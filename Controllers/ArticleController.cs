@@ -7,13 +7,13 @@ namespace BlogASP.Controllers
     public class ArticleController : Controller
     {
         // GET: /Article
-        /*public IActionResult Index()
+        public IActionResult Index()
         {
             // Logic to get a list of articles
             return View();
         }
 
-        // GET: /Article/Details/5
+        /*// GET: /Article/Details/5
         public IActionResult Details(int id)
         {
             // Logic to retrieve and display details of a specific article
