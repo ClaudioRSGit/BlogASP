@@ -1,13 +1,17 @@
-﻿using BlogASP.Models;
-using Microsoft.EntityFrameworkCore;
+﻿    using BlogASP.Models;
+    using Microsoft.EntityFrameworkCore;
 
-namespace BlogASP.DAL
-{
-    public class DatabaseContext : DbContext
+    namespace BlogASP.DAL
     {
-        public DatabaseContext(DbContextOptions <DatabaseContext> options) : base(options){
-            
+        public class DatabaseContext : DbContext
+        {
+            public DatabaseContext() { }
+            public DatabaseContext(DbContextOptions<DatabaseContext> options)
+            : base(options)
+            {
+
+            }
+
+            public DbSet<UserModel> Users { get; set; }
         }
-        public DbSet<UserModel> Users { get; set; }
     }
-}
