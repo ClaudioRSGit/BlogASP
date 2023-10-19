@@ -1,0 +1,34 @@
+﻿@{
+    ViewData["Title"] = "Delete User";
+}
+
+<h1 class="text-center display-4">Delete User?</h1>
+
+
+<br />
+
+<form>
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter your Username">
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter your Email">
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" id="password" placeholder="Enter your Password">
+    </div>
+
+
+    <a role="button" class="btn btn-danger ">Delete</a>
+    <a role="button" class="btn btn-secondary btn-block" asp-controller="AdminPanel" asp-action="Index">Back</a>
+
+</form>
+
+
+
+
