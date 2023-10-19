@@ -3,6 +3,33 @@
 }
 
 <div class="text-center">
-    <p>Email:</p>
-    <p>PassWord:</p>
+    <h2>Sign Up</h2>
+    <form class="row">
+        <div>
+            <label for="inputUserName" class="form-label">Username</label>
+            <input type="text" class="form-control" id="inputUserName" placeholder="JoseAntonio444"><br>
+        </div>
+        <div>
+            <label for="inputEmail4" class="form-label">Email</label>
+            <input type="email" class="form-control" id="inputEmail4" placeholder="1234@gmail.com"><br>
+        </div>
+        <div>
+            <label for="inputPassword" class="form-label">Password</label>
+            <input type="password" class="form-control" id="inputPassword4" placeholder="********"><br>
+        </div>
+        <div>
+            <label for="inputRepeatPassword" class="form-label">Repeat Password</label>
+            <input type="password" class="form-control" id="RepeatPassword" placeholder="********"><br>
+        </div>
+        <div>
+            <label for="inputRole" class="form-label">Role</label>
+            <select class="form-select" id="inputRole">
+                <option value="option1">Admin</option>
+                <option value="option2">Privileged</option>
+            </select>
+        </div>
+        <div class="col-12 mt-3">
+            <button type="submit" class="btn btn-primary">Sign in</button>
+        </div>
+    </form>
 </div>
