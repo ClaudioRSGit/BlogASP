@@ -1,5 +1,33 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿@{
+    ViewData["Title"] = "Show User";
 }
+
+<h1 class="text-center display-4">Show User</h1>
+
+
+<br />
+
+<form action="/your-action" method="post">
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="name" placeholder="Enter your Username">
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter your Email">
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" id="password" placeholder="Enter your Password">
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+
+    <a role="button" class="btn btn-secondary " asp-controller="AdminPanel" asp-action="Index">Back</a>
+
+
+</form>
+
+
