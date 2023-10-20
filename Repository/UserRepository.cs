@@ -10,6 +10,11 @@ namespace BlogASP.Repository
         {
             _databaseContext = databaseContext;
         }
+
+        public List<UserModel> GetAll() 
+        {
+            return _databaseContext.Users.ToList();
+        }
         public UserModel Create(UserModel user)
         {
             //Insert on Database

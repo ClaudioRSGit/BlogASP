@@ -13,7 +13,8 @@ namespace BlogASP.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            List<UserModel> users = _userRepository.GetAll();
+            return View(users);
         }
 
         public IActionResult Create()
