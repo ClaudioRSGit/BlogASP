@@ -8,5 +8,7 @@ namespace BlogASP.Repository
         List<UserModel> GetAll();
         UserModel Create(UserModel user);
         UserModel Edit(UserModel user);
+
+        bool Erase(int id); 
     }
 }

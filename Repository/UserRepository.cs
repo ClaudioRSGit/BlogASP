@@ -43,5 +43,16 @@ namespace BlogASP.Repository
 
             return userDB;
         }
+
+        public bool Erase(int id)
+        {
+            UserModel userDB = ListById(id);
+
+            if (userDB == null) throw new Exception("Delete error!");
+
+            _databaseContext.Users.Remove(userDB);
+            _databaseContext.SaveChanges();
+            return true;
+        }
     }
 }

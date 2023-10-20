@@ -33,8 +33,9 @@ namespace BlogASP.Controllers
             return View();
         }
 
-        public IActionResult Delete()
+        public IActionResult Delete(int id)
         {
+            UserModel user = _userRepository.ListById(id);
             return View();
         }
 
@@ -49,6 +50,12 @@ namespace BlogASP.Controllers
         public IActionResult Edit(UserModel user)
         {
             _userRepository.Edit(user);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Erase(int id)
+        {
+            _userRepository.Erase(id);
             return RedirectToAction("Index");
         }
     }
