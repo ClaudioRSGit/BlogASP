@@ -11,6 +11,11 @@ namespace BlogASP.Repository
             _databaseContext = databaseContext;
         }
 
+        public UserModel ListById(int id)
+        {
+            return _databaseContext.Users.FirstOrDefault(x => x.Id == id);
+        }
+
         public List<UserModel> GetAll() 
         {
             return _databaseContext.Users.ToList();
@@ -21,6 +26,22 @@ namespace BlogASP.Repository
             _databaseContext.Users.Add(user);
             _databaseContext.SaveChanges();
             return user;
+        }
+
+        public UserModel Edit(UserModel user)
+        {
+            UserModel userDB = ListById(user.Id);
+
+            if (userDB == null) throw new Exception("Atualization error!");
+
+            userDB.Name = user.Name;
+            userDB.Email = user.Email;
+            userDB.Password = user.Password;
+
+            _databaseContext.Users.Update(userDB);
+            _databaseContext.SaveChanges();
+
+            return userDB;
         }
     }
 }

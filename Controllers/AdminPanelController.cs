@@ -22,9 +22,10 @@ namespace BlogASP.Controllers
             return View();
         }
 
-        public IActionResult Edit()
+        public IActionResult Edit(int id)
         {
-            return View();
+            UserModel user = _userRepository.ListById(id);
+            return View(user);
         }
 
         public IActionResult Show()
@@ -41,6 +42,13 @@ namespace BlogASP.Controllers
         public IActionResult Create(UserModel user) 
         {
             _userRepository.Create(user);
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult Edit(UserModel user)
+        {
+            _userRepository.Edit(user);
             return RedirectToAction("Index");
         }
     }
