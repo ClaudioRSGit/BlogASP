@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BlogASP
 {
-    public class Startup
+    public class Startup 
     {
         public Startup(IConfiguration configuration)
         {
@@ -14,17 +14,16 @@ namespace BlogASP
 
         public void ConfigureServices(IServiceCollection services)
         {
-            // Configure your services here
-
-            // AddDbContext should be here
-            services.AddDbContext<DatabaseContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DataBase")));
+            services.AddControllersWithViews();
+            services.AddEntityFrameworkSqlServer().AddDbContext<DatabaseContext>(o => o.UseSqlServer(Configuration.GetConnectionString("DataBase")));
+            //services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DataBase")));
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment()) {
-            app.UseDeveloperExceptionPage();
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
             }
             else
             {
@@ -36,8 +35,8 @@ namespace BlogASP
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                name:"default",
-                pattern:"{controller=Home}/{action=Index}/{id}");
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id}");
             });
         }
     }

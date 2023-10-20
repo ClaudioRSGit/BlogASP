@@ -9,73 +9,73 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = BlogASP
 build_property.RootNamespace = BlogASP
-build_property.ProjectDir = C:\Users\Claudio\Desktop\ASP Blog\BlogASP\
+build_property.ProjectDir = C:\Users\fabio\Desktop\Nova pasta\BlogASP\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\Claudio\Desktop\ASP Blog\BlogASP
+build_property.MSBuildProjectDirectory = C:\Users\fabio\Desktop\Nova pasta\BlogASP
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/Claudio/Desktop/ASP Blog/BlogASP/Views/AdminPanel/Create.cshtml]
+[C:/Users/fabio/Desktop/Nova pasta/BlogASP/Views/AdminPanel/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5QYW5lbFxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Claudio/Desktop/ASP Blog/BlogASP/Views/AdminPanel/Delete.cshtml]
+[C:/Users/fabio/Desktop/Nova pasta/BlogASP/Views/AdminPanel/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5QYW5lbFxEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Claudio/Desktop/ASP Blog/BlogASP/Views/AdminPanel/Edit.cshtml]
+[C:/Users/fabio/Desktop/Nova pasta/BlogASP/Views/AdminPanel/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5QYW5lbFxFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Claudio/Desktop/ASP Blog/BlogASP/Views/AdminPanel/Index.cshtml]
+[C:/Users/fabio/Desktop/Nova pasta/BlogASP/Views/AdminPanel/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5QYW5lbFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Claudio/Desktop/ASP Blog/BlogASP/Views/AdminPanel/Show.cshtml]
+[C:/Users/fabio/Desktop/Nova pasta/BlogASP/Views/AdminPanel/Show.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5QYW5lbFxTaG93LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Claudio/Desktop/ASP Blog/BlogASP/Views/Article/Index.cshtml]
+[C:/Users/fabio/Desktop/Nova pasta/BlogASP/Views/Article/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQXJ0aWNsZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Claudio/Desktop/ASP Blog/BlogASP/Views/Home/Index.cshtml]
+[C:/Users/fabio/Desktop/Nova pasta/BlogASP/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Claudio/Desktop/ASP Blog/BlogASP/Views/Home/Privacy.cshtml]
+[C:/Users/fabio/Desktop/Nova pasta/BlogASP/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Claudio/Desktop/ASP Blog/BlogASP/Views/Login/Index.cshtml]
+[C:/Users/fabio/Desktop/Nova pasta/BlogASP/Views/Login/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9naW5cSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Claudio/Desktop/ASP Blog/BlogASP/Views/SelectedArticle/Index.cshtml]
+[C:/Users/fabio/Desktop/Nova pasta/BlogASP/Views/SelectedArticle/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2VsZWN0ZWRBcnRpY2xlXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Claudio/Desktop/ASP Blog/BlogASP/Views/Shared/Error.cshtml]
+[C:/Users/fabio/Desktop/Nova pasta/BlogASP/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Claudio/Desktop/ASP Blog/BlogASP/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/fabio/Desktop/Nova pasta/BlogASP/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Claudio/Desktop/ASP Blog/BlogASP/Views/SignUp/Index.cshtml]
+[C:/Users/fabio/Desktop/Nova pasta/BlogASP/Views/SignUp/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2lnblVwXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Claudio/Desktop/ASP Blog/BlogASP/Views/_ViewImports.cshtml]
+[C:/Users/fabio/Desktop/Nova pasta/BlogASP/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Claudio/Desktop/ASP Blog/BlogASP/Views/_ViewStart.cshtml]
+[C:/Users/fabio/Desktop/Nova pasta/BlogASP/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Claudio/Desktop/ASP Blog/BlogASP/Views/Shared/_Layout.cshtml]
+[C:/Users/fabio/Desktop/Nova pasta/BlogASP/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-3chilr5xkv
