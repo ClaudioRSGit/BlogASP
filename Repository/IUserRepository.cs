@@ -4,6 +4,6 @@ namespace BlogASP.Repository
 {
     public interface IUserRepository
     {
-        UserModel Add(UserModel user);
+        UserModel Create(UserModel user);
     }
 }

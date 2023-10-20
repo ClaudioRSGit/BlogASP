@@ -1,9 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BlogASP.Models;
+using BlogASP.Repository;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BlogASP.Controllers
 {
     public class AdminPanelController : Controller
     {
+        private readonly IUserRepository _userRepository;
+        public AdminPanelController(IUserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
         public IActionResult Index()
         {
             return View();
@@ -27,6 +34,13 @@ namespace BlogASP.Controllers
         public IActionResult Delete()
         {
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult Create(UserModel user) 
+        {
+            _userRepository.Create(user);
+            return RedirectToAction("Index");
         }
     }
 }
