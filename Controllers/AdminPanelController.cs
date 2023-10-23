@@ -61,11 +61,11 @@ namespace BlogASP.Controllers
 
 
         [HttpPost]
-        public IActionResult Accept(int id)
+        public IActionResult SetAsPrivileged(int id)
         {
             UserModel user = _userRepository.ListById(id);
 
-            if (user != null && user.Role == "EndUser")
+            if (user != null && (user.Role == "EndUser" || user.Role == "Administrator"))
             {
                 user.Role = "Privileged";
                 _userRepository.Edit(user);
