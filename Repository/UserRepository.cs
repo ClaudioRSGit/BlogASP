@@ -21,8 +21,9 @@ namespace BlogASP.Repository
             return _databaseContext.Users.ToList();
         }
         public UserModel Create(UserModel user)
-        {
-            //Insert on Database
+        {  
+            user.Role = "EndUser";
+            user.isValidated = false;
             _databaseContext.Users.Add(user);
             _databaseContext.SaveChanges();
             return user;
@@ -34,9 +35,10 @@ namespace BlogASP.Repository
 
             if (userDB == null) throw new Exception("Atualization error!");
 
+            userDB.Username = user.Name;
             userDB.Name = user.Name;
             userDB.Email = user.Email;
-            userDB.Password = user.Password;
+            
 
             _databaseContext.Users.Update(userDB);
             _databaseContext.SaveChanges();

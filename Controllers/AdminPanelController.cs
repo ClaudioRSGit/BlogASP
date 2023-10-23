@@ -58,5 +58,12 @@ namespace BlogASP.Controllers
             _userRepository.Erase(id);
             return RedirectToAction("Index");
         }
+
+        public IActionResult PendingUsers()
+        {
+            List<UserModel> endUsers = _userRepository.GetAll().Where(u => u.Role == "EndUser").ToList();
+            return View(endUsers);
+        }
+
     }
 }
