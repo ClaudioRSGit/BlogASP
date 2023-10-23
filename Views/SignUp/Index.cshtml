@@ -1,35 +1,33 @@
-﻿@{
+﻿@model UserModel
+@{
     ViewData["Title"] = "Sign Up";
 }
 
 <div class="text-center">
     <h2>Sign Up</h2>
-    <form class="row">
-        <div>
-            <label for="inputUserName" class="form-label">Username</label>
-            <input type="text" class="form-control" id="inputUserName" placeholder="JoseAntonio444"><br>
+    <form asp-controller="SignUp" asp-action="Create" method="post">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" asp-for="Name" class="form-control" id="name" placeholder="Enter your Name">
         </div>
-        <div>
-            <label for="inputEmail4" class="form-label">Email</label>
-            <input type="email" class="form-control" id="inputEmail4" placeholder="1234@gmail.com"><br>
+
+        <div class="form-group">
+            <label for="Username">Username:</label>
+            <input type="text" asp-for="Username" class="form-control" id="Username" placeholder="Enter your Username">
         </div>
-        <div>
-            <label for="inputPassword" class="form-label">Password</label>
-            <input type="password" class="form-control" id="inputPassword4" placeholder="********"><br>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" asp-for="Email" class="form-control" id="email" placeholder="Enter your Email">
         </div>
-        <div>
-            <label for="inputRepeatPassword" class="form-label">Repeat Password</label>
-            <input type="password" class="form-control" id="RepeatPassword" placeholder="********"><br>
+
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" asp-for="Password" class="form-control" id="password" placeholder="Enter your Password">
         </div>
-       <!-- <div>
-            <label for="inputRole" class="form-label">Role</label>
-            <select class="form-select" id="inputRole">
-                <option value="option1">Admin</option>
-                <option value="option2">Privileged</option>
-            </select>
-        </div> -->
-        <div class="col-12 mt-3">
-            <button type="submit" class="btn btn-primary">Sign in</button>
-        </div>
+
+        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+
+        <a role="button" class="btn btn-secondary " asp-controller="AdminPanel" asp-action="Home">Back</a>
     </form>
 </div>
