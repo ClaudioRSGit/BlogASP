@@ -73,15 +73,15 @@
                         <a role="button" class="btn btn-warning btn-sm" asp-route-id="@user.Id" asp-controller="AdminPanel" asp-action="Edit">Edit</a>
                         <form asp-controller="AdminPanel" asp-action="SetAsEndUser" method="post" style="display: inline-block;">
                             <input type="hidden" name="id" value="@user.Id" />
-                            <button type="submit" class="btn btn-danger">Set as EndUser</button>
+                            <button type="submit" class="btn btn-danger"}>Set as EndUser</button>
                         </form>
                         <form asp-controller="AdminPanel" asp-action="SetAsPrivileged" method="post" style="display: inline-block;">
                             <input type="hidden" name="id" value="@user.Id" />
-                            <button type="submit" class="btn btn-success">Set as Privileged</button>
+                            <button type="submit" class="btn btn-success" @if (user.Role == "Privileged"){<text>disabled</text>}>Set as Privileged</button>
                         </form>
                         <form asp-controller="AdminPanel" asp-action="SetAsAdministrator" method="post" style="display: inline-block;">
                             <input type="hidden" name="id" value="@user.Id" />
-                            <button type="submit" class="btn btn-primary">Set as Administrator</button>
+                            <button type="submit" class="btn btn-primary" @if (user.Role == "Administrator"){<text>disabled</text>}>Set as Administrator</button>
                         </form>
                     </td>
                 </tr>
