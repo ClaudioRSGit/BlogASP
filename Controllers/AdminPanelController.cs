@@ -67,15 +67,29 @@ namespace BlogASP.Controllers
 
             if (user != null && user.Role == "EndUser")
             {
-                // Atualize a Role para "Privileged"
                 user.Role = "Privileged";
                 _userRepository.Edit(user);
 
-                // Redirecione para a página "PendingUsers" após a ação "Accept"
                 return RedirectToAction("Index");
             }
 
-            return View("Error"); // Trate erros ou casos em que o usuário não seja encontrado.
+            return View("Error");
+        }
+
+        [HttpPost]
+        public IActionResult SetAsEndUser(int id)
+        {
+            UserModel user = _userRepository.ListById(id);
+
+            if (user != null && user.Role == "Privileged")
+            {
+                user.Role = "EndUser";
+                _userRepository.Edit(user);
+
+                return RedirectToAction("Index");
+            }
+
+            return View("Error");
         }
     }
 }

@@ -29,7 +29,10 @@
                     <td>
                         <a role="button" class="btn btn-primary btn-sm" asp-route-id="@user.Id" asp-controller="AdminPanel" asp-action="Show">Show</a>
                         <a role="button" class="btn btn-warning btn-sm" asp-route-id="@user.Id" asp-controller="AdminPanel" asp-action="Edit">Edit</a>
-                        <a role="button" class="btn btn-danger btn-sm" asp-route-id="@user.Id" asp-controller="AdminPanel" asp-action="Delete">Set as EndUser</a>
+                        <form asp-controller="AdminPanel" asp-action="SetAsEndUser" method="post">
+                            <input type="hidden" name="id" value="@user.Id" />
+                            <button type="submit" class="btn btn-danger">Set as EndUser</button>
+                        </form>
                     </td>
                     <td>
                         <div class="form-check form-switch text-center">
