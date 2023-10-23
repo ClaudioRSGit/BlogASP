@@ -13,6 +13,7 @@
                 <th>#</th>
                 <th>Name</th>
                 <th>Email</th>
+                <th>Role</th>
                 <th>Action</th>
                 <th scope="col">Administrator</th>
             </tr>
@@ -24,6 +25,7 @@
                     <td>@user.Id</td>
                     <td>@user.Name</td>
                     <td>@user.Email</td>
+                    <td>@user.Role</td>
                     <td>
                         <a role="button" class="btn btn-primary btn-sm" asp-route-id="@user.Id" asp-controller="AdminPanel" asp-action="Show">Show</a>
                         <a role="button" class="btn btn-warning btn-sm" asp-route-id="@user.Id" asp-controller="AdminPanel" asp-action="Edit">Edit</a>
@@ -58,10 +60,13 @@
                     <td>@user.Name</td>
                     <td>@user.Email</td>
                     <td>
-                        <div class="btn-group" role="group" aria-label="example">
-                            <a role="button" class="btn btn-success">Accept</a>
-                            <a role="button" class="btn btn-danger">Reject</a>
-                        </div>
+                        <form asp-controller="AdminPanel" asp-action="Accept" method="post">
+                            <input type="hidden" name="id" value="@user.Id" />
+                            <button type="submit" class="btn btn-success">Accept</button>
+                        </form>
+                        <!--
+                        <a role="button" class="btn btn-danger">Reject</a>
+                        -->
                     </td>
                 </tr>
             }

@@ -59,11 +59,23 @@ namespace BlogASP.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult PendingUsers()
-        {
-            List<UserModel> endUsers = _userRepository.GetAll().Where(u => u.Role == "EndUser").ToList();
-            return View(endUsers);
-        }
 
+        [HttpPost]
+        public IActionResult Accept(int id)
+        {
+            UserModel user = _userRepository.ListById(id);
+
+            if (user != null && user.Role == "EndUser")
+            {
+                // Atualize a Role para "Privileged"
+                user.Role = "Privileged";
+                _userRepository.Edit(user);
+
+                // Redirecione para a página "PendingUsers" após a ação "Accept"
+                return RedirectToAction("Index");
+            }
+
+            return View("Error"); // Trate erros ou casos em que o usuário não seja encontrado.
+        }
     }
 }
