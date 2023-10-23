@@ -53,11 +53,11 @@ namespace BlogASP.Controllers
             return RedirectToAction("Index");
         }
 
-        public IActionResult Erase(int id)
-        {
-            _userRepository.Erase(id);
-            return RedirectToAction("Index");
-        }
+        //public IActionResult Erase(int id)
+        //{
+        //    _userRepository.Erase(id);
+        //    return RedirectToAction("Index");
+        //}
 
 
         [HttpPost]
@@ -81,9 +81,25 @@ namespace BlogASP.Controllers
         {
             UserModel user = _userRepository.ListById(id);
 
-            if (user != null && user.Role == "Privileged")
+            if (user != null && (user.Role == "Privileged" || user.Role == "Administrator"))
             {
                 user.Role = "EndUser";
+                _userRepository.Edit(user);
+
+                return RedirectToAction("Index");
+            }
+
+            return View("Error");
+        }
+
+        [HttpPost]
+        public IActionResult SetAsAdministrator(int id)
+        {
+            UserModel user = _userRepository.ListById(id);
+
+            if (user != null && user.Role == "Privileged")
+            {
+                user.Role = "Administrator";
                 _userRepository.Edit(user);
 
                 return RedirectToAction("Index");

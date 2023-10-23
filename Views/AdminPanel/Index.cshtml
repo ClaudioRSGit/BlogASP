@@ -15,11 +15,10 @@
                 <th>Email</th>
                 <th>Role</th>
                 <th>Action</th>
-                <th scope="col">Administrator</th>
             </tr>
         </thead>
         <tbody>
-            @foreach (UserModel user in Model.Where(u => u.Role == "Privileged"))
+            @foreach (UserModel user in Model.Where(u => u.Role == "Privileged" || u.Role == "Administrator"))
             {
                 <tr>
                     <td>@user.Id</td>
@@ -33,11 +32,10 @@
                             <input type="hidden" name="id" value="@user.Id" />
                             <button type="submit" class="btn btn-danger">Set as EndUser</button>
                         </form>
-                    </td>
-                    <td>
-                        <div class="form-check form-switch text-center">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                        </div>
+                        <form asp-controller="AdminPanel" asp-action="SetAsAdministrator" method="post">
+                            <input type="hidden" name="id" value="@user.Id" />
+                            <button type="submit" class="btn btn-success">Set as Administrator</button>
+                        </form>
                     </td>
                 </tr>
             }

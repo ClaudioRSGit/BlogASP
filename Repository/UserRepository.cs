@@ -35,7 +35,7 @@ namespace BlogASP.Repository
 
             if (userDB == null) throw new Exception("Atualization error!");
 
-            userDB.Username = user.Name;
+            userDB.Username = user.Username;
             userDB.Name = user.Name;
             userDB.Email = user.Email;
             
