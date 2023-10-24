@@ -9,9 +9,26 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<DatabaseContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase")));
 
+
+//////////////////Login///////////////////
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Login"; // Defina a URL da página de login
+        options.AccessDeniedPath = "/Home/AccessDenied"; // Defina a URL da página de acesso negado
+    });
+
+builder.Services.AddAuthorization();
+
+//////////////////Login///////////////////
+
+
+
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 builder.Services.AddControllersWithViews();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -27,7 +44,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllerRoute(
     name: "default",

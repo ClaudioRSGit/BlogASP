@@ -3,18 +3,27 @@
 }
 
 <div class="text-center">
-   <h2>Login</h2>
-    <form class="row">
-        <div>
-            <label for="inputUserName" class="form-label">Username</label>
-            <input type="text" class="form-control" id="inputUserName" placeholder="JoseAntonio444"><br>
+    <h2>Login</h2>
+    <form asp-controller="Login" asp-action="Login" method="post">
+        <div class="form-group">
+            <label for="inputUsername" class="form-label">Username</label>
+            <input type="text" class="form-control" id="inputUsername" name="Username" placeholder="JoseAntonio444">
         </div>
-        <div>
+        <div class="form-group">
             <label for="inputPassword" class="form-label">Password</label>
-            <input type="password" class="form-control" id="inputPassword4" placeholder="********"><br>
+            <input type="password" class="form-control" id="inputPassword" name="Password" placeholder="********">
         </div>
         <div class="col-12 mt-3">
             <button type="submit" class="btn btn-primary">Login</button>
         </div>
     </form>
+    @if (ViewData.ModelState.TryGetValue(string.Empty, out var errors))
+    {
+        <div class="alert alert-danger">
+            @foreach (var error in errors.Errors)
+            {
+                @error.ErrorMessage
+            }
+        </div>
+    }
 </div>

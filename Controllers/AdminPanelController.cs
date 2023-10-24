@@ -1,5 +1,6 @@
 ﻿using BlogASP.Models;
 using BlogASP.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogASP.Controllers
@@ -11,6 +12,7 @@ namespace BlogASP.Controllers
         {
             _userRepository = userRepository;
         }
+
         public IActionResult Index()
         {
             List<UserModel> users = _userRepository.GetAll();

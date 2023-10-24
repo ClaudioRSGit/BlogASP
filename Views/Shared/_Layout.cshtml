@@ -24,8 +24,14 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Article">Articles</a>
                         </li>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Administrator"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="AdminPanel">Admin Panel</a>
+                            </li>
+                        }
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="AdminPanel">Admin Panel</a>
+                            <span class="nav-link text-dark">Welcome, @User.Identity.Name</span>
                         </li>
                     </ul>
                     <ul class="navbar-nav">
@@ -39,11 +45,14 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="SignUp">Sign Up</a>
                             </button>
                         </li>
-                        <li class="nav-item">
-                            <button class="btn btn-light">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home">Logout</a>
-                            </button>
-                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <button class="btn btn-light">
+                                    <a class="nav-link text-dark" asp-action="Logout" asp-controller="Login" method="post">Logout</a>
+                                </button>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
