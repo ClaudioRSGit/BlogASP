@@ -11,7 +11,7 @@ namespace BlogASP.Models
         public string? Category { get; set; }
         public string? Description { get; set; }
         public int? Stars { get; set; }
-
+        public bool isPrivate { get; set; }
         public int? UserId { get; set; }
 
         [ForeignKey("UserId")]

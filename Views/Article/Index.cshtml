@@ -1,16 +1,23 @@
-﻿@{
-    ViewData["Title"] = "Article List";
-}
+﻿@model List<BlogASP.Models.ArticleModel>
 
-<div class="text-center">
-    <h2>Articles Preview</h2>
-    <div class="card col-4">
-        <img src="https://www.canetoad.co.uk/wpimages/wp47e0b011_05_06.jpg" width="361" class="card-img-top" alt="..." height="240">
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">Card Description</p>
-            <p class="card-text"><small class="text-muted">Last updated 3 mins ago (updated_at)</small></p>
-            <a role="button "class="text-Dark" asp-area="" asp-controller="SelectedArticle">Full Article</a>
+<h2>Articles</h2>
+
+<div class="row">
+    <a role="button" class="text-Dark" asp-controller="Article" asp-action="Create">Create New Article</a>
+    @foreach (var article in Model)
+    {
+        <div class="col-4 mb-3">
+            <div class="card">
+                <img src="https://picsum.photos/200/300" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">@article.Title</h5>
+                    <p class="card-text">@article.Description</p>
+                    <a href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary">Read More</a>
+                    <p class="card-text">Stars: <span class="star-count">@article.Stars</span></p>
+                    <button class="btn btn-warning btn-star" data-article-id="@article.ArticleId">Star</button>
+
+                </div>
+            </div>
         </div>
-    </div>
+    }
 </div>
