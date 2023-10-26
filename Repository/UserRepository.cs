@@ -23,7 +23,6 @@ namespace BlogASP.Repository
         public UserModel Create(UserModel user)
         {  
             user.Role = "EndUser";
-            user.isValidated = false;
             _databaseContext.Users.Add(user);
             _databaseContext.SaveChanges();
             return user;

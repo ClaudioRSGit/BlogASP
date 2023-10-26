@@ -10,8 +10,9 @@
 
         public string Role { get; set; }
 
-        public bool? isValidated { get; set; }
+        public int? CommentId { get; set; }
 
-        
+        public int? ArticletId { get; set; }
+
     }
 }
