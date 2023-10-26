@@ -13,7 +13,7 @@ namespace BlogASP.Repository
 
         public UserModel ListById(int id)
         {
-            return _databaseContext.Users.FirstOrDefault(x => x.Id == id);
+            return _databaseContext.Users.FirstOrDefault(x => x.UserId == id);
         }
 
         public List<UserModel> GetAll() 
@@ -30,7 +30,7 @@ namespace BlogASP.Repository
 
         public UserModel Edit(UserModel user)
         {
-            UserModel userDB = ListById(user.Id);
+            UserModel userDB = ListById(user.UserId);
 
             if (userDB == null) throw new Exception("Atualization error!");
 

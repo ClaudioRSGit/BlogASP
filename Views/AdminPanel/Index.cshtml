@@ -19,13 +19,13 @@
             @foreach (UserModel user in Model.Where(u => u.Role == "EndUser"))
             {
                  <tr>
-                    <td>@user.Id</td>
+                    <td>@user.UserId</td>
                     <td>@user.Name</td>
                     <td>@user.Username</td>
                     <td>@user.Email</td>
                     <td>
                         <form asp-controller="AdminPanel" asp-action="SetAsPrivileged" method="post">
-                            <input type="hidden" name="id" value="@user.Id" />
+                            <input type="hidden" name="id" value="@user.UserId" />
                             <button type="submit" class="btn btn-success">Accept</button>
                         </form>
                         <!--
@@ -61,26 +61,26 @@
             @foreach (UserModel user in Model.Where(u => u.Role == "Privileged" || u.Role == "Administrator"))
             {
                 <tr>
-                    <td>@user.Id</td>
+                    <td>@user.UserId</td>
                     <td>@user.Name</td>
                     <td>@user.Username</td>
                     <td>@user.Email</td>
                     <td>@user.Role</td>
                     <td>
                         <!--
-                        <a role="button" class="btn btn-primary btn-sm" asp-route-id="@user.Id" asp-controller="AdminPanel" asp-action="Show">Show</a>
+                        <a role="button" class="btn btn-primary btn-sm" asp-route-id="@user.UserId" asp-controller="AdminPanel" asp-action="Show">Show</a>
                         -->
-                        <a role="button" class="btn btn-warning btn-sm" asp-route-id="@user.Id" asp-controller="AdminPanel" asp-action="Edit">Edit</a>
+                        <a role="button" class="btn btn-warning btn-sm" asp-route-id="@user.UserId" asp-controller="AdminPanel" asp-action="Edit">Edit</a>
                         <form asp-controller="AdminPanel" asp-action="SetAsEndUser" method="post" style="display: inline-block;">
-                            <input type="hidden" name="id" value="@user.Id" />
+                            <input type="hidden" name="id" value="@user.UserId" />
                             <button type="submit" class="btn btn-danger"}>Set as EndUser</button>
                         </form>
                         <form asp-controller="AdminPanel" asp-action="SetAsPrivileged" method="post" style="display: inline-block;">
-                            <input type="hidden" name="id" value="@user.Id" />
+                            <input type="hidden" name="id" value="@user.UserId" />
                             <button type="submit" class="btn btn-success" @if (user.Role == "Privileged"){<text>disabled</text>}>Set as Privileged</button>
                         </form>
                         <form asp-controller="AdminPanel" asp-action="SetAsAdministrator" method="post" style="display: inline-block;">
-                            <input type="hidden" name="id" value="@user.Id" />
+                            <input type="hidden" name="id" value="@user.UserId" />
                             <button type="submit" class="btn btn-primary" @if (user.Role == "Administrator"){<text>disabled</text>}>Set as Administrator</button>
                         </form>
                     </td>
