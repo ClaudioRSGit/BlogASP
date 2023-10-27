@@ -24,7 +24,7 @@ namespace BlogASP.Controllers
         public IActionResult Logout()
         {
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Index", "Home"); // Redirecione para a página inicial após o logout
+            return RedirectToAction("Index", "Home");
         }
 
         /////////Login//////////
@@ -32,30 +32,26 @@ namespace BlogASP.Controllers
         [HttpPost]
         public IActionResult Login(UserModel loginModel)
         {
-            // Encontre o utilizador na base de dados com o mesmo nome de utilizador
             var user = _userRepository.GetAll().FirstOrDefault(u => u.Username == loginModel.Username);
 
             if (user != null && user.Password == loginModel.Password)
             {
-                // Crie as reivindicações para o utilizador autenticado
                 var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.Username),
                 new Claim(ClaimTypes.Role, user.Role)
-                // Adicione mais reivindicações conforme necessário
             };
 
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var principal = new ClaimsPrincipal(identity);
 
-                // Faça o login do utilizador
                 HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
-                return RedirectToAction("Index", "Home"); // Redirecione para a página inicial após o login bem-sucedido
+                return RedirectToAction("Index", "Home"); 
             }
             else
             {
-                ModelState.AddModelError(string.Empty, "Nome de utilizador ou palavra-passe inválidos");
+                ModelState.AddModelError(string.Empty, "Invalid username or password!");
                 return View("Index");
             }
         }
