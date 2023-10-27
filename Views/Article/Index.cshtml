@@ -3,7 +3,10 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-3">
-            <h4>Categories side bar</h4>
+            <h4>Categories</h4>
+
+            <a href="@Url.Action("Create", "Article")" class="btn btn-primary">Create New Article</a>
+      
             <div id="filteredArticles" class="mt-4">
                 <a href="#" class="category-link" data-category="all">All</a>
                 @foreach (var category in Model.Select(a => a.Category).Distinct())
@@ -15,8 +18,6 @@
 
         <div class="col-md-9">
             <h2>Articles</h2>
-
-            <a href="@Url.Action("Create", "Article")" class="btn btn-primary">Create New Article</a>
 
             <div class="row" id="article-container">
                 @foreach (var article in Model)
