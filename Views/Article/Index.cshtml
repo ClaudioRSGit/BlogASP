@@ -30,9 +30,6 @@
                                 <p class="card-text">@article.Description</p>
                                 <a href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary">Read More</a>
                                 <button class="btn btn-warning btn-star" data-article-id="@article.ArticleId">Star: <span class="star-count" data-article-id="@article.ArticleId">@article.Stars</span></button>
-                                <button class="btn btn-warning btn-star" data-article-id="@article.ArticleId">
-                                    <i class="fas fa-star"></i> Star: <span class="star-count" data-article-id="@article.ArticleId">@article.Stars</span>
-                                </button>
                             </div>
                         </div>
                     </div>
