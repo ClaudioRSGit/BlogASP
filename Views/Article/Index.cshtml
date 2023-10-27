@@ -9,8 +9,8 @@
 
             <!-- Search Box and Button -->
             <div class="mt-4">
-                <input type="text" id="categorySearch" placeholder="Search Category">
-                <button class="btn btn-success" onclick="searchByCategory()">Search</button>
+                <input type="text" id="searchTerm" class="form-control" placeholder="Enter category">
+                <button id="searchButton" class="btn btn-primary">Search</button>
             </div>
 
             <div id="filteredArticles" class="mt-4">
@@ -69,18 +69,27 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     $(document).ready(function () {
-        $('.category-link').click(function (e) {
+        // Usando .on() para vincular eventos de clique para elementos dinâmicos
+        $(document).on('click', '.category-link', function (e) {
             e.preventDefault();
             var category = $(this).data('category');
-            filterArticlesByCategory(category);
+            filterArticles(category);
         });
 
-        $('.btn-star').click(function () {
+        $(document).on('click', '.btn-star', function () {
             var articleId = $(this).data('article-id');
             starArticle(articleId);
         });
 
-        function filterArticlesByCategory(category) {
+        $('#searchButton').click(function () {
+            var searchTerm = $('#searchTerm').val();
+            filterArticles(searchTerm);
+        });
+
+        function filterArticles(filterTerm) {
+            // Convertendo para minúsculas para tornar a comparação insensível a maiúsculas e minúsculas
+            filterTerm = filterTerm.toLowerCase();
+
             // Hide all articles initially
             $('.category-article').hide();
 
@@ -88,10 +97,13 @@
             $('.overflow-container .category-article').slice(0, 3).show();
 
             // Show articles based on the selected category
-            if (category === 'all') {
+            if (filterTerm === 'all') {
                 $('.category-article').show(); // Show all articles for "All" category
             } else {
-                $('.category-article[data-category="' + category + '"]').show();
+                $('.category-article').filter(function() {
+                    var category = $(this).data('category').toLowerCase();
+                    return category === filterTerm;
+                }).show();
             }
         }
 
@@ -111,13 +123,5 @@
                 }
             });
         }
-
-        function searchByCategory() {
-            var category = $('#categorySearch').val().trim().toLowerCase();
-            filterArticlesByCategory(category);
-        }
-    });
-    $('#searchButton').click(function () {
-        searchByCategory();
     });
 </script>
