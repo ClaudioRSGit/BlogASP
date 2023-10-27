@@ -29,8 +29,28 @@
                                 <h5 class="card-title">@article.Title</h5>
                                 <p class="card-text">@article.Description</p>
                                 <a href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary">Read More</a>
+                                <button class="btn btn-warning btn-star" data-article-id="@article.ArticleId">Star: <span class="star-count" data-article-id="@article.ArticleId">@article.Stars</span></button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 mt-4">
+        <h2>Top 3 Articles</h2>
+        <div class="overflow-container" style="overflow-x: auto; white-space: nowrap;">
+            <div class="row">
+                @foreach (var article in Model.OrderByDescending(a => a.Stars).Take(3))
+                {
+                    <div class="col-4 mb-3 category-article" data-category="@article.Category">
+                        <div class="card">
+                            <img src="https://picsum.photos/200" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">@article.Title</h5>
+                                <p class="card-text">@article.Description</p>
+                                <a href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary">Read More</a>
                                 <p class="card-text">Stars: <span class="star-count" data-article-id="@article.ArticleId">@article.Stars</span></p>
-                                <button class="btn btn-warning btn-star" data-article-id="@article.ArticleId">Star</button>
                             </div>
                         </div>
                     </div>
@@ -39,10 +59,9 @@
         </div>
     </div>
 </div>
-
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-
 <script>
+
     $(document).ready(function () {
         $('.category-link').click(function (e) {
             e.preventDefault();
@@ -56,9 +75,15 @@
         });
 
         function filterArticlesByCategory(category) {
+            // Hide all articles initially
             $('.category-article').hide();
+
+            // Show top 3 articles regardless of the category
+            $('.overflow-container .category-article').slice(0, 3).show();
+
+            // Show articles based on the selected category
             if (category === 'all') {
-                $('.category-article').show();
+                $('.category-article').show(); // Show all articles for "All" category
             } else {
                 $('.category-article[data-category="' + category + '"]').show();
             }
