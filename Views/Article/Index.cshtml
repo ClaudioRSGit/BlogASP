@@ -9,8 +9,11 @@
 
             <!-- Search Box and Button -->
             <div class="mt-4">
-                <input type="text" id="searchTerm" class="form-control" placeholder="Enter category">
+                <input type="text" id="searchTerm" class="form-control" placeholder="Enter title">
                 <button id="searchButton" class="btn btn-primary">Search</button>
+                <div id="noResultsMessage" class="col-md-9 mt-4" style="display: none;">
+                    <p>Artigo não encontrado.</p>
+                </div>
             </div>
 
             <div id="filteredArticles" class="mt-4">
@@ -69,27 +72,23 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     $(document).ready(function () {
-        // Usando .on() para vincular eventos de clique para elementos dinâmicos
-        $(document).on('click', '.category-link', function (e) {
+        $('.category-link').click(function (e) {
             e.preventDefault();
             var category = $(this).data('category');
-            filterArticles(category);
+            filterArticlesByCategory(category);
         });
 
-        $(document).on('click', '.btn-star', function () {
+        $('.btn-star').click(function () {
             var articleId = $(this).data('article-id');
             starArticle(articleId);
         });
 
         $('#searchButton').click(function () {
             var searchTerm = $('#searchTerm').val();
-            filterArticles(searchTerm);
+            filterArticlesByTitle(searchTerm);
         });
 
-        function filterArticles(filterTerm) {
-            // Convertendo para minúsculas para tornar a comparação insensível a maiúsculas e minúsculas
-            filterTerm = filterTerm.toLowerCase();
-
+        function filterArticlesByCategory(category) {
             // Hide all articles initially
             $('.category-article').hide();
 
@@ -97,14 +96,22 @@
             $('.overflow-container .category-article').slice(0, 3).show();
 
             // Show articles based on the selected category
-            if (filterTerm === 'all') {
+            if (category === 'all') {
                 $('.category-article').show(); // Show all articles for "All" category
             } else {
-                $('.category-article').filter(function() {
-                    var category = $(this).data('category').toLowerCase();
-                    return category === filterTerm;
-                }).show();
+                $('.category-article[data-category="' + category + '"]').show();
             }
+        }
+
+        function filterArticlesByTitle(title) {
+            // Hide all articles initially
+            $('.category-article').hide();
+
+            // Show top 3 articles regardless of the category
+            $('.overflow-container .category-article').slice(0, 3).show();
+
+            // Show articles based on the selected title
+            $('.category-article:contains("' + title + '")').show();
         }
 
         function starArticle(articleId) {
@@ -123,5 +130,28 @@
                 }
             });
         }
+    });
+    $(document).ready(function () {
+        // ... (o resto do seu código)
+
+        function filterArticlesByTitle(title) {
+            // Hide all articles and the noResultsMessage initially
+            $('.category-article').hide();
+            $('#noResultsMessage').hide();
+
+            // Show top 3 articles regardless of the category
+            $('.overflow-container .category-article').slice(0, 3).show();
+
+            // Show articles based on the selected title
+            var matchingArticles = $('.category-article:contains("' + title + '")');
+            if (matchingArticles.length > 0) {
+                matchingArticles.show();
+            } else {
+                // If no articles match, display the noResultsMessage
+                $('#noResultsMessage').show();
+            }
+        }
+
+        // ... (o resto do seu código)
     });
 </script>
