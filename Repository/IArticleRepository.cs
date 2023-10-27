@@ -5,6 +5,7 @@ namespace BlogASP.Repository
 {
     public interface IArticleRepository
     {
+        List<ArticleModel> GetArticlesByCategory(string category);
         ArticleModel GetArticleById(int id);
         List<ArticleModel> GetAllArticles();
         ArticleModel CreateArticle(ArticleModel article);

@@ -1,23 +1,84 @@
 ﻿@model List<BlogASP.Models.ArticleModel>
 
-<h2>Articles</h2>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            <h4>Categories</h4>
 
-<div class="row">
-    <a role="button" class="text-Dark" asp-controller="Article" asp-action="Create">Create New Article</a>
-    @foreach (var article in Model)
-    {
-        <div class="col-4 mb-3">
-            <div class="card">
-                <img src="https://picsum.photos/200/300" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">@article.Title</h5>
-                    <p class="card-text">@article.Description</p>
-                    <a href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary">Read More</a>
-                    <p class="card-text">Stars: <span class="star-count">@article.Stars</span></p>
-                    <button class="btn btn-warning btn-star" data-article-id="@article.ArticleId">Star</button>
-
-                </div>
+            <a href="@Url.Action("Create", "Article")" class="btn btn-primary">Create New Article</a>
+      
+            <div id="filteredArticles" class="mt-4">
+                <a href="#" class="category-link" data-category="all">All</a>
+                @foreach (var category in Model.Select(a => a.Category).Distinct())
+                {
+                    <p><a href="#" class="category-link" data-category="@category">@category</a></p>
+                }
             </div>
         </div>
-    }
+
+        <div class="col-md-9">
+            <h2>Articles</h2>
+
+            <div class="row" id="article-container">
+                @foreach (var article in Model)
+                {
+                    <div class="col-4 mb-3 category-article" data-category="@article.Category">
+                        <div class="card">
+                            <img src="https://picsum.photos/200" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">@article.Title</h5>
+                                <p class="card-text">@article.Description</p>
+                                <a href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary">Read More</a>
+                                <p class="card-text">Stars: <span class="star-count" data-article-id="@article.ArticleId">@article.Stars</span></p>
+                                <button class="btn btn-warning btn-star" data-article-id="@article.ArticleId">Star</button>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.category-link').click(function (e) {
+            e.preventDefault();
+            var category = $(this).data('category');
+            filterArticlesByCategory(category);
+        });
+
+        $('.btn-star').click(function () {
+            var articleId = $(this).data('article-id');
+            starArticle(articleId);
+        });
+
+        function filterArticlesByCategory(category) {
+            $('.category-article').hide();
+            if (category === 'all') {
+                $('.category-article').show();
+            } else {
+                $('.category-article[data-category="' + category + '"]').show();
+            }
+        }
+
+        function starArticle(articleId) {
+            $.ajax({
+                url: '/Article/StarArticle',
+                method: 'POST',
+                data: { articleId: articleId },
+                success: function (result) {
+                    var starsElement = $('.star-count[data-article-id="' + articleId + '"]');
+                    if (starsElement.length > 0) {
+                        starsElement.text(result.stars);
+                    }
+                },
+                error: function (error) {
+                    console.error('Erro ao dar estrela:', error);
+                }
+            });
+        }
+    });
+</script>

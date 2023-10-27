@@ -1,5 +1,6 @@
 ﻿using BlogASP.DAL;
 using BlogASP.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,15 @@ namespace BlogASP.Repository
     public class ArticleRepository : IArticleRepository
     {
         private readonly DatabaseContext _databaseContext;
-            
+
         public ArticleRepository(DatabaseContext databaseContext)
         {
             _databaseContext = databaseContext;
         }
-
+        public List<ArticleModel> GetArticlesByCategory(string category)
+        {
+            return _databaseContext.Articles.Where(a => a.Category == category).ToList();
+        }
         public void UpdateArticle(ArticleModel article)
         {
             _databaseContext.Articles.Update(article);
@@ -27,7 +31,16 @@ namespace BlogASP.Repository
 
         public List<ArticleModel> GetAllArticles()
         {
-            return _databaseContext.Articles.ToList();
+            try
+            {
+                return _databaseContext.Articles.ToList();
+            }
+            catch (Exception ex)
+            {
+                // Registre ou manipule a exceção conforme necessário
+                Console.Error.WriteLine($"Error fetching articles: {ex.Message}");
+                return null; // Ou outra sinalização de falha
+            }
         }
 
         public ArticleModel CreateArticle(ArticleModel article)
@@ -42,18 +55,19 @@ namespace BlogASP.Repository
         {
             ArticleModel articleDB = GetArticleById(article.ArticleId);
 
-            if (articleDB == null) throw new Exception("Atualization error!");
+            if (articleDB == null)
+                return null;
 
             articleDB.Title = article.Title;
             articleDB.Category = article.Category;
             articleDB.Description = article.Description;
 
-            // Adicione lógica adicional, se necessário, antes de salvar as alterações
             _databaseContext.Articles.Update(articleDB);
             _databaseContext.SaveChanges();
 
             return articleDB;
         }
+
 
         public bool DeleteArticle(int id)
         {
@@ -66,5 +80,6 @@ namespace BlogASP.Repository
             _databaseContext.SaveChanges();
             return true;
         }
+
     }
 }

@@ -15,8 +15,23 @@ namespace BlogASP.Controllers
         {
             return View();
         }
-        public ArticleController(IArticleRepository articleRepository)
+
+        public List<ArticleModel> GetArticlesByCategory(string category)
         {
+            try
+            {
+                var articles = _context.Articles.Where(a => a.Category == category).ToList();
+                return articles;
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine(ex.Message);
+                return null;
+            }
+        }
+        public ArticleController(DatabaseContext context, IArticleRepository articleRepository)
+        {
+            _context = context;
             _articleRepository = articleRepository;
         }
         [HttpGet]
@@ -26,19 +41,9 @@ namespace BlogASP.Controllers
             return View(articles);
         }
 
-        [HttpPost]
-        public IActionResult Create(ArticleModel article)
-        {
-            if (ModelState.IsValid)
-            {
-                _articleRepository.CreateArticle(article);
-                return RedirectToAction("Index", "Home"); 
-            }
-
-            return View(article);
-        }
         public IActionResult Details(int id)
         {
+            // Lógica para obter e exibir os detalhes do artigo
             var article = _articleRepository.GetArticleById(id);
 
             if (article == null)
@@ -48,23 +53,40 @@ namespace BlogASP.Controllers
 
             return View(article);
         }
+        [HttpPost]
+        public IActionResult Create(ArticleModel article)
+        {
+            if (ModelState.IsValid)
+            {
+                article.Stars = 0; // Defina o número inicial de estrelas aqui
+                _articleRepository.CreateArticle(article);
+                return RedirectToAction("Index", "Home");
+            }
 
+            return View(article);
+        }
         [HttpPost]
         public IActionResult StarArticle(int articleId)
         {
-            // Obtenha o artigo do banco de dados
             var article = _articleRepository.GetArticleById(articleId);
 
-            // Atualize o campo Stars
             if (article != null)
             {
-                article.Stars += 1;
+                // Verificar se o usuário já deu estrela (usando cookies como exemplo)
+                bool userHasStarred = HttpContext.Request.Cookies["userHasStarred-" + articleId] == "true";
+
+                // Adicionar ou remover estrela com base na verificação
+                article.Stars += userHasStarred ? -1 : 1;
+
+                // Atualizar o status de estrela do usuário (usando cookies como exemplo)
+                HttpContext.Response.Cookies.Append("userHasStarred-" + articleId, (!userHasStarred).ToString());
+
                 _articleRepository.UpdateArticle(article);
             }
 
-            // Retorne o novo número de estrelas para atualização na interface do usuário
             return Json(new { stars = article?.Stars });
         }
+
 
         public void UpdateArticle(ArticleModel article)
         {
