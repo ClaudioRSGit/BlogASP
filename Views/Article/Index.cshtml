@@ -6,7 +6,13 @@
             <h4>Categories</h4>
 
             <a href="@Url.Action("Create", "Article")" class="btn btn-primary">Create New Article</a>
-      
+
+            <!-- Search Box and Button -->
+            <div class="mt-4">
+                <input type="text" id="categorySearch" placeholder="Search Category">
+                <button class="btn btn-success" onclick="searchByCategory()">Search</button>
+            </div>
+
             <div id="filteredArticles" class="mt-4">
                 <a href="#" class="category-link" data-category="all">All</a>
                 @foreach (var category in Model.Select(a => a.Category).Distinct())
@@ -59,9 +65,9 @@
         </div>
     </div>
 </div>
+
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
-
     $(document).ready(function () {
         $('.category-link').click(function (e) {
             e.preventDefault();
@@ -105,5 +111,13 @@
                 }
             });
         }
+
+        function searchByCategory() {
+            var category = $('#categorySearch').val().trim().toLowerCase();
+            filterArticlesByCategory(category);
+        }
+    });
+    $('#searchButton').click(function () {
+        searchByCategory();
     });
 </script>
