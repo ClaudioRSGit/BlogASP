@@ -7,27 +7,59 @@
     <h2>Sign Up</h2>
     <form asp-controller="SignUp" asp-action="Create" method="post">
         <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" asp-for="Name" class="form-control" id="name" placeholder="Enter your Name">
+            <label for="Name">Name:</label>
+            <input type="text" asp-for="Name" class="form-control" placeholder="Enter your Name" required>
         </div>
 
         <div class="form-group">
             <label for="Username">Username:</label>
-            <input type="text" asp-for="Username" class="form-control" id="Username" placeholder="Enter your Username">
+            <input type="text" asp-for="Username" class="form-control" placeholder="Enter your Username" required
+                   pattern="^[a-zA-Z0-9_]{5,}$"
+                   title="Username must contain only letters, numbers, and underscores and must be at least 5 characters long.">
         </div>
 
         <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" asp-for="Email" class="form-control" id="email" placeholder="Enter your Email">
+            <label for="Email">Email:</label>
+            <input type="text" asp-for="Email" class="form-control" placeholder="Enter your Email" required
+                   pattern="^[A-Za-z0-9._%+-]+[.][A-Za-z0-9.-]+[.][A-Za-z]{2,6}$"
+                   title="Invalid email format. Please enter a valid email address.">
         </div>
 
         <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" asp-for="Password" class="form-control" id="password" placeholder="Enter your Password">
+            <label for="Password">Password:</label>
+            <input type="password" asp-for="Password" class = "form-control" placeholder="Enter your Password" required
+                   pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{5,}$"
+                   title="Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character, and must be at least 5 characters long.">
         </div>
+
+        <div class="form-group">
+            <label for="ConfirmPassword">Confirm Password:</label>
+            <input type="password" id="ConfirmPassword" class="form-control" placeholder="Confirm your Password" required
+                   data-val="true"
+                   data-val-equalto="The password and confirmation password do not match."
+                   data-val-equalto-other="Password"
+                   data-val-equalto-rules="Password">
+        </div>
+
+
 
         <button type="submit" class="btn btn-primary btn-block">Submit</button>
 
-        <a role="button" class="btn btn-secondary " asp-controller="Home" asp-action="Index">Back</a>
+        <a role="button" class="btn btn-secondary" asp-controller="Home" asp-action="Index">Back</a>
     </form>
 </div>
+
+<script>
+    var passwordInput = document.getElementById("Password");
+    var confirmPasswordInput = document.getElementById("ConfirmPassword");
+
+    passwordInput.addEventListener("input", validatePassword);
+
+    function validatePassword() {
+        if (passwordInput.value !== confirmPasswordInput.value) {
+            confirmPasswordInput.setCustomValidity("The password and confirmation password do not match.");
+        } else {
+            confirmPasswordInput.setCustomValidity("");
+        }
+    }
+</script>
