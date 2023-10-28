@@ -13,32 +13,115 @@
             <p>@Model.Description</p>
         </div>
     </div>
+    <h3>Comment Section</h3>
+    <!-- Comment 1 -->
+    <div class="flex flex-col items-center pb-8 border-b border-gray-200 md:flex-row md:space-x-8">
+        <div class="flex flex-col justify-center items-center space-y-4 text-center md:flex-row md:justify-start md:space-y-0 md:space-x-6 md:text-left">
+            <!-- User Avatar -->
+            <img class="w-24 h-24 rounded-full border border-gray-200" src="https://helios-i.mashable.com/imagery/authors/01sT0oXtE6IeRNrRLduLq1X/image.fill.size_100x100.v1624381011.jpg" alt="User Avatar" width="100" height="100">
+            <div class="flex flex-col space-y-2">
+                <!-- User Name -->
+                <div class="w-full font-bold header-200">Sam Haysom</div>
+                <!-- Comment Text -->
+                <div class="w-full text-xl font-bold">
+                    Wow, this article is really insightful! I learned a lot from it. Can't wait to read more from you.
+                </div>
+            </div>
+        </div>
+        <!-- Comment Actions (e.g., social media links) -->
+        <div class="flex flex-row justify-center pt-4 mt-8 w-full border-t border-gray-200 md:justify-start md:pt-0 md:pl-4 md:mt-0 md:w-auto md:border-t-0 md:border-l md:border-solid space-x4" style="height: 75px;align-items: center;">
+            <a href="https://twitter.com/samhaysom" class="px-3 hover:text-primary-400" target="_blank" rel="noopener" title="(opens in a new window)">
+                <svg class="inline-block w-5 h-5 fill-current md:h-4"><use href="/images/icons/spritemap.svg#sprite-twitter-brands"></use></svg>
+            </a>
+        </div>
+    </div>
 
-    <div class="mt-5 text-center">
-        <h2>Comment Section</h2>
+    <!-- Comment 2 -->
+    <div class="flex flex-col items-center pb-8 border-b border-gray-200 md:flex-row md:space-x-8">
+        <div class="flex flex-col justify-center items-center space-y-4 text-center md:flex-row md:justify-start md:space-y-0 md:space-x-6 md:text-left">
+            <!-- User Avatar -->
+            <img class="w-24 h-24 rounded-full border border-gray-200" src="https://helios-i.mashable.com/imagery/authors/01sT0oXtE6IeRNrRLduLq1X/image.fill.size_100x100.v1624381011.jpg" alt="User Avatar" width="100" height="100">
+            <div class="flex flex-col space-y-2">
+                <!-- User Name -->
+                <div class="w-full font-bold header-200">Sam Haysom</div>
+                <!-- Comment Text -->
+                <div class="w-full text-xl font-bold">
+                    Wow, this article is really insightful! I learned a lot from it. Can't wait to read more from you.
+                </div>
+            </div>
+        </div>
+        <!-- Comment Actions (e.g., social media links) -->
+        <div class="flex flex-row justify-center pt-4 mt-8 w-full border-t border-gray-200 md:justify-start md:pt-0 md:pl-4 md:mt-0 md:w-auto md:border-t-0 md:border-l md:border-solid space-x4" style="height: 75px;align-items: center;">
+            <a href="https://twitter.com/samhaysom" class="px-3 hover:text-primary-400" target="_blank" rel="noopener" title="(opens in a new window)">
+                <svg class="inline-block w-5 h-5 fill-current md:h-4"><use href="/images/icons/spritemap.svg#sprite-twitter-brands"></use></svg>
+            </a>
+        </div>
+    </div>
 
+    <!-- Comment 3 -->
+    <div class="flex flex-col items-center pb-8 border-b border-gray-200 md:flex-row md:space-x-8">
+        <div class="flex flex-col justify-center items-center space-y-4 text-center md:flex-row md:justify-start md:space-y-0 md:space-x-6 md:text-left">
+            <!-- User Avatar -->
+            <img class="w-24 h-24 rounded-full border border-gray-200" src="https://helios-i.mashable.com/imagery/authors/01sT0oXtE6IeRNrRLduLq1X/image.fill.size_100x100.v1624381011.jpg" alt="User Avatar" width="100" height="100">
+            <div class="flex flex-col space-y-2">
+                <!-- User Name -->
+                <div class="w-full font-bold header-200">Sam Haysom</div>
+                <!-- Comment Text -->
+                <div class="w-full text-xl font-bold">
+                    Wow, this article is really insightful! I learned a lot from it. Can't wait to read more from you.
+                </div>
+            </div>
+        </div>
+        <!-- Comment Actions (e.g., social media links) -->
+        <div class="flex flex-row justify-center pt-4 mt-8 w-full border-t border-gray-200 md:justify-start md:pt-0 md:pl-4 md:mt-0 md:w-auto md:border-t-0 md:border-l md:border-solid space-x4" style="height: 75px;align-items: center;">
+            <a href="https://twitter.com/samhaysom" class="px-3 hover:text-primary-400" target="_blank" rel="noopener" title="(opens in a new window)">
+                <svg class="inline-block w-5 h-5 fill-current md:h-4"><use href="/images/icons/spritemap.svg#sprite-twitter-brands"></use></svg>
+            </a>
+        </div>
     </div>
 
     <!-- Related Articles -->
     <h2>Related Articles</h2>
-    <div class="overflow-container" style="overflow-x: auto; white-space: nowrap;">
-        <div class="row">
-            @foreach (var article in ViewBag.ArticleRepository.GetRelatedArticles(Model.ArticleId))
+    <div class="overflow-container" style="overflow-x: auto; white-space: nowrap; display: flex;">
+        @{
+            var relatedArticles = ViewBag.ArticleRepository.GetRelatedArticles(Model.ArticleId);
+            foreach (var article in relatedArticles)
             {
-                <!-- Display related articles as needed -->
+                <div class="card" style="width: 18rem; margin-right: 10px;">
+                    <img src="@article.Picture" class="card-img-top" alt="Article Image">
+                    <div class="card-body">
+                        <h5 class="card-title">@article.Title</h5>
+                        <p class="card-text">@article.Description</p>
+                        <a href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
             }
-        </div>
+        }
     </div>
 
     <!-- Most Starred Articles -->
     <h2>Top 3 Articles</h2>
     <div class="overflow-container" style="overflow-x: auto; white-space: nowrap;">
         <div class="row">
-            @foreach (var article in ViewBag.ArticleRepository.GetMostStarredArticles())
-            {
-                <!-- Display most starred articles as needed -->
+            @{
+                var mostStarredArticles = ViewBag.ArticleRepository.GetMostStarredArticles();
+                foreach (var article in mostStarredArticles)
+                {
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <img src="@article.Picture" class="card-img-top" alt="Article Image">
+                            <div class="card-body">
+                                <h5 class="card-title">@article.Title</h5>
+                                <p class="card-text">@article.Description</p>
+                                <a href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary">Read More</a>
+                                <p class="card-text">Stars: <span class="star-count" data-article-id="@article.ArticleId">@article.Stars</span></p>
+                            </div>
+                        </div>
+                    </div>
+                }
             }
         </div>
     </div>
+
 
 </div>
