@@ -13,6 +13,7 @@ namespace BlogASP.Models
         public int? Stars { get; set; }
         public bool isPrivate { get; set; }
         public int? UserId { get; set; }
+        public string? Picture { get; set; }
 
         [ForeignKey("UserId")]
         public UserModel? User { get; set; }
