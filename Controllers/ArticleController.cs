@@ -43,13 +43,15 @@ namespace BlogASP.Controllers
 
         public IActionResult Details(int id)
         {
-            // Lógica para obter e exibir os detalhes do artigo
             var article = _articleRepository.GetArticleById(id);
 
             if (article == null)
             {
                 return NotFound();
             }
+
+            // Pass the repository to the view
+            ViewBag.ArticleRepository = _articleRepository;
 
             return View(article);
         }
@@ -58,11 +60,9 @@ namespace BlogASP.Controllers
         {
             if (ModelState.IsValid)
             {
-                // número inicial de estrelas aqui
                 article.Stars = 0;
 
-                // Preencha o campo Picture com um link de imagem aleatório
-                article.Picture = GetRandomImageLink(); // Substitua GetRandomImageLink pela lógica desejada para obter um link de imagem.
+                article.Picture = GetRandomImageLink();
 
                 _articleRepository.CreateArticle(article);
                 return RedirectToAction("Index", "Home");
@@ -93,7 +93,7 @@ namespace BlogASP.Controllers
         }
         private string GetRandomImageLink()
         {
-            // Lógica para obter um link de imagem aleatório
+            //obter um link de imagem aleatório
             var imageLinks = new List<string>
             {
                 "https://fastly.picsum.photos/id/60/1920/1200.jpg?hmac=fAMNjl4E_sG_WNUjdU39Kald5QAHQMh-_-TsIbbeDNI",
