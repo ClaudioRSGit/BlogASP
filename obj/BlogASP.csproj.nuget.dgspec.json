@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Claudio\\Desktop\\ASP\\BlogASP\\BlogASP.csproj": {}
+    "C:\\Users\\Claudio\\Desktop\\BlogASP\\BlogASP.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Claudio\\Desktop\\ASP\\BlogASP\\BlogASP.csproj": {
+    "C:\\Users\\Claudio\\Desktop\\BlogASP\\BlogASP.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Claudio\\Desktop\\ASP\\BlogASP\\BlogASP.csproj",
+        "projectUniqueName": "C:\\Users\\Claudio\\Desktop\\BlogASP\\BlogASP.csproj",
         "projectName": "BlogASP",
-        "projectPath": "C:\\Users\\Claudio\\Desktop\\ASP\\BlogASP\\BlogASP.csproj",
+        "projectPath": "C:\\Users\\Claudio\\Desktop\\BlogASP\\BlogASP.csproj",
         "packagesPath": "C:\\Users\\Claudio\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Claudio\\Desktop\\ASP\\BlogASP\\obj\\",
+        "outputPath": "C:\\Users\\Claudio\\Desktop\\BlogASP\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Claudio\\AppData\\Roaming\\NuGet\\NuGet.Config",
