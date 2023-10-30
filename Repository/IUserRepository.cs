@@ -9,6 +9,6 @@ namespace BlogASP.Repository
         UserModel Create(UserModel user);
         UserModel Edit(UserModel user);
 
-        bool Erase(int id); 
+        bool Delete(int id); 
     }
 }
