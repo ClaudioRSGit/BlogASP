@@ -23,13 +23,32 @@
         </div>
 
         <div class="col-md-9">
-            <h2>Articles</h2>
-
+            
             <div id="noResultsMessage" class="col-md-9 mt-4" style="display: none;">
                 <p>Artigo não encontrado.</p>
             </div>
 
             <div class="row" id="article-container">
+                <h3>Hot Article</h3>
+                <div class="mt-4">
+                        @foreach (var article in Model.OrderByDescending(a => a.Stars).Take(1))
+                        {
+                            <div class="category-article" data-category="@article.Category">
+                                <div class="card">
+                                    <img src="@article.Picture" class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">@article.Title</h5>
+                                        <p class="card-text">@article.Description</p>
+                                        <a href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary">Read More</a>
+                                        <p class="card-text">Stars: <span class="star-count" data-article-id="@article.ArticleId">@article.Stars</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                </div>
+
+                <h2>Articles</h2>
+
                 @foreach (var article in Model)
                 {
                     <div class="col-4 mb-3 category-article" data-category="@article.Category">
