@@ -1,6 +1,7 @@
 ﻿using BlogASP.DAL;
 using BlogASP.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,12 @@ namespace BlogASP.Repository
     public class ArticleRepository : IArticleRepository
     {
         private readonly DatabaseContext _databaseContext;
+
+        public ArticleRepository(DatabaseContext databaseContext)
+        {
+            _databaseContext = databaseContext;
+        }
+
         public List<ArticleModel> GetRelatedArticles(int articleId)
         {
             var targetArticle = _databaseContext.Articles.Find(articleId);
@@ -22,6 +29,7 @@ namespace BlogASP.Repository
                 .Where(a => a.Category == targetArticle.Category && a.ArticleId != articleId)
                 .ToList();
         }
+
         public List<ArticleModel> GetMostStarredArticles()
         {
             return _databaseContext.Articles
@@ -29,22 +37,23 @@ namespace BlogASP.Repository
                 .Take(3)
                 .ToList();
         }
-        public ArticleRepository(DatabaseContext databaseContext)
-        {
-            _databaseContext = databaseContext;
-        }
+
         public List<ArticleModel> GetArticlesByCategory(string category)
         {
             return _databaseContext.Articles.Where(a => a.Category == category).ToList();
         }
+
         public void UpdateArticle(ArticleModel article)
         {
             _databaseContext.Articles.Update(article);
             _databaseContext.SaveChanges();
         }
+
         public ArticleModel GetArticleById(int id)
         {
-            return _databaseContext.Articles.FirstOrDefault(x => x.ArticleId == id);
+            return _databaseContext.Articles
+                .Include(a => a.Comments) // Include comments
+                .FirstOrDefault(x => x.ArticleId == id);
         }
 
         public List<ArticleModel> GetAllArticles()
@@ -55,15 +64,15 @@ namespace BlogASP.Repository
             }
             catch (Exception ex)
             {
-                // Registre ou manipule a exceção conforme necessário
+                // Handle or log the exception as needed
                 Console.Error.WriteLine($"Error fetching articles: {ex.Message}");
-                return null; // Ou outra sinalização de falha
+                return null; // Or another way to signal a failure
             }
         }
 
         public ArticleModel CreateArticle(ArticleModel article)
         {
-            // Adicione lógica adicional, se necessário, antes de salvar o artigo
+            // Add additional logic if needed before saving the article
             _databaseContext.Articles.Add(article);
             _databaseContext.SaveChanges();
             return article;
@@ -86,18 +95,17 @@ namespace BlogASP.Repository
             return articleDB;
         }
 
-
         public bool DeleteArticle(int id)
         {
             ArticleModel articleDB = GetArticleById(id);
 
-            if (articleDB == null) throw new Exception("Delete error!");
+            if (articleDB == null)
+                throw new Exception("Delete error!");
 
-            // Adicione lógica adicional, se necessário, antes de remover o artigo
+            // Add additional logic if needed before removing the article
             _databaseContext.Articles.Remove(articleDB);
             _databaseContext.SaveChanges();
             return true;
         }
-
     }
 }
