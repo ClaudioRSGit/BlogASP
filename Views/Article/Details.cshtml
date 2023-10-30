@@ -46,7 +46,7 @@
 
     <!-- Related Articles -->
     <h2>Related Articles</h2>
-    @if (ViewBag.ArticleRepository.GetRelatedArticles(Model.ArticleId).Any())
+    @if (ViewBag.ArticleRepository.GetRelatedArticles(Model.ArticleId).Count > 0)
     {
         <div class="overflow-container" style="overflow-x: auto; white-space: nowrap; display: flex;">
             @{

@@ -14,10 +14,10 @@
             </div>
 
             <div id="filteredArticles" class="mt-4">
-                <a href="#" class="category-link" data-category="all">All</a>
+                <a href="#" class="btn btn-primary category-link" data-category="all">All</a>
                 @foreach (var category in Model.Select(a => a.Category).Distinct())
                 {
-                    <p><a href="#" class="category-link" data-category="@category">@category</a></p>
+                    <a href="#" class="btn btn-outline-primary category-link" data-category="@category">@category</a>
                 }
             </div>
         </div>
@@ -29,7 +29,10 @@
             </div>
 
             <div class="row" id="article-container">
-                <h3>Hot Article</h3>
+                <h3>
+                    Hot Article <img src="https://media3.giphy.com/media/47GPQ7ZzivsemHKPvB/giphy.gif?cid=6c09b95214tgpwzhqgko1j455abol9glk6cpzwcto13b1kgf&ep=v1_stickers_related&rid=giphy.gif&ct=s" height="50px" alt="Animated GIF">
+                </h3>
+                
                 <div class="mt-4">
                         @foreach (var article in Model.OrderByDescending(a => a.Stars).Take(1))
                         {
