@@ -42,10 +42,24 @@ namespace BlogASP.Controllers
             return View();
         }
 
+        [HttpPost]
         public IActionResult Delete(int id)
         {
-            UserModel user = _userRepository.ListById(id);
-            return View();
+            try
+            {
+                if (_userRepository.Delete(id))
+                {
+                    return Ok(); 
+                }
+                else
+                {
+                    return BadRequest("Deleting Error:");
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Deleting Error: " + ex.Message); 
+            }
         }
 
         [HttpPost]
@@ -68,12 +82,6 @@ namespace BlogASP.Controllers
             _userRepository.Edit(user);
             return RedirectToAction("Index");
         }
-
-        //public IActionResult Erase(int id)
-        //{
-        //    _userRepository.Erase(id);
-        //    return RedirectToAction("Index");
-        //}
 
 
         [HttpPost]

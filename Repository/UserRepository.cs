@@ -45,7 +45,7 @@ namespace BlogASP.Repository
             return userDB;
         }
 
-        public bool Erase(int id)
+        public bool Delete(int id)
         {
             UserModel userDB = ListById(id);
 

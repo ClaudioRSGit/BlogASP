@@ -75,7 +75,7 @@
                                         <input type="hidden" name="id" value="@user.UserId" />
                                         <button type="submit" class="btn btn-success">Accept</button>
                                     </form>
-                                    <a role="button" class="btn btn-danger">Reject</a>
+                                    <a role="button" class="btn btn-danger reject-button" data-id="@user.UserId">Reject</a>
                                 </td>
                             </tr>
                         }
@@ -199,7 +199,7 @@
 <script>
     document.querySelectorAll(".nav-link").forEach(function (link) {
         link.addEventListener("click", function () {
-            var target = link.getAttribute("href").substring(1); // Remove o "#" do href
+            var target = link.getAttribute("href").substring(1); 
             showTable(target);
         });
     });
@@ -214,4 +214,27 @@
             }
         });
     }
+
+    document.querySelectorAll(".reject-button").forEach(function (button) {
+        button.addEventListener("click", function () {
+            var userId = button.getAttribute("data-id");
+            var confirmation = confirm("Do you really want to delete this user?");
+            if (confirmation) {
+                fetch("/AdminPanel/Delete/" + userId, {
+                    method: "POST",
+                })
+                    .then(function (response) {
+                        if (response.ok) {
+                            var tableRow = button.closest("tr");
+                            tableRow.style.display = "none"; 
+                        } else {
+                            console.log("Error deleting user.");
+                        }
+                    })
+                    .catch(function (error) {
+                        console.error("Error processing request:", error);
+                    });
+            }
+        });
+    });
 </script>

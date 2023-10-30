@@ -14,8 +14,8 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.LoginPath = "/Login"; // Defina a URL da página de login
-        options.AccessDeniedPath = "/Home/AccessDenied"; // Defina a URL da página de acesso negado
+        options.LoginPath = "/Login"; 
+        options.AccessDeniedPath = "/Home/AccessDenied"; 
     });
 
 builder.Services.AddAuthorization();
