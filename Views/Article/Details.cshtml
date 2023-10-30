@@ -46,22 +46,29 @@
 
     <!-- Related Articles -->
     <h2>Related Articles</h2>
-    <div class="overflow-container" style="overflow-x: auto; white-space: nowrap; display: flex;">
-        @{
-            var relatedArticles = ViewBag.ArticleRepository.GetRelatedArticles(Model.ArticleId);
-            foreach (var article in relatedArticles)
-            {
-                <div class="card" style="width: 18rem; margin-right: 10px;">
-                    <img src="@article.Picture" class="card-img-top" alt="Article Image">
-                    <div class="card-body">
-                        <h5 class="card-title">@article.Title</h5>
-                        <p class="card-text">@article.Description</p>
-                        <a href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary">Read More</a>
+    @if (ViewBag.ArticleRepository.GetRelatedArticles(Model.ArticleId).Any())
+    {
+        <div class="overflow-container" style="overflow-x: auto; white-space: nowrap; display: flex;">
+            @{
+                var relatedArticles = ViewBag.ArticleRepository.GetRelatedArticles(Model.ArticleId);
+                foreach (var article in relatedArticles)
+                {
+                    <div class="card" style="width: 18rem; margin-right: 10px;">
+                        <img src="@article.Picture" class="card-img-top" alt="Article Image">
+                        <div class="card-body">
+                            <h5 class="card-title">@article.Title</h5>
+                            <p class="card-text">@article.Description</p>
+                            <a href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary">Read More</a>
+                        </div>
                     </div>
-                </div>
+                }
             }
-        }
-    </div>
+        </div>
+    }
+    else
+    {
+        <p>No related articles available.</p>
+    }
 
     <!-- Most Starred Articles -->
     <h2>Top 3 Articles</h2>

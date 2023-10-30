@@ -66,7 +66,7 @@ namespace BlogASP.Controllers
                 article.Picture = GetRandomImageLink();
 
                 _articleRepository.CreateArticle(article);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Details", "Article", new { id = article.ArticleId });
             }
 
             return View(article);
