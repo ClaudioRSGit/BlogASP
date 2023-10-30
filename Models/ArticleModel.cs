@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BlogASP.Models
@@ -13,11 +14,10 @@ namespace BlogASP.Models
         public int? Stars { get; set; }
         public bool isPrivate { get; set; }
         public int? UserId { get; set; }
+        public string? Picture { get; set; }
 
         [ForeignKey("UserId")]
         public UserModel? User { get; set; }
-
         public ICollection<CommentModel>? Comments { get; set; }
-
     }
 }

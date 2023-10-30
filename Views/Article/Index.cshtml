@@ -6,7 +6,13 @@
             <h4>Categories</h4>
 
             <a href="@Url.Action("Create", "Article")" class="btn btn-primary">Create New Article</a>
-      
+
+            <!-- Search Box and Button -->
+            <div class="mt-4">
+                <input type="text" id="searchTerm" class="form-control" placeholder="Enter title">
+                <button id="searchButton" class="btn btn-primary">Search</button>
+            </div>
+
             <div id="filteredArticles" class="mt-4">
                 <a href="#" class="category-link" data-category="all">All</a>
                 @foreach (var category in Model.Select(a => a.Category).Distinct())
@@ -19,12 +25,16 @@
         <div class="col-md-9">
             <h2>Articles</h2>
 
+            <div id="noResultsMessage" class="col-md-9 mt-4" style="display: none;">
+                <p>Artigo não encontrado.</p>
+            </div>
+
             <div class="row" id="article-container">
                 @foreach (var article in Model)
                 {
                     <div class="col-4 mb-3 category-article" data-category="@article.Category">
                         <div class="card">
-                            <img src="https://picsum.photos/200" class="card-img-top" alt="...">
+                            <img src="@article.Picture" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">@article.Title</h5>
                                 <p class="card-text">@article.Description</p>
@@ -45,7 +55,7 @@
                 {
                     <div class="col-4 mb-3 category-article" data-category="@article.Category">
                         <div class="card">
-                            <img src="https://picsum.photos/200" class="card-img-top" alt="...">
+                            <img src="@article.Picture" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">@article.Title</h5>
                                 <p class="card-text">@article.Description</p>
@@ -59,9 +69,9 @@
         </div>
     </div>
 </div>
+
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
-
     $(document).ready(function () {
         $('.category-link').click(function (e) {
             e.preventDefault();
@@ -74,10 +84,15 @@
             starArticle(articleId);
         });
 
+        $('#searchButton').click(function () {
+            var searchTerm = $('#searchTerm').val();
+            filterArticlesByTitle(searchTerm);
+        });
+
         function filterArticlesByCategory(category) {
             // Hide all articles initially
             $('.category-article').hide();
-
+            $('#noResultsMessage').hide();
             // Show top 3 articles regardless of the category
             $('.overflow-container .category-article').slice(0, 3).show();
 
@@ -88,6 +103,8 @@
                 $('.category-article[data-category="' + category + '"]').show();
             }
         }
+
+        
 
         function starArticle(articleId) {
             $.ajax({
@@ -105,5 +122,34 @@
                 }
             });
         }
-    });
+        function filterArticlesByTitle(title) {
+            // Oculta todos os artigos inicialmente
+            $('.category-article').hide();
+
+            // Mostra os 3 principais artigos independentemente da categoria
+            $('.overflow-container .category-article').slice(0, 3).show();
+
+            // Contador para rastrear o número de artigos correspondentes
+            var matchingCount = 0;
+
+            // Itera sobre os artigos para verificar o título
+            $('.category-article').each(function () {
+                var articleTitle = $(this).find('.card-title').text().toLowerCase();
+                if (articleTitle.includes(title.toLowerCase())) {
+                    $(this).show();
+                    matchingCount++;
+                }
+            });
+
+            // Verifica se algum artigo foi encontrado
+            if (matchingCount === 0) {
+                // Se nenhum artigo corresponder, exibe a mensagem noResultsMessage
+                $('#noResultsMessage').show();
+            } else {
+                // Se houver pelo menos um artigo correspondente, oculta a mensagem
+                $('#noResultsMessage').hide();
+            }
+        }
+    }); 
+    
 </script>

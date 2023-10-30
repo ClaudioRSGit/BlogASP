@@ -1,14 +1,65 @@
 ﻿@model BlogASP.Models.ArticleModel
 
-<div class="text-center">
-    <h2>Article Details</h2>
+<div class="container">
+    <div class="text-center">
+        <h2>@Model.Title</h2>
+        <p>Category: @Model.Category</p>
 
-    <div class="card col-4">
-        <img src="https://picsum.photos/200/300" width="361" class="card-img-top" alt="..." height="240">
-        <div class="card-body">
-            <h4 class="card-title">@Model.Category</h4>
-            <h5 class="card-title">@Model.Title</h5>
-            <p class="card-text">@Model.Description</p>
+        <div class="mt-4">
+            <img src="@Model.Picture" class="img-fluid" alt="Article Image">
+        </div>
+
+        <div class="mt-4">
+            <p>@Model.Description</p>
         </div>
     </div>
+    <hr>
+    
+    
+    <hr>
+
+    <!-- Related Articles -->
+    <h2>Related Articles</h2>
+    <div class="overflow-container" style="overflow-x: auto; white-space: nowrap; display: flex;">
+        @{
+            var relatedArticles = ViewBag.ArticleRepository.GetRelatedArticles(Model.ArticleId);
+            foreach (var article in relatedArticles)
+            {
+                <div class="card" style="width: 18rem; margin-right: 10px;">
+                    <img src="@article.Picture" class="card-img-top" alt="Article Image">
+                    <div class="card-body">
+                        <h5 class="card-title">@article.Title</h5>
+                        <p class="card-text">@article.Description</p>
+                        <a href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+
+    <!-- Most Starred Articles -->
+    <h2>Top 3 Articles</h2>
+    <div class="overflow-container" style="overflow-x: auto; white-space: nowrap;">
+        <div class="row">
+            @{
+                var mostStarredArticles = ViewBag.ArticleRepository.GetMostStarredArticles();
+                foreach (var article in mostStarredArticles)
+                {
+                    <div class="col-md-4 mb-3">
+                        <div class="card">
+                            <img src="@article.Picture" class="card-img-top" alt="Article Image">
+                            <div class="card-body">
+                                <h5 class="card-title">@article.Title</h5>
+                                <p class="card-text">@article.Description</p>
+                                <a href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary">Read More</a>
+                                <p class="card-text">Stars: <span class="star-count" data-article-id="@article.ArticleId">@article.Stars</span></p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+
+
 </div>

@@ -10,7 +10,25 @@ namespace BlogASP.Repository
     public class ArticleRepository : IArticleRepository
     {
         private readonly DatabaseContext _databaseContext;
+        public List<ArticleModel> GetRelatedArticles(int articleId)
+        {
+            var targetArticle = _databaseContext.Articles.Find(articleId);
+            if (targetArticle == null)
+            {
+                return new List<ArticleModel>(); // or handle as appropriate
+            }
 
+            return _databaseContext.Articles
+                .Where(a => a.Category == targetArticle.Category && a.ArticleId != articleId)
+                .ToList();
+        }
+        public List<ArticleModel> GetMostStarredArticles()
+        {
+            return _databaseContext.Articles
+                .OrderByDescending(a => a.Stars)
+                .Take(3)
+                .ToList();
+        }
         public ArticleRepository(DatabaseContext databaseContext)
         {
             _databaseContext = databaseContext;

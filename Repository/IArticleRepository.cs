@@ -5,6 +5,8 @@ namespace BlogASP.Repository
 {
     public interface IArticleRepository
     {
+        List<ArticleModel> GetRelatedArticles(int articleId);
+        List<ArticleModel> GetMostStarredArticles();
         List<ArticleModel> GetArticlesByCategory(string category);
         ArticleModel GetArticleById(int id);
         List<ArticleModel> GetAllArticles();
