@@ -8,15 +8,22 @@ namespace BlogASP.Controllers
     public class AdminPanelController : Controller
     {
         private readonly IUserRepository _userRepository;
-        public AdminPanelController(IUserRepository userRepository)
+        private readonly IArticleRepository _articleRepository;
+
+        public AdminPanelController(IUserRepository userRepository, IArticleRepository articleRepository)
         {
             _userRepository = userRepository;
+            _articleRepository = articleRepository;
         }
 
         public IActionResult Index()
         {
-            List<UserModel> users = _userRepository.GetAll();
-            return View(users);
+            var viewModel = new AdminPanelViewModel
+            {
+                Users = _userRepository.GetAll(),
+                Articles = _articleRepository.GetAllArticles()
+            };
+            return View(viewModel);
         }
 
         public IActionResult Create()
