@@ -33,15 +33,21 @@
     </div>
 
     <!-- Add Comment Form -->
-    <form id="addCommentForm">
-        <div class="form-group">
-            <label for="commentDescription">Add a comment:</label>
-            <textarea class="form-control" id="commentDescription" name="commentDescription" rows="3"></textarea>
-        </div>
-        <button type="button" class="btn btn-primary" onclick="addComment(@Model.ArticleId)">Add Comment</button>
-    </form>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <form id="addCommentForm">
+            <div class="form-group">
+                <label for="commentDescription">Add a comment:</label>
+                <textarea class="form-control" id="commentDescription" name="commentDescription" rows="3"></textarea>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="addComment(@Model.ArticleId)">Add Comment</button>
+        </form>
+    }
+    else
+    {
+        <span class="text-muted" style="font-size: 16px;">(Login to comment! 👉)</span>
+    }
 
-    
     <hr>
 
     <!-- Related Articles -->
