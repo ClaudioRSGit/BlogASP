@@ -17,6 +17,12 @@ namespace BlogASP.Models
 
         public string Role { get; set; }
 
+        public DateTime CreatedAt { get; set; }
+
+        public DateTime UpdatedAt { get; set; }
+
+        public DateTime? DeletedAt { get; set; }
+
         public ICollection<ArticleModel> Articles { get; set; }
         public ICollection<CommentModel> Comments { get; set; }
 

@@ -65,13 +65,6 @@ namespace BlogASP.Controllers
         [HttpPost]
         public IActionResult Create(UserModel user) 
         {
-            //if (ModelState.IsValid)
-            //{
-            //    _userRepository.Create(user);
-            //    return RedirectToAction("Index");
-            //}
-            //return View(user);
-            //
             _userRepository.Create(user);
             return RedirectToAction("Index");
         }

@@ -23,6 +23,7 @@ namespace BlogASP.Repository
         public UserModel Create(UserModel user)
         {  
             user.Role = "EndUser";
+            user.CreatedAt = DateTime.Now;
             _databaseContext.Users.Add(user);
             _databaseContext.SaveChanges();
             return user;
@@ -37,7 +38,8 @@ namespace BlogASP.Repository
             userDB.Username = user.Username;
             userDB.Name = user.Name;
             userDB.Email = user.Email;
-            
+            userDB.UpdatedAt = DateTime.Now;
+
 
             _databaseContext.Users.Update(userDB);
             _databaseContext.SaveChanges();
@@ -49,8 +51,9 @@ namespace BlogASP.Repository
         {
             UserModel userDB = ListById(id);
 
-            if (userDB == null) throw new Exception("Delete error!");
+            if (userDB == null) throw new Exception("Disable error!");
 
+            userDB.DeletedAt = DateTime.Now;
             _databaseContext.Users.Remove(userDB);
             _databaseContext.SaveChanges();
             return true;
