@@ -1,5 +1,5 @@
 ﻿@model List<BlogASP.Models.ArticleModel>
-
+<button id="darkModeToggle">Toggle Dark Mode</button>
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-3">
@@ -30,7 +30,7 @@
 
             <div class="row" id="article-container">
                 <h3>
-                    Hot Article <img src="https://media3.giphy.com/media/47GPQ7ZzivsemHKPvB/giphy.gif?cid=6c09b95214tgpwzhqgko1j455abol9glk6cpzwcto13b1kgf&ep=v1_stickers_related&rid=giphy.gif&ct=s" height="50px" alt="Animated GIF">
+                    Hot Article <img src="https://media3.giphy.com/media/47GPQ7ZzivsemHKPvB/giphy.gif?cid=6c09b95214tgpwzhqgko1j455abol9glk6cpzwcto13b1kgf&ep=v1_stickers_related&rid=giphy.gif&ct=s" height="30px" alt="Animated GIF">
                 </h3>
                 
                 <div class="mt-4">
@@ -91,7 +91,12 @@
         </div>
     </div>
 </div>
-
+<style>
+    .dark-mode {
+        background-color: #333;
+        color: #fff;
+    }
+</style>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script>
     $(document).ready(function () {
@@ -173,5 +178,13 @@
             }
         }
     }); 
+
+
+    function toggleDarkMode() {
+        document.body.classList.toggle('dark-mode');
+    }
+
+    // Event listener for the button click
+    document.getElementById('darkModeToggle').addEventListener('click', toggleDarkMode);
     
 </script>
