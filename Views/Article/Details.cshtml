@@ -57,7 +57,7 @@
                         <img src="@article.Picture" class="card-img-top" alt="Article Image">
                         <div class="card-body">
                             <h5 class="card-title">@article.Title</h5>
-                            <p class="card-text">@article.Description</p>
+                            <p class="card-text">@Truncate(article.Description, 100)</p>
                             <a href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary">Read More</a>
                         </div>
                     </div>
@@ -70,6 +70,16 @@
         <p>No related articles available.</p>
     }
 
+    @functions {
+        public static string Truncate(string value, int maxLength)
+        {
+            if (string.IsNullOrEmpty(value) || value.Length <= maxLength)
+            {
+                return value;
+            }
+            return value.Substring(0, maxLength) + "...";
+        }
+    }
     <!-- Most Starred Articles -->
     <h2>Top 3 Articles</h2>
     <div class="overflow-container" style="overflow-x: auto; white-space: nowrap;">
