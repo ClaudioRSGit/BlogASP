@@ -1,106 +1,72 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<div class="container">
+    <div class="container mt-5">
+        <div class="text-center">
+            <h1 class="display-4 font-weight-bold">Welcome to <span class="text-primary">TechInSight</span></h1>
 
-<style>
-    .text-center {
-        max-width: 800px;
-        margin: auto;
-        text-align: center;
-    }
+            <!-- Updated image with a random IT-related image from Unsplash -->
+            <img src="https://source.unsplash.com/1600x900/?technology" alt="TechInSight Technology" class="img-fluid rounded mt-4 shadow">
 
-    .display-4 {
-        color: #333;
-    }
+            <p class="lead mt-4">
+                Elevate your tech journey with <strong>TechInSight</strong> — a premier destination for the latest tech trends, insightful analyses, and groundbreaking innovations. Join us as we shape the future of IT together.
+            </p>
 
-    img {
-        max-width: 100%;
-        height: auto;
-        margin-top: 20px;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+            <h2 class="mt-5">Discover the Future with Us</h2>
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <br />
+                    <img src="https://source.unsplash.com/800x600/?future-tech" alt="Discover the Future" class="img-fluid rounded shadow mb-4">
+                </div>
 
-    p {
-        font-size: 16px;
-        line-height: 1.6;
-        color: #555;
-    }
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center h-100">
+                        <ul class="list-group w-100">
+                            <li class="list-group-item">
+                                <i class="fas fa-rocket fa-fw"></i>
+                                <h2>Discover the Future with Us</h2>
+                                <p>At <strong>TechInSight</strong>, we delve deep into the core of technology. From coding novelties to industry-changing breakthroughs, we've got you covered.</p>
+                                <p>Our team of experts curates content that goes beyond the surface, providing you with in-depth insights into the ever-evolving world of IT.</p>
+                                <p>Explore the future with us as we uncover the latest trends, analyze emerging technologies, and anticipate what's next in the tech landscape.</p>
+                            </li>
+                            <!-- ... (repeat for other list items) -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
 
-    h2 {
-        margin-top: 20px;
-        color: #333;
-    }
+            <h2 class="mt-5">TechInSight Back Office</h2>
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <div class="d-flex align-items-center h-100">
+                        <ul class="list-group w-100">
+                            <li class="list-group-item">
+                                <i class="fas fa-cogs fa-fw"></i>
+                                <h2>Article Management:</h2>
+                                <br />
+                                <p>Explore our advanced backend system designed for efficient article management. </p>
+                                <p>From creating engaging content to editing seamlessly, our platform streamlines the entire process. </p>
+                                <p>Stay tuned for regular updates on the latest tech breakthroughs, industry insights, and much more.</p>
+                            </li>
+                            <br />
+                            <!-- ... (repeat for other list items) -->
+                        </ul>
+                    </div>
+                </div>
+                <br />
+                <div class="col-md-6">
+                    <img src="https://source.unsplash.com/800x600/?office-tech" alt="TechInSight Back Office" class="img-fluid rounded shadow mb-4">
+                </div>
+            </div>
 
-    ul {
-        list-style-type: none;
-        padding: 0;
-        margin-top: 10px;
-    }
+            <h2 class="mt-5">Stay Engaged</h2>
 
-        ul p {
-            margin-bottom: 10px;
-        }
+            <img src="https://source.unsplash.com/800x600/?engaged-tech" alt="Stay Engaged" class="img-fluid rounded shadow mt-4">
 
-    strong {
-        color: #007bff;
-    }
-
-    .text-center p strong {
-        display: block;
-        font-size: 18px;
-        margin-top: 10px;
-    }
-
-    /* New styles for positioning ul elements */
-    .back-office-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-    }
-
-        .back-office-container .back-office-item {
-            flex: 1;
-        }
-
-    .back-office-item img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 8px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-</style>
-
-<div class="text-center">
-    <h1 class="display-4">About Us</h1>
-
-    <img src="https://cdn.uconnectlabs.com/wp-content/uploads/sites/7/2020/07/Blog-Concept-Art-840x560.jpg?v=100802" alt="TechInSight Logo">
-
-    <p>🚀 Explore the vast universe of technology with TechInSight, your go-to destination for cutting-edge insights, expert analyses, and the latest trends in the world of IT.</p>
-
-    <p>At TechInSight, we're not just a blog; we're a community of tech enthusiasts, industry experts, and curious minds united by our passion for innovation. Whether you're an IT professional, a coding novice, or just someone intrigued by the ever-evolving tech landscape, you're in the right place.</p>
-
-    <h2>What TechInSight Offers:</h2>
-    <!-- ... (unchanged) -->
-
-    <h2>TechInSight Back Office:</h2>
-    <div class="back-office-container">
-        <div class="back-office-item">
-            <ul>
-                <li>🛠️ <strong>Article Management:</strong> Our backend system allows us to seamlessly create, edit, and manage articles. Expect regular updates on the latest tech breakthroughs.</li>
-                <!-- ... (repeat for other list items) -->
-            </ul>
-        </div>
-
-        <div class="back-office-item">
-            <img src="https://via.placeholder.com/150" alt="Placeholder Image">
+            <p class="lead mt-5">
+                <strong>Join the <span class="text-primary">TechInSight</span> community today and become part of a journey marked by continuous learning, exploration, and technological brilliance. Let's navigate the future of IT together! 🚀</strong>
+            </p>
         </div>
     </div>
-
-    <h2>Stay Engaged:</h2>
-    <ul>
-        <!-- ... (unchanged) -->
-    </ul>
-
-    <p><strong>Join the TechInSight community today and embark on a journey of continuous learning, exploration, and technological brilliance. Let's navigate the future of IT together! 🚀</strong></p>
 </div>
