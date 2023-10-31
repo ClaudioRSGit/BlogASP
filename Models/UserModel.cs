@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using System.ComponentModel.DataAnnotations;
 
 namespace BlogASP.Models
 {
@@ -7,15 +9,16 @@ namespace BlogASP.Models
         [Key]
         public int UserId { get; set; }
 
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         public string Username { get; set; }
 
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         public string Password { get; set; }
 
-        public string Role { get; set; }
+        [BindProperty(SupportsGet = false)]
+        public string? Role { get; set; }
 
         public DateTime CreatedAt { get; set; }
 
@@ -23,8 +26,8 @@ namespace BlogASP.Models
 
         public DateTime? DeletedAt { get; set; }
 
-        public ICollection<ArticleModel> Articles { get; set; }
-        public ICollection<CommentModel> Comments { get; set; }
+        public ICollection<ArticleModel>? Articles { get; set; }
+        public ICollection<CommentModel>? Comments { get; set; }
 
     }
 }

@@ -10,20 +10,30 @@
             <input type="text" class="form-control" id="inputUsername" name="Username" placeholder="JoseAntonio444">
         </div>
         <div class="form-group">
-            <label for="inputPassword" class="form-label">Password</label>
+            <label for "inputPassword" class="form-label">Password</label>
             <input type="password" class="form-control" id="inputPassword" name="Password" placeholder="********">
         </div>
         <div class="col-12 mt-3">
             <button type="submit" class="btn btn-primary">Login</button>
         </div>
     </form>
-    @if (ViewData.ModelState.TryGetValue(string.Empty, out var errors))
+
+    @if (TempData.ContainsKey("CustomError"))
     {
         <div class="alert alert-danger">
-            @foreach (var error in errors.Errors)
-            {
-                @error.ErrorMessage
-            }
+            @TempData["CustomError"]
         </div>
+    }
+    else
+    {
+        if (ViewData.ModelState.ContainsKey(string.Empty))
+        {
+            <div class="alert alert-danger">
+                @foreach (var error in ViewData.ModelState[string.Empty].Errors)
+                {
+                    @error.ErrorMessage
+                }
+            </div>
+        }
     }
 </div>

@@ -27,8 +27,6 @@ namespace BlogASP.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        /////////Login//////////
-     
         [HttpPost]
         public IActionResult Login(UserModel loginModel)
         {
@@ -36,22 +34,30 @@ namespace BlogASP.Controllers
 
             if (user != null && user.Password == loginModel.Password)
             {
+                if (user.Role == "Disabled")
+                {
+                    ModelState.Remove("Role");
+                    TempData["CustomError"] = "Your account is disabled.";
+                    return View("Index");
+                }
+
                 var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, user.Username),
-                new Claim(ClaimTypes.Role, user.Role)
-            };
+                    {
+                        new Claim(ClaimTypes.Name, user.Username),
+                        new Claim(ClaimTypes.Role, user.Role)
+                    };
 
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var principal = new ClaimsPrincipal(identity);
 
                 HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
-                return RedirectToAction("Index", "Home"); 
+                return RedirectToAction("Index", "Home");
             }
             else
             {
-                ModelState.AddModelError(string.Empty, "Invalid username or password!");
+                TempData["CustomError"] = "Username or Password incorrect.Try again!";
+
                 return View("Index");
             }
         }

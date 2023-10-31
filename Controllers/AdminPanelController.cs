@@ -125,9 +125,6 @@ namespace BlogASP.Controllers
             return View("Error");
         }
 
-
-
-
         [HttpPost]
         public IActionResult DisableUser(int id)
         {
@@ -150,7 +147,6 @@ namespace BlogASP.Controllers
 
             if (user != null)
             {
-                // Defina a Role de acordo com a lógica de ativação, por exemplo, "EndUser" ou outra role apropriada.
                 user.Role = "EndUser";
                 _userRepository.Edit(user);
             }
