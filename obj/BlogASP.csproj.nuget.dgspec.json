@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\fabio\\Desktop\\OLD\\BlogASP\\BlogASP.csproj": {}
+    "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\BlogASP.csproj": {}
   },
   "projects": {
-    "C:\\Users\\fabio\\Desktop\\OLD\\BlogASP\\BlogASP.csproj": {
+    "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\BlogASP.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\fabio\\Desktop\\OLD\\BlogASP\\BlogASP.csproj",
+        "projectUniqueName": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\BlogASP.csproj",
         "projectName": "BlogASP",
-        "projectPath": "C:\\Users\\fabio\\Desktop\\OLD\\BlogASP\\BlogASP.csproj",
+        "projectPath": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\BlogASP.csproj",
         "packagesPath": "C:\\Users\\fabio\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\fabio\\Desktop\\OLD\\BlogASP\\obj\\",
+        "outputPath": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

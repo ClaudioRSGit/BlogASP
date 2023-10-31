@@ -42,25 +42,25 @@ namespace BlogASP.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult Delete(int id)
-        {
-            try
-            {
-                if (_userRepository.Delete(id))
-                {
-                    return Ok(); 
-                }
-                else
-                {
-                    return BadRequest("Deleting Error:");
-                }
-            }
-            catch (Exception ex)
-            {
-                return BadRequest("Deleting Error: " + ex.Message); 
-            }
-        }
+        //[HttpPost]
+        //public IActionResult Delete(int id)
+        //{
+        //    try
+        //    {
+        //        if (_userRepository.Delete(id))
+        //        {
+        //            return Ok(); 
+        //        }
+        //        else
+        //        {
+        //            return BadRequest("Deleting Error:");
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest("Deleting Error: " + ex.Message); 
+        //    }
+        //}
 
         [HttpPost]
         public IActionResult Create(UserModel user) 
@@ -123,6 +123,39 @@ namespace BlogASP.Controllers
             }
 
             return View("Error");
+        }
+
+
+
+
+        [HttpPost]
+        public IActionResult DisableUser(int id)
+        {
+            UserModel user = _userRepository.ListById(id);
+
+            if (user != null)
+            {
+                user.Role = "Disabled";
+                user.DeletedAt = DateTime.Now;
+                _userRepository.Edit(user);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult EnableUser(int id)
+        {
+            UserModel user = _userRepository.ListById(id);
+
+            if (user != null)
+            {
+                // Defina a Role de acordo com a lógica de ativação, por exemplo, "EndUser" ou outra role apropriada.
+                user.Role = "EndUser";
+                _userRepository.Edit(user);
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

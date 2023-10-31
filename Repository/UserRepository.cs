@@ -47,16 +47,16 @@ namespace BlogASP.Repository
             return userDB;
         }
 
-        public bool Delete(int id)
-        {
-            UserModel userDB = ListById(id);
-
-            if (userDB == null) throw new Exception("Disable error!");
-
-            userDB.DeletedAt = DateTime.Now;
-            _databaseContext.Users.Remove(userDB);
-            _databaseContext.SaveChanges();
-            return true;
-        }
+        //public bool Delete(int id)
+        //{
+        //    UserModel userDB = ListById(id);
+        //
+        //    if (userDB == null) throw new Exception("Disable error!");
+        //
+        //    userDB.DeletedAt = DateTime.Now;
+        //    _databaseContext.Users.Remove(userDB);
+        //    _databaseContext.SaveChanges();
+        //    return true;
+        //}
     }
 }
