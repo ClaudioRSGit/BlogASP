@@ -12,6 +12,18 @@
         <div class="mt-4">
             <p>@Model.Description</p>
         </div>
+
+        <div class="mt-4">
+            @if (@Model.UpdatedAt != null && @Model.CreatedAt != null)
+            {
+                <p>Updated At: @Model.UpdatedAt.ToString("MMMM dd, yyyy h:mm tt")</p>
+                <p>Created At: @Model.CreatedAt.ToString("MMMM dd, yyyy h:mm tt")</p>
+            }
+            else
+            {
+                <p>At some point in human history</p>
+            }
+        </div>
     </div>
     <hr>
     <!-- Display Comments -->
@@ -20,14 +32,28 @@
         @foreach (var comment in Model.Comments)
         {
             <div class="comment" style="border-bottom: 1px solid #eee; padding: 8px;">
-                @if (comment.User != null)
-                {
-                    <span style="font-weight: bold;"></span> @comment.Description
-                }
-                else
-                {
-                    <span style="font-weight: bold;">@comment.UserName</span> @comment.Description
-                }
+                <div style="display: flex; justify-content: space-between;">
+                    <div>
+                        @if (comment.User != null)
+                        {
+                            <span style="font-weight: bold;"></span> @comment.Description
+                        }
+                        else
+                        {
+                            <span style="font-weight: bold;">User: @comment.UserName</span> <p>@comment.Description</p>
+                        }
+                    </div>
+                    <div style="color: #888; font-size: 0.8em;">
+                        @if (comment.UpdatedAt != null)
+                        {
+                            <p>@comment.UpdatedAt.ToString("MMMM dd, yyyy h:mm tt")</p>
+                        }
+                        else
+                        {
+                            <p>At some point in human history</p>
+                        }
+                    </div>
+                </div>
             </div>
         }
     </div>
@@ -47,6 +73,7 @@
     {
         <span class="text-muted" style="font-size: 16px;">(Login to comment! 👉)</span>
     }
+
 
     <hr>
 
@@ -112,6 +139,7 @@
 
 
 </div>
+
 <script>
     function addComment(articleId) {
         var commentDescription = $('#commentDescription').val();
