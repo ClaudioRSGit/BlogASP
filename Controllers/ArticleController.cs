@@ -1,8 +1,10 @@
 ﻿using BlogASP.DAL;
 using BlogASP.Models;
 using BlogASP.Repository;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace BlogASP.Controllers
 {
@@ -10,7 +12,6 @@ namespace BlogASP.Controllers
     {
         private readonly DatabaseContext _context;
         private readonly IArticleRepository _articleRepository;
-
         public IActionResult Create()
         {
             return View();
@@ -65,7 +66,7 @@ namespace BlogASP.Controllers
                 article.Picture = GetRandomImageLink();
 
                 _articleRepository.CreateArticle(article);
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Details", "Article", new { id = article.ArticleId });
             }
 
             return View(article);
@@ -117,5 +118,47 @@ namespace BlogASP.Controllers
             _context.SaveChanges();
         }
 
+        [HttpPost]
+        public IActionResult AddComment(int articleId, string commentDescription)
+        {
+            try
+            {
+                // Retrieve the article from the database
+                ArticleModel article = _articleRepository.GetArticleById(articleId);
+
+                if (article == null)
+                {
+                    return NotFound("Article not found");
+                }
+
+                // Create a new comment
+                CommentModel newComment = new CommentModel
+                {
+                    ArticleId = articleId,
+                    UserName = User.Identity.Name,
+                    Description = commentDescription,
+                    // You might want to set other properties like timestamp, etc.
+                };
+
+                // Add the comment to the article
+                article.Comments.Add(newComment);
+
+                // Update the article in the database
+                _articleRepository.UpdateArticle(article);
+
+                return Ok("Comment added successfully");
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it as appropriate
+                Console.WriteLine("Outer Exception: " + ex.Message);
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine("Inner Exception: " + ex.InnerException.Message);
+                }
+
+                return StatusCode(500, "Error adding comment: " + ex.Message);
+            }
+        }
     }
 }

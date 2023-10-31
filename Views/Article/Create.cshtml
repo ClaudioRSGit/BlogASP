@@ -1,27 +1,36 @@
 ﻿@model BlogASP.Models.ArticleModel
 
-<form asp-action="Create" method="post">
-    <div>
-        <label asp-for="Title"></label>
-        <input asp-for="Title" />
+<h1 class="text-center">Create New Article</h1>
+
+<form asp-action="Create" method="post" class="mt-5">
+    <div class="form-group">
+        <label asp-for="Title" class="control-label">Title:</label>
+        <input asp-for="Title" class="form-control" />
     </div>
 
-    <div>
-        <label asp-for="Category"></label>
-        <input asp-for="Category" />
+    <div class="form-group">
+        <label asp-for="Category" class="control-label">Category:</label>
+        <input asp-for="Category" class="form-control" />
     </div>
 
-    <div>
-        <label asp-for="Description"></label>
-        <textarea asp-for="Description"></textarea>
+    <div class="form-group">
+        <label asp-for="Description" class="control-label">Description:</label>
+        <textarea asp-for="Description" class="form-control" rows="5"></textarea>
     </div>
 
-    <div>
-        <label asp-for="isPrivate">Visibility</label>
-        <br />
-        <input type="radio" asp-for="isPrivate" value="true" /> Private
-        <input type="radio" asp-for="isPrivate" value="false" /> Public
+    <div class="form-group">
+        <label asp-for="isPrivate" class="control-label">Visibility:</label>
+        <div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" asp-for="isPrivate" value="true" />
+                <label class="form-check-label">Private</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" asp-for="isPrivate" value="false" />
+                <label class="form-check-label">Public</label>
+            </div>
+        </div>
     </div>
-    
-    <button type="submit">Criar Artigo</button>
+
+    <button type="submit" class="btn btn-primary">Create Article</button>
 </form>

@@ -1,4 +1,4 @@
-﻿@model BlogASP.Models.ArticleModel
+﻿@using System.Security.Claims;
 
 <div class="container">
     <div class="text-center">
@@ -14,28 +14,61 @@
         </div>
     </div>
     <hr>
-    
+    <!-- Display Comments -->
+    <h2>Comments</h2>
+    <div id="comments-container" style="border: 1px solid #ccc; padding: 10px; border-radius: 5px; background-color: #f9f9f9;">
+        @foreach (var comment in Model.Comments)
+        {
+            <div class="comment" style="border-bottom: 1px solid #eee; padding: 8px;">
+                @if (comment.User != null)
+                {
+                    <span style="font-weight: bold;"></span> @comment.Description
+                }
+                else
+                {
+                    <span style="font-weight: bold;">@comment.UserName</span> @comment.Description
+                }
+            </div>
+        }
+    </div>
+
+    <!-- Add Comment Form -->
+    <form id="addCommentForm">
+        <div class="form-group">
+            <label for="commentDescription">Add a comment:</label>
+            <textarea class="form-control" id="commentDescription" name="commentDescription" rows="3"></textarea>
+        </div>
+        <button type="button" class="btn btn-primary" onclick="addComment(@Model.ArticleId)">Add Comment</button>
+    </form>
+
     
     <hr>
 
     <!-- Related Articles -->
     <h2>Related Articles</h2>
-    <div class="overflow-container" style="overflow-x: auto; white-space: nowrap; display: flex;">
-        @{
-            var relatedArticles = ViewBag.ArticleRepository.GetRelatedArticles(Model.ArticleId);
-            foreach (var article in relatedArticles)
-            {
-                <div class="card" style="width: 18rem; margin-right: 10px;">
-                    <img src="@article.Picture" class="card-img-top" alt="Article Image">
-                    <div class="card-body">
-                        <h5 class="card-title">@article.Title</h5>
-                        <p class="card-text">@article.Description</p>
-                        <a href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary">Read More</a>
+    @if (ViewBag.ArticleRepository.GetRelatedArticles(Model.ArticleId).Count > 0)
+    {
+        <div class="overflow-container" style="overflow-x: auto; white-space: nowrap; display: flex;">
+            @{
+                var relatedArticles = ViewBag.ArticleRepository.GetRelatedArticles(Model.ArticleId);
+                foreach (var article in relatedArticles)
+                {
+                    <div class="card" style="width: 18rem; margin-right: 10px;">
+                        <img src="@article.Picture" class="card-img-top" alt="Article Image">
+                        <div class="card-body">
+                            <h5 class="card-title">@article.Title</h5>
+                            <p class="card-text">@article.Description</p>
+                            <a href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary">Read More</a>
+                        </div>
                     </div>
-                </div>
+                }
             }
-        }
-    </div>
+        </div>
+    }
+    else
+    {
+        <p>No related articles available.</p>
+    }
 
     <!-- Most Starred Articles -->
     <h2>Top 3 Articles</h2>
@@ -63,3 +96,23 @@
 
 
 </div>
+<script>
+    function addComment(articleId) {
+        var commentDescription = $('#commentDescription').val();
+        $.ajax({
+            url: '/Article/AddComment',
+            method: 'POST',
+            data: {
+                articleId: articleId,
+                commentDescription: commentDescription
+            },
+            success: function (result) {
+                // Optionally handle success
+                $('#comments-container').load(location.href + ' #comments-container');
+            },
+            error: function (error) {
+                console.error('Error adding comment:', error);
+            }
+        });
+    }
+</script>
