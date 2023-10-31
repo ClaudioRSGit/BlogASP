@@ -1,9 +1,13 @@
 using BlogASP.DAL;
+using BlogASP.Models;
 using BlogASP.Repository;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddHttpContextAccessor();
 
 // Add services to the container.
 builder.Services.AddDbContext<DatabaseContext>(options =>
@@ -43,12 +47,12 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-// Adicione esta linha para habilitar o suporte a endpoints
 app.MapControllers();
 
 app.Run();
