@@ -47,16 +47,14 @@ namespace BlogASP.Repository
             return userDB;
         }
 
-        //public bool Delete(int id)
-        //{
-        //    UserModel userDB = ListById(id);
-        //
-        //    if (userDB == null) throw new Exception("Disable error!");
-        //
-        //    userDB.DeletedAt = DateTime.Now;
-        //    _databaseContext.Users.Remove(userDB);
-        //    _databaseContext.SaveChanges();
-        //    return true;
-        //}
+        public UserModel GetUserByUsername(string username)
+        {
+            return _databaseContext.Users.FirstOrDefault(u => u.Username == username);
+        }
+
+        public UserModel GetUserByEmail(string email)
+        {
+            return _databaseContext.Users.FirstOrDefault(u => u.Email == email);
+        }
     }
 }
