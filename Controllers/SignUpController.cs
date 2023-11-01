@@ -26,6 +26,10 @@ namespace BlogASP.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(UserModel user)
         {
+            var passwordHash = PasswordHasher.HashPassword(user.Password);
+
+            user.Password = passwordHash;
+
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.Name, user.Username),
