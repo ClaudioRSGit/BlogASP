@@ -5,15 +5,17 @@
         <div class="col-md-3">
             <h4>Categories</h4>
             <br />
+            @if (User.Identity.IsAuthenticated)
+            {
             <a href="@Url.Action("Create", "Article")" class="btn btn-primary">Create New Article</a>
-
+            }
             <!-- Search Box and Button -->
             <div class="mt-4">
                 <input type="text" id="searchTerm" class="form-control" placeholder="Enter title">
                 <br />
                 <button id="searchButton" class="btn btn-primary">Search</button>
             </div>
-
+            
             <div id="filteredArticles" class="mt-4">
                 <a href="#" class="btn btn-primary category-link" data-category="all">All</a>
                 @foreach (var category in Model.Select(a => a.Category).Distinct())
@@ -25,15 +27,15 @@
 
         <div class="col-md-9">
             
-            <div id="noResultsMessage" class="col-md-9 mt-4" style="display: none;">
-                <p>Artigo não encontrado.</p>
-            </div>
+            
 
             <div class="row" id="article-container">
                 <h3>
                     Hot Article 🚀 <img src="https://media3.giphy.com/media/47GPQ7ZzivsemHKPvB/giphy.gif?cid=6c09b95214tgpwzhqgko1j455abol9glk6cpzwcto13b1kgf&ep=v1_stickers_related&rid=giphy.gif&ct=s" height="30px" alt="Animated GIF">
                 </h3>
-                
+                <div id="noResultsMessage" class="col-md-9 mt-4" style="display: none;">
+                    <p>Artigo não encontrado.</p>
+                </div>
                 <div class="mt-4">
                         @foreach (var article in Model.OrderByDescending(a => a.Stars).Take(1))
                         {
@@ -52,8 +54,11 @@
                 </div>
 
                 <h2>Articles</h2>
-
-                @foreach (var article in Model)
+                @if (!User.Identity.IsAuthenticated)
+                {
+                    <span class="text-muted" style="font-size: 16px;">(Login to see more! 👉)</span>
+                }
+                @foreach (var article in Model.Where(a => User.Identity.IsAuthenticated || !a.isPrivate))
                 {
                     <div class="col-4 mb-3 category-article" data-category="@article.Category">
                         <div class="card">
@@ -62,7 +67,10 @@
                                 <h5 class="card-title">@article.Title</h5>
                                 <p class="card-text">@article.Description</p>
                                 <a href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary">Read More</a>
-                                <button class="btn btn-warning btn-star" data-article-id="@article.ArticleId">Star: <span class="star-count" data-article-id="@article.ArticleId">@article.Stars</span></button>
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <button class="btn btn-warning btn-star" data-article-id="@article.ArticleId">Star: <span class="star-count" data-article-id="@article.ArticleId">@article.Stars</span></button>
+                                }
                             </div>
                         </div>
                     </div>
@@ -71,25 +79,31 @@
         </div>
     </div>
     <div class="col-md-12 mt-4">
+        <!-- Top 3 Articles -->
         <h2>Top 3 Articles</h2>
-        <div class="overflow-container" style="overflow-x: auto; white-space: nowrap;">
-            <div class="row">
-                @foreach (var article in Model.OrderByDescending(a => a.Stars).Take(3))
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <span class="text-muted" style="font-size: 16px;">(Login to see more! 👉)</span>
+        }
+        
+            <div class="overflow-container" style="overflow-x: auto; white-space: nowrap;">
+                <div class="row">
+                @foreach (var article in Model.OrderByDescending(a => a.Stars).Take(3).Where(a => User.Identity.IsAuthenticated || !a.isPrivate))
                 {
-                    <div class="col-4 mb-3 category-article" data-category="@article.Category">
-                        <div class="card">
-                            <img src="@article.Picture" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">@article.Title</h5>
-                                <p class="card-text">@article.Description</p>
-                                <a href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary">Read More</a>
-                                <p class="card-text">Stars: <span class="star-count" data-article-id="@article.ArticleId">@article.Stars</span></p>
+                        <div class="col-4 mb-3 category-article" data-category="@article.Category">
+                            <div class="card">
+                                <img src="@article.Picture" class="card-img-top" alt="...">
+                                <div class="card-body" style="max-height: 200px; overflow: hidden;">
+                                    <h5 class="card-title">@article.Title</h5>
+                                    <p class="card-text" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">@article.Description</p>
+                                    <a href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary">Read More</a>
+                                    <p class="card-text">Stars: <span class="star-count" data-article-id="@article.ArticleId">@article.Stars</span></p>
+                                </div>
                             </div>
                         </div>
-                    </div>
                 }
             </div>
-        </div>
+            </div>
     </div>
 </div>
 

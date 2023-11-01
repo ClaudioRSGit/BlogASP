@@ -12,6 +12,18 @@
         <div class="mt-4">
             <p>@Model.Description</p>
         </div>
+
+        <div class="mt-4">
+            @if (@Model.UpdatedAt != null && @Model.CreatedAt != null)
+            {
+                <p>Updated At: @Model.UpdatedAt.ToString("MMMM dd, yyyy h:mm tt")</p>
+                <p>Created At: @Model.CreatedAt.ToString("MMMM dd, yyyy h:mm tt")</p>
+            }
+            else
+            {
+                <p>At some point in human history</p>
+            }
+        </div>
     </div>
     <hr>
     <!-- Display Comments -->
@@ -20,28 +32,49 @@
         @foreach (var comment in Model.Comments)
         {
             <div class="comment" style="border-bottom: 1px solid #eee; padding: 8px;">
-                @if (comment.User != null)
-                {
-                    <span style="font-weight: bold;"></span> @comment.Description
-                }
-                else
-                {
-                    <span style="font-weight: bold;">@comment.UserName</span> @comment.Description
-                }
+                <div style="display: flex; justify-content: space-between;">
+                    <div>
+                        @if (comment.User != null)
+                        {
+                            <span style="font-weight: bold;"></span> @comment.Description
+                        }
+                        else
+                        {
+                            <span style="font-weight: bold;">User: @comment.UserName</span> <p>@comment.Description</p>
+                        }
+                    </div>
+                    <div style="color: #888; font-size: 0.8em;">
+                        @if (comment.UpdatedAt != null)
+                        {
+                            <p>@comment.UpdatedAt.ToString("MMMM dd, yyyy h:mm tt")</p>
+                        }
+                        else
+                        {
+                            <p>At some point in human history</p>
+                        }
+                    </div>
+                </div>
             </div>
         }
     </div>
 
     <!-- Add Comment Form -->
-    <form id="addCommentForm">
-        <div class="form-group">
-            <label for="commentDescription">Add a comment:</label>
-            <textarea class="form-control" id="commentDescription" name="commentDescription" rows="3"></textarea>
-        </div>
-        <button type="button" class="btn btn-primary" onclick="addComment(@Model.ArticleId)">Add Comment</button>
-    </form>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <form id="addCommentForm">
+            <div class="form-group">
+                <label for="commentDescription">Add a comment:</label>
+                <textarea class="form-control" id="commentDescription" name="commentDescription" rows="3"></textarea>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="addComment(@Model.ArticleId)">Add Comment</button>
+        </form>
+    }
+    else
+    {
+        <span class="text-muted" style="font-size: 16px;">(Login to comment! 👉)</span>
+    }
 
-    
+
     <hr>
 
     <!-- Related Articles -->
@@ -57,7 +90,7 @@
                         <img src="@article.Picture" class="card-img-top" alt="Article Image">
                         <div class="card-body">
                             <h5 class="card-title">@article.Title</h5>
-                            <p class="card-text">@article.Description</p>
+                            <p class="card-text">@Truncate(article.Description, 100)</p>
                             <a href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary">Read More</a>
                         </div>
                     </div>
@@ -70,6 +103,16 @@
         <p>No related articles available.</p>
     }
 
+    @functions {
+        public static string Truncate(string value, int maxLength)
+        {
+            if (string.IsNullOrEmpty(value) || value.Length <= maxLength)
+            {
+                return value;
+            }
+            return value.Substring(0, maxLength) + "...";
+        }
+    }
     <!-- Most Starred Articles -->
     <h2>Top 3 Articles</h2>
     <div class="overflow-container" style="overflow-x: auto; white-space: nowrap;">
@@ -96,6 +139,7 @@
 
 
 </div>
+
 <script>
     function addComment(articleId) {
         var commentDescription = $('#commentDescription').val();

@@ -23,6 +23,8 @@ namespace BlogASP.Repositories
 
         public CommentModel AddCommentToArticle(int articleId, int userId, CommentModel comment)
         {
+            comment.CreatedAt = DateTime.Now;
+            comment.UpdatedAt = DateTime.Now;
             comment.ArticleId = articleId;
             comment.UserId = userId; // Set the user ID
             _databaseContext.Comments.Add(comment);

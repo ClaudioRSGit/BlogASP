@@ -59,6 +59,8 @@ namespace BlogASP.Controllers
         [HttpPost]
         public IActionResult Create(ArticleModel article)
         {
+            article.CreatedAt = DateTime.Now;
+            article.UpdatedAt = DateTime.Now;
             if (ModelState.IsValid)
             {
                 article.Stars = 0;
@@ -114,6 +116,7 @@ namespace BlogASP.Controllers
 
         public void UpdateArticle(ArticleModel article)
         {
+            article.UpdatedAt = DateTime.Now;
             _context.Articles.Update(article);
             _context.SaveChanges();
         }
@@ -134,6 +137,8 @@ namespace BlogASP.Controllers
                 // Create a new comment
                 CommentModel newComment = new CommentModel
                 {
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
                     ArticleId = articleId,
                     UserName = User.Identity.Name,
                     Description = commentDescription,

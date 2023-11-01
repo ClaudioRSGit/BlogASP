@@ -45,6 +45,7 @@ namespace BlogASP.Repository
 
         public void UpdateArticle(ArticleModel article)
         {
+            article.UpdatedAt = DateTime.Now;
             _databaseContext.Articles.Update(article);
             _databaseContext.SaveChanges();
         }
@@ -72,7 +73,8 @@ namespace BlogASP.Repository
 
         public ArticleModel CreateArticle(ArticleModel article)
         {
-            // Add additional logic if needed before saving the article
+            article.CreatedAt = DateTime.Now;
+            article.UpdatedAt = DateTime.Now;
             _databaseContext.Articles.Add(article);
             _databaseContext.SaveChanges();
             return article;
@@ -97,8 +99,9 @@ namespace BlogASP.Repository
 
         public bool DeleteArticle(int id)
         {
+            var article = _databaseContext.Articles.Find(id);
+            article.DeletedAt = DateTime.Now;
             ArticleModel articleDB = GetArticleById(id);
-
             if (articleDB == null)
                 throw new Exception("Delete error!");
 
