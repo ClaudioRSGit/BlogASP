@@ -3,35 +3,97 @@
     ViewData["Title"] = "Create User";
 }
 
-<h1 class="text-center display-4">Create User</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" />
+    <style>
+        body {
+            background: url('https://source.unsplash.com/1920x1080/?technology') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        .container {
+            z-index: 1;
+            position: relative;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.8);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-body text-center">
+                        <h2 class="mb-4">Create User</h2>
+                        <form asp-controller="AdminPanel" asp-action="CreateAdmin" method="post">
+
+                            <div class="form-group">
+                                <label for="Name">Name:</label>
+                                <input type="text" asp-for="Name" class="form-control" placeholder="Enter your Name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Username">Username:</label>
+                                <input type="text" asp-for="Username" class="form-control" placeholder="Enter your Username" required
+                                       pattern="^[a-zA-Z0-9_]{5,}$"
+                                       title="Username must contain only letters, numbers, and underscores and must be at least 5 characters long.">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Email">Email:</label>
+                                <input type="text" asp-for="Email" class="form-control" placeholder="Enter your Email" required
+                                       pattern="^[A-Za-z0-9._%+-]+[.][A-Za-z0-9.-]+[.][A-Za-z]{2,6}$"
+                                       title="Invalid email format. Please enter a valid email address.">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Password">Password:</label>
+                                <input type="password" asp-for="Password" class="form-control" placeholder="Enter your Password" required
+                                       pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{5,}$"
+                                       title="Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character, and must be at least 5 characters long.">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="ConfirmPassword">Confirm Password:</label>
+                                <input type="password" id="ConfirmPassword" class="form-control" placeholder="Confirm your Password" required
+                                       data-val="true"
+                                       data-val-equalto="The password and confirmation password do not match."
+                                       data-val-equalto-other="Password"
+                                       data-val-equalto-rules="Password">
+                            </div>
+
+                            @if (ViewData.ContainsKey("CustomErrors"))
+                            {
+                                <div class="alert alert-danger mt-4">
+                                    <ul style="list-style-type: none;">
+                                        @foreach (var error in ViewData["CustomErrors"] as List<string>)
+                                        {
+                                            <li>@error</li>
+                                        }
+                                    </ul>
+                                </div>
+                            }
+                            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                            <a role="button" class="btn btn-secondary mt-3" asp-controller="AdminPanel" asp-action="Index">Back</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <br />
-<form asp-controller="AdminPanel" asp-action="Create" method="post">
-    <div class="form-group">
-        <label for="name">Name:</label>
-        <input type="text" asp-for="Name" class="form-control" id="name" placeholder="Enter your Name">
-    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
-    <div class="form-group">
-        <label for="Username">Username:</label>
-        <input type="text" asp-for="Username" class="form-control" id="Username" placeholder="Enter your Username">
-    </div>
-
-    <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" asp-for="Email" class="form-control" id="email" placeholder="Enter your Email">
-    </div>
-
-    <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="password" asp-for="Password" class="form-control" id="password" placeholder="Enter your Password">
-    </div>
-
-    <button type="submit" class="btn btn-primary btn-block">Submit</button>
-
-<a role="button" class="btn btn-secondary " asp-controller="AdminPanel" asp-action="Index">Back</a>
-</form>
-
-
-
-
-
+</body>
+</html>

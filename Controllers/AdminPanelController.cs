@@ -188,5 +188,25 @@ namespace BlogASP.Controllers
             return View("EditArticle", article);
         }
 
+        [HttpPost]
+        public IActionResult CreateAdmin(UserModel user)
+        {
+            if (ModelState.IsValid)
+            {
+                var existingUser = _userRepository.GetUserByUsername(user.Username);
+                if (existingUser != null)
+                {
+                    ModelState.AddModelError(string.Empty, "Username already exists");
+                    return View("Create");
+                }
+                string hashedPassword = PasswordHasher.HashPassword(user.Password);
+                user.Password = hashedPassword;
+
+                _userRepository.Create(user);
+
+                return RedirectToAction("Index");
+            }
+            return View("Create");
+        }
     }
 }

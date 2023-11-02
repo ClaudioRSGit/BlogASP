@@ -243,7 +243,7 @@
                                             <div class="btn-group" role="group">
                                                 <button type="submit" class="btn btn-danger rounded-pill" style="margin-right: 5px;">Disable</button>
                                                 <a role="button" href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary rounded-pill" style="margin-right: 5px;">Show</a>
-                                                <a role="button" href="@Url.Action("EditArticle", "AdminPanel", new { id = article.ArticleId })" class="btn btn-primary btn-sm rounded-pill" style="margin-right: 5px;">Edit</a>
+                                                <a role="button" href="@Url.Action("EditArticle", "AdminPanel", new { id = article.ArticleId })" class="btn btn-warning btn-sm rounded-pill" style="margin-right: 5px;">Edit</a>
                                             </div>
                                         </form>
                                     }
@@ -253,8 +253,8 @@
                     </tbody>
                 </table>
             </div>
-            <button role="button" class="btn btn-secondary btn-sm float-right">New User</button>
-            <button role="button" class="btn btn-secondary btn-sm float-right">Export Data</button>
+            <a role="button" href="@Url.Action("Create", "AdminPanel")" class="btn btn-secondary btn-sm" style="margin-right: 5px;">New User</a>
+            <button role="button" class="btn btn-secondary btn-sm">Export Data</button>
         </main>
     </div>
 </div>
