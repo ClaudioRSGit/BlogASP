@@ -35,6 +35,7 @@
                     <div class="card-body text-center">
                         <h2 class="mb-4">Sign Up</h2>
                         <form asp-controller="SignUp" asp-action="Create" method="post">
+
                             <div class="form-group">
                                 <label for="Name">Name:</label>
                                 <input type="text" asp-for="Name" class="form-control" placeholder="Enter your Name" required>
@@ -69,6 +70,20 @@
                                        data-val-equalto-other="Password"
                                        data-val-equalto-rules="Password">
                             </div>
+
+                            @if (ViewData.ContainsKey("CustomErrors"))
+                            {
+                                <div class="alert alert-danger mt-4">
+                                    <ul style="list-style-type: none;">
+                                        @foreach (var error in ViewData["CustomErrors"] as List<string>)
+                                        {
+                                            <li>@error</li>
+                                        }
+                                    </ul>
+                                </div>
+                            }
+
+
 
                             <button type="submit" class="btn btn-primary btn-block">Submit</button>
 

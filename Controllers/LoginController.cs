@@ -32,7 +32,7 @@ namespace BlogASP.Controllers
         {
             var user = _userRepository.GetAll().FirstOrDefault(u => u.Username == loginModel.Username);
 
-            if (user != null && user.Password == loginModel.Password)
+            if (user != null && PasswordHasher.VerifyPassword(user.Password, loginModel.Password))
             {
                 if (user.Role == "Disabled")
                 {
@@ -42,10 +42,10 @@ namespace BlogASP.Controllers
                 }
 
                 var claims = new List<Claim>
-                    {
-                        new Claim(ClaimTypes.Name, user.Username),
-                        new Claim(ClaimTypes.Role, user.Role)
-                    };
+                {
+                    new Claim(ClaimTypes.Name, user.Username),
+                    new Claim(ClaimTypes.Role, user.Role)
+                };
 
                 var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                 var principal = new ClaimsPrincipal(identity);
@@ -56,8 +56,7 @@ namespace BlogASP.Controllers
             }
             else
             {
-                TempData["CustomError"] = "Username or Password incorrect.Try again!";
-
+                TempData["CustomError"] = "Username or Password incorrect. Try again!";
                 return View("Index");
             }
         }

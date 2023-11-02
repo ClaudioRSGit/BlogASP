@@ -15,6 +15,9 @@ namespace BlogASP.Models
         public bool isPrivate { get; set; }
         public int? UserId { get; set; }
         public string? Picture { get; set; }
+
+        public bool? isDisabled { get; set; }
+
         public DateTime? CreatedAt { get; set; }
 
         public DateTime? UpdatedAt { get; set; }
