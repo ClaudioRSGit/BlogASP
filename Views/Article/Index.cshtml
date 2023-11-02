@@ -47,7 +47,8 @@
                                         <p class="card-text">@article.Description</p>
                                         <a href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary">Read More</a>
                                         <p class="card-text">Stars: <span class="star-count" data-article-id="@article.ArticleId">@article.Stars</span></p>
-                                    </div>
+                                    <a role="button" href="@Url.Action("Edit", "Article", new { id = article.ArticleId })" class="btn btn-primary btn-sm rounded-pill">Edit</a>
+                                </div>
                                 </div>
                             </div>
                         }

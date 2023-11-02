@@ -56,21 +56,13 @@ namespace BlogASP.Controllers
             return RedirectToAction("Index");
         }
 
-        ///Nao Funciona
-        [HttpPost]
-        public IActionResult EditArticle(ArticleModel article)
-        {
-            _articleRepository.EditArticle(article);
-            return RedirectToAction("Index");
-        }
-
 
         [HttpPost]
         public IActionResult SetAsPrivileged(int id)
         {
             UserModel user = _userRepository.ListById(id);
 
-            if (user != null && (user.Role == "EndUser" || user.Role == "Administrator"))
+            if (user != null && (user.Role == "Public" || user.Role == "Administrator"))
             {
                 user.Role = "Privileged";
                 _userRepository.Edit(user);
@@ -82,13 +74,13 @@ namespace BlogASP.Controllers
         }
 
         [HttpPost]
-        public IActionResult SetAsEndUser(int id)
+        public IActionResult SetAsPublicUser(int id)
         {
             UserModel user = _userRepository.ListById(id);
 
             if (user != null && (user.Role == "Privileged" || user.Role == "Administrator"))
             {
-                user.Role = "EndUser";
+                user.Role = "Public";
                 _userRepository.Edit(user);
 
                 return RedirectToAction("Index");
@@ -137,7 +129,7 @@ namespace BlogASP.Controllers
             {
                 article.isDisabled = true;
                 article.DeletedAt = DateTime.Now;
-                _articleRepository.EditArticle(article);
+                _articleRepository.Edit(article);
             }
 
             return RedirectToAction("Index");
@@ -152,7 +144,7 @@ namespace BlogASP.Controllers
             {
                 article.isDisabled = false;
                 article.UpdatedAt = DateTime.Now;
-                _articleRepository.EditArticle(article);
+                _articleRepository.Edit(article);
             }
             return RedirectToAction("Index");
         }
@@ -164,11 +156,37 @@ namespace BlogASP.Controllers
 
             if (user != null)
             {
-                user.Role = "EndUser";
+                user.Role = "Public";
                 _userRepository.Edit(user);
             }
 
             return RedirectToAction("Index");
         }
+
+        public IActionResult EditArticle(int id)
+        {
+            ArticleModel article = _articleRepository.GetArticleById(id);
+
+            if (article == null)
+            {
+                return View("Error");
+            }
+            article.Picture = article.Picture;
+            return View("EditArticle", article);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateArticle(ArticleModel article)
+        {
+            if (ModelState.IsValid)
+            {
+                _articleRepository.UpdateArticle(article);
+
+                
+                return RedirectToAction("Index");
+            }
+            return View("EditArticle", article);
+        }
+
     }
 }

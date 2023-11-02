@@ -1,0 +1,44 @@
+﻿@model ArticleModel
+@{
+    ViewData["Title"] = "Article Edit";
+}
+
+<h1 class="text-center">Article Edit</h1>
+
+<br />
+
+<form asp-controller="AdminPanel" asp-action="UpdateArticle" method="post">
+    <input type="hidden" asp-for="ArticleId" />
+    <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" asp-for="Title" class="form-control" id="title" placeholder="Enter the Title">
+    </div>
+
+    <div class="form-group">
+        <label for="category">Category:</label>
+        <input type="text" asp-for="Category" class="form-control" id="category" placeholder="Enter the Category">
+    </div>
+
+    <div class="form-group">
+        <label for="description">Description:</label>
+        <input type="text" asp-for="Description" class="form-control" id="description" placeholder="Description">
+    </div>
+
+    <div class="form-group">
+        <label asp-for="isPrivate" class="control-label">Visibility:</label>
+        <div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" asp-for="isPrivate" value="true" />
+                <label class="form-check-label">Private</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" asp-for="isPrivate" value="false" />
+                <label class="form-check-label">Public</label>
+            </div>
+        </div>
+    </div>
+
+    <input type="hidden" asp-for="Picture" />
+    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+    <a role="button" class="btn btn-secondary btn-block" asp-controller="Article" asp-action="Index">Back</a>
+</form>

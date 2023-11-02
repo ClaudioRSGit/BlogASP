@@ -22,7 +22,7 @@ namespace BlogASP.Repository
         }
         public UserModel Create(UserModel user)
         {  
-            user.Role = "EndUser";
+            user.Role = "Public";
             user.CreatedAt = DateTime.Now;
             _databaseContext.Users.Add(user);
             _databaseContext.SaveChanges();
@@ -33,7 +33,7 @@ namespace BlogASP.Repository
         {
             UserModel userDB = ListById(user.UserId);
 
-            if (userDB == null) throw new Exception("Atualization error!");
+            if (userDB == null) throw new Exception("Update error!");
 
             userDB.Username = user.Username;
             userDB.Name = user.Name;

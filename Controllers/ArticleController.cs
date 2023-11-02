@@ -114,12 +114,12 @@ namespace BlogASP.Controllers
             return imageLinks[index];
         }
 
-        public void UpdateArticle(ArticleModel article)
-        {
-            article.UpdatedAt = DateTime.Now;
-            _context.Articles.Update(article);
-            _context.SaveChanges();
-        }
+        //public void EditArticle(ArticleModel article)
+        //{
+        //    article.UpdatedAt = DateTime.Now;
+        //    _context.Articles.Update(article);
+        //    _context.SaveChanges();
+        //}
 
         [HttpPost]
         public IActionResult AddComment(int articleId, string commentDescription)
@@ -164,6 +164,38 @@ namespace BlogASP.Controllers
 
                 return StatusCode(500, "Error adding comment: " + ex.Message);
             }
+        }
+
+        [HttpPost]
+        public IActionResult Edit(ArticleModel article)
+        {
+            _articleRepository.Edit(article);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Edit(int id)
+        {
+            ArticleModel article = _articleRepository.GetArticleById(id);
+
+            if (article == null)
+            {
+                return View("Error");
+            }
+            article.Picture = article.Picture;
+            return View("Edit", article);
+        }
+
+        [HttpPost]
+        public IActionResult Update(ArticleModel article)
+        {
+            if (ModelState.IsValid)
+            {
+                _articleRepository.UpdateArticle(article);
+
+
+                return RedirectToAction("Index");
+            }
+            return View("EditArticle", article);
         }
     }
 }

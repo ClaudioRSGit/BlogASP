@@ -1,4 +1,5 @@
 ﻿using BlogASP.DAL;
+using BlogASP.Migrations;
 using BlogASP.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -81,11 +82,11 @@ namespace BlogASP.Repository
             return article;
         }
 
-        public ArticleModel EditArticle(ArticleModel article)
+        public ArticleModel Edit(ArticleModel article)
         {
             ArticleModel articleDB = GetArticleById(article.ArticleId);
 
-            if (articleDB == null) throw new Exception("Atualization error!");
+            if (articleDB == null) throw new Exception("Update error!");
 
             articleDB.Title = article.Title;
             articleDB.Category = article.Category;
