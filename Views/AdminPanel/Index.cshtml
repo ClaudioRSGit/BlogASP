@@ -51,7 +51,7 @@
                 <ul class="nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link" href="#pending-users">
-                            End Users
+                            Public Users
                         </a>
                     </li>
                     <li class="nav-item">
@@ -71,34 +71,37 @@
         <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" id="content">
             <!-- Tabela de Users Pendentes -->
             <div id="pending-users" class="table-container" >
-                <h1>End Users</h1>
+                <h1>Public Users</h1>
+                <br />
                 <table class="table table-striped table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">UserName</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Actions</th>
+                            <th scope="col" style="text-align: center;">#</th>
+                            <th scope="col" style="text-align: center;">Name</th>
+                            <th scope="col" style="text-align: center;">UserName</th>
+                            <th scope="col" style="text-align: center;">Email</th>
+                            <th scope="col" style="text-align: center;">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (UserModel user in Model.Users.Where(u => u.Role == "EndUser"))
                         {
                             <tr>
-                                <td>@user.UserId</td>
-                                <td>@user.Name</td>
-                                <td>@user.Username</td>
-                                <td>@user.Email</td>
-                                <td>
-                                    <form asp-controller="AdminPanel" asp-action="SetAsPrivileged" method="post">
-                                        <input type="hidden" name="id" value="@user.UserId" />
-                                        <button type="submit" class="btn btn-success">Accept</button>
-                                    </form>
-                                    <form asp-controller="AdminPanel" asp-action="DisableUser" method="post">
-                                        <input type="hidden" name="id" value="@user.UserId" />
-                                        <button type="submit" class="btn btn-danger">Disable</button>
-                                    </form>
+                                <td style="text-align: center;">@user.UserId</td>
+                                <td style="text-align: center;">@user.Name</td>
+                                <td style="text-align: center;">@user.Username</td>
+                                <td style="text-align: center;">@user.Email</td>
+                                <td style="text-align: center;">
+                                    <div class="btn-group" role="group">
+                                        <form asp-controller="AdminPanel" asp-action="SetAsPrivileged" method="post">
+                                            <input type="hidden" name="id" value="@user.UserId" />
+                                            <button type="submit" class="btn btn-success rounded-pill" style="margin-right: 5px;">Accept</button>
+                                        </form>
+                                        <form asp-controller="AdminPanel" asp-action="DisableUser" method="post">
+                                            <input type="hidden" name="id" value="@user.UserId" />
+                                            <button type="submit" class="btn btn-danger rounded-pill">Disable</button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         }
@@ -109,32 +112,33 @@
             <!-- Tabela  Users -->
             <div id="all-users" class="table-container" style="display: none;">
                 <h1>Users</h1>
+                <br />
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Username</th>
-                            <th>Email</th>
-                            <th>Role</th>
-                            <th>CreatedAt</th>
-                            <th>UpdatedAt</th>
-                            <th>DeletedAt</th>
-                            <th>Actions</th>
+                            <th style="text-align: center;">#</th>
+                            <th style="text-align: center;">Name</th>
+                            <th style="text-align: center;">Username</th>
+                            <th style="text-align: center;">Email</th>
+                            <th style="text-align: center;">Role</th>
+                            <th style="text-align: center;">CreatedAt</th>
+                            <th style="text-align: center;">UpdatedAt</th>
+                            <th style="text-align: center;">DeletedAt</th>
+                            <th style="text-align: center;">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (UserModel user in Model.Users.Where(u => u.Role == "Privileged" || u.Role == "Administrator" || u.Role == "Disabled"))
                         {
                             <tr>
-                                <td>@user.UserId</td>
-                                <td>@user.Name</td>
-                                <td>@user.Username</td>
-                                <td>@user.Email</td>
-                                <td>@user.Role</td>
-                                <td>@user.CreatedAt</td>
-                                <td>@user.UpdatedAt</td>
-                                <td>
+                                <td style="text-align: center;">@user.UserId</td>
+                                <td style="text-align: center;">@user.Name</td>
+                                <td style="text-align: center;">@user.Username</td>
+                                <td style="text-align: center;">@user.Email</td>
+                                <td style="text-align: center;">@user.Role</td>
+                                <td style="text-align: center;">@user.CreatedAt</td>
+                                <td style="text-align: center;">@user.UpdatedAt</td>
+                                <td style="text-align: center;">
                                     @{
                                         if (user.DeletedAt == null)
                                         {
@@ -146,7 +150,7 @@
                                         }
                                     }
                                 </td>
-                                <td>
+                                <td style="text-align: center;">
                                     @if (user.Role == "Disabled")
                                     {
                                         <form asp-controller="AdminPanel" asp-action="EnableUser" method="post">
@@ -156,33 +160,31 @@
                                     }
                                     else
                                     {
-                                        <form asp-controller="AdminPanel" asp-action="DisableUser" method="post">
-                                            <input type="hidden" name="id" value="@user.UserId" />
-                                            <button type="submit" class="btn btn-danger">Disable</button>
-                                        </form>
-
-                                        <a role="button" class="btn btn-secondary btn-sm" asp-route-id="@user.UserId" asp-controller="AdminPanel" asp-action="Edit">Edit</a>
-
-                                        <form asp-controller="AdminPanel" asp-action="SetAsEndUser" method="post" style="display: inline-block;">
-                                            <input type="hidden" name="id" value="@user.UserId" />
-                                            <button type="submit" class="btn btn-secondary">Set as EndUser</button>
-                                        </form>
-
-                                        <form asp-controller="AdminPanel" asp-action="SetAsPrivileged" method="post" style="display: inline-block;">
-                                            <input type="hidden" name="id" value="@user.UserId" />
-                                            <button type="submit" class="btn btn-secondary" @if (user.Role == "Privileged")
-                                            {
-                                                <text>disabled</text>
-                                            }>Set as Privileged</button>
-                                        </form>
-
-                                        <form asp-controller="AdminPanel" asp-action="SetAsAdministrator" method="post" style="display: inline-block;">
-                                            <input type="hidden" name="id" value="@user.UserId" />
-                                            <button type="submit" class="btn btn-secondary" @if (user.Role == "Administrator")
-                                            {
-                                                <text>disabled</text>
-                                            }>Set as Administrator</button>
-                                        </form>
+                                        <div class="btn-group" role="group" style="display: flex;">
+                                            <form asp-controller="AdminPanel" asp-action="DisableUser" method="post">
+                                                <input type="hidden" name="id" value="@user.UserId" />
+                                                <button type="submit" class="btn btn-danger rounded-pill" style="margin-right: 5px;">Disable</button>
+                                            </form>
+                                            <a role="button" class="btn btn-warning btn-sm rounded-pill" style="margin-right: 5px;" asp-route-id="@user.UserId" asp-controller="AdminPanel" asp-action="Edit">Edit</a>
+                                            <form asp-controller="AdminPanel" asp-action="SetAsEndUser" method="post" style="display: inline-block;">
+                                                <input type="hidden" name="id" value "@user.UserId" />
+                                                <button type="submit" class="btn btn-primary rounded-pill" style="margin-right: 5px;">Public</button>
+                                            </form>
+                                            <form asp-controller="AdminPanel" asp-action="SetAsPrivileged" method="post" style="display: inline-block;">
+                                                <input type="hidden" name="id" value="@user.UserId" />
+                                                <button type="submit" class="btn btn-primary rounded-pill" style="margin-right: 5px;" @if (user.Role == "Privileged")
+                                                {
+                                                    <text>disabled</text>
+                                                }>Privileged</button>
+                                            </form>
+                                            <form asp-controller="AdminPanel" asp-action="SetAsAdministrator" method="post" style="display: inline-block;">
+                                                <input type="hidden" name="id" value="@user.UserId" />
+                                                <button type="submit" class="btn btn-primary rounded-pill" @if (user.Role == "Administrator")
+                                                {
+                                                    <text>disabled</text>
+                                                }>Administrator</button>
+                                            </form>
+                                        </div>
                                     }
                                 </td>
                             </tr>
@@ -191,28 +193,29 @@
                 </table>
             </div>
 
-            <!-- Tabela  Articles -->
+            <!-- Tabela Articles -->
             <div id="articles" class="table-container" style="display: none;">
                 <h1>Articles</h1>
+                <br />
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Title</th>
-                            <th>Category</th>
-                            <th>Stars</th>
-                            <th>Private</th>
-                            <th>Actions</th>
+                            <th style="text-align: center;">#</th>
+                            <th style="text-align: center;">Title</th>
+                            <th style="text-align: center;">Category</th>
+                            <th style="text-align: center;">Stars</th>
+                            <th style="text-align: center;">Private</th>
+                            <th style="text-align: center;">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach (ArticleModel article in Model.Articles)
                         {
                             <tr>
-                                <td>@article.ArticleId</td>
-                                <td>@article.Title</td>
-                                <td>@article.Category</td>
-                                <td>
+                                <td style="text-align: center;">@article.ArticleId</td>
+                                <td style="text-align: center;">@article.Title</td>
+                                <td style="text-align: center;">@article.Category</td>
+                                <td style="text-align: center;">
                                     @{
                                         if (article.Stars == null)
                                         {
@@ -224,25 +227,27 @@
                                         }
                                     }
                                 </td>
-                                <td>@article.isPrivate</td>
-                                <td>
+                                <td style="text-align: center;">@article.isPrivate</td>
+                                <td style="text-align: center;">
                                     @if (article.isDisabled == true)
                                     {
                                         <form asp-controller="AdminPanel" asp-action="EnableArticle" method="post">
                                             <input type="hidden" name="id" value="@article.ArticleId" />
-                                            <button type="submit" class="btn btn-success">Enable</button>
+                                            <div class="btn-group" role="group">
+                                                <button type="submit" class="btn btn-success rounded-pill">Enable</button>
+                                            </div>
                                         </form>
                                     }
                                     else
                                     {
                                         <form asp-controller="AdminPanel" asp-action="DisableArticle" method="post">
                                             <input type="hidden" name="id" value="@article.ArticleId" />
-                                            <button type="submit" class="btn btn-danger">Disable</button>
+                                            <div class="btn-group" role="group">
+                                                <button type="submit" class="btn btn-danger rounded-pill" style="margin-right: 5px;">Disable</button>
+                                                <a role="button" href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary rounded-pill" style="margin-right: 5px;">Show</a>
+                                                <a role="button" class="btn btn-warning btn-sm rounded-pill" asp-route-id="@article.ArticleId" asp-controller="AdminPanel" asp-action="EditArticle" >Edit</a>
+                                            </div>
                                         </form>
-                                        <a role="button" href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-secondary">Show</a>
-
-                                        <!-- Nao funciona -->
-                                        <a role="button" class="btn btn-secondary btn-sm" asp-route-id="@article.ArticleId" asp-controller="AdminPanel" asp-action="EditArticle">Edit</a>
                                     }
                                 </td>
                             </tr>
@@ -250,12 +255,12 @@
                     </tbody>
                 </table>
             </div>
+            <button role="button" class="btn btn-secondary btn-sm float-right">New User</button>
+            <button role="button" class="btn btn-secondary btn-sm float-right">Export Data</button>
         </main>
     </div>
 </div>
 
-<button role="button" class="btn btn-secondary btn-sm">New User</button>
-<button role="button" class="btn btn-secondary btn-sm">Export Data</button>
 
 <script>
     document.querySelectorAll(".nav-link").forEach(function (link) {
