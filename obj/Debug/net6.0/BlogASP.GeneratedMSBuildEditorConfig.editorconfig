@@ -16,6 +16,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\fabio\Desktop\ASPNET\BlogASP
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/fabio/Desktop/ASPNET/BlogASP/Views/AdminPanel/ArticleEdit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5QYW5lbFxBcnRpY2xlRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/fabio/Desktop/ASPNET/BlogASP/Views/AdminPanel/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5QYW5lbFxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

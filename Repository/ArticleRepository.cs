@@ -73,6 +73,7 @@ namespace BlogASP.Repository
 
         public ArticleModel CreateArticle(ArticleModel article)
         {
+            article.isDisabled = false;
             article.CreatedAt = DateTime.Now;
             article.UpdatedAt = DateTime.Now;
             _databaseContext.Articles.Add(article);
@@ -84,8 +85,7 @@ namespace BlogASP.Repository
         {
             ArticleModel articleDB = GetArticleById(article.ArticleId);
 
-            if (articleDB == null)
-                return null;
+            if (articleDB == null) throw new Exception("Atualization error!");
 
             articleDB.Title = article.Title;
             articleDB.Category = article.Category;

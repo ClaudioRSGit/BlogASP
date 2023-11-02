@@ -42,26 +42,6 @@ namespace BlogASP.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public IActionResult Delete(int id)
-        //{
-        //    try
-        //    {
-        //        if (_userRepository.Delete(id))
-        //        {
-        //            return Ok(); 
-        //        }
-        //        else
-        //        {
-        //            return BadRequest("Deleting Error:");
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return BadRequest("Deleting Error: " + ex.Message); 
-        //    }
-        //}
-
         [HttpPost]
         public IActionResult Create(UserModel user) 
         {
@@ -73,6 +53,14 @@ namespace BlogASP.Controllers
         public IActionResult Edit(UserModel user)
         {
             _userRepository.Edit(user);
+            return RedirectToAction("Index");
+        }
+
+        ///Nao Funciona
+        [HttpPost]
+        public IActionResult EditArticle(ArticleModel article)
+        {
+            _articleRepository.EditArticle(article);
             return RedirectToAction("Index");
         }
 
@@ -137,6 +125,35 @@ namespace BlogASP.Controllers
                 _userRepository.Edit(user);
             }
 
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult DisableArticle(int id)
+        {
+            ArticleModel article = _articleRepository.GetArticleById(id);
+
+            if (article != null)
+            {
+                article.isDisabled = true;
+                article.DeletedAt = DateTime.Now;
+                _articleRepository.EditArticle(article);
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult EnableArticle(int id)
+        {
+            ArticleModel article = _articleRepository.GetArticleById(id);
+
+            if (article != null)
+            {
+                article.isDisabled = false;
+                article.UpdatedAt = DateTime.Now;
+                _articleRepository.EditArticle(article);
+            }
             return RedirectToAction("Index");
         }
 

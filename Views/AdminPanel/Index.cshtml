@@ -181,7 +181,6 @@
                             <th>Title</th>
                             <th>Category</th>
                             <th>Stars</th>
-                            <th>UserId</th>
                             <th>Private</th>
                             <th>Actions</th>
                         </tr>
@@ -205,23 +204,26 @@
                                         }
                                     }
                                 </td>
-                                <td>
-                                    @{
-                                        if (article.UserId == null)
-                                        {
-                                            @: Unknown
-                                        }
-                                        else
-                                        {
-                                            @article.Stars
-                                        }
-                                    }
-                                </td>
                                 <td>@article.isPrivate</td>
                                 <td>
-                                    <a role="button" class="btn btn-secondary btn-sm" asp-route-id="@article.ArticleId" asp-controller="Article" asp-action="">Show</a>
-                                    <a role="button" class="btn btn-secondary btn-sm" asp-route-id="@article.ArticleId" asp-controller="Article" asp-action="">Edit</a>
-                                    <a role="button" class="btn btn-secondary btn-sm" asp-route-id="@article.ArticleId" asp-controller="Article" asp-action="">Delete</a>
+                                    @if (article.isDisabled == true)
+                                    {
+                                        <form asp-controller="AdminPanel" asp-action="EnableArticle" method="post">
+                                            <input type="hidden" name="id" value="@article.ArticleId" />
+                                            <button type="submit" class="btn btn-success">Enable</button>
+                                        </form>
+                                    }
+                                    else
+                                    {
+                                        <form asp-controller="AdminPanel" asp-action="DisableArticle" method="post">
+                                            <input type="hidden" name="id" value="@article.ArticleId" />
+                                            <button type="submit" class="btn btn-danger">Disable</button>
+                                        </form>
+                                        <a role="button" href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-secondary">Show</a>
+
+                                        <!-- Nao funciona -->
+                                        <a role="button" class="btn btn-secondary btn-sm" asp-route-id="@article.ArticleId" asp-controller="AdminPanel" asp-action="EditArticle">Edit</a>
+                                    }
                                 </td>
                             </tr>
                         }
@@ -232,6 +234,7 @@
     </div>
 </div>
 
+<button role="button" class="btn btn-secondary btn-sm">New User</button>
 <button role="button" class="btn btn-secondary btn-sm">Export Data</button>
 
 <script>
