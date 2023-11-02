@@ -1,3 +1,4 @@
+using BlogASP;
 using BlogASP.DAL;
 using BlogASP.Models;
 using BlogASP.Repository;
@@ -54,5 +55,35 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapControllers();
+
+//////////////////////////////// Admin Default
+using (var scope = builder.Services.BuildServiceProvider().CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var dbContext = services.GetRequiredService<DatabaseContext>();
+    var userRepository = services.GetRequiredService<IUserRepository>();
+
+    var existingAdmin = userRepository.GetUserByUsername("Administrator");
+
+    if (existingAdmin == null)
+    {
+        var adminUser = new UserModel
+        {
+            Name = "Administrator",
+            Username = "Administrator",
+            Email = "administrator@admin.com"
+            // Defina a senha e outras propriedades aqui
+        };
+
+        string adminPassword = "Admin123!"; 
+        adminUser.Password = PasswordHasher.HashPassword(adminPassword);
+
+        adminUser.Role = "Administrator"; 
+
+        dbContext.Users.Add(adminUser);
+        dbContext.SaveChanges();
+    }
+}
+////////////////////////////////////////////////
 
 app.Run();
