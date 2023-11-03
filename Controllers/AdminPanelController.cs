@@ -2,6 +2,7 @@
 using BlogASP.Repository;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Text;
 
 namespace BlogASP.Controllers
 {
@@ -208,5 +209,36 @@ namespace BlogASP.Controllers
             }
             return View("Create");
         }
+
+        [HttpGet]
+        [HttpPost]
+        public IActionResult ExportToCSV()
+        {
+            var users = _userRepository.GetAll();
+            var articles = _articleRepository.GetAllArticles(); 
+
+            var csvData = new StringBuilder();
+            csvData.AppendLine("UserId,Name,Username,Email,Role,CreatedAt,UpdatedAt,DeletedAt");
+
+            foreach (var user in users)
+            {
+                csvData.AppendLine($"{user.UserId},{user.Name},{user.Username},{user.Email},{user.Role},{user.CreatedAt},{user.UpdatedAt},{user.DeletedAt}");
+            }
+
+            csvData.AppendLine();
+
+            csvData.AppendLine("ArticleId,Title,Category,Stars,isPrivate,isDisabled,DeletedAt");
+
+            foreach (var article in articles)
+            {
+                csvData.AppendLine($"{article.ArticleId},{article.Title},{article.Category},{article.Stars},{article.isPrivate},{article.isDisabled},{article.DeletedAt}");
+            }
+
+            var csvFileName = "exported_data.csv";
+            var csvBytes = Encoding.UTF8.GetBytes(csvData.ToString());
+            return File(csvBytes, "text/csv", csvFileName);
+        }
+
+
     }
 }
