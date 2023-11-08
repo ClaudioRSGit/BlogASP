@@ -28,8 +28,9 @@
                 <h4>Order By</h4>
 
                 <button class="btn btn-outline-primary order-by-link" data-order-by="asc">Order By Date Asc</button>
-                <button class="btn btn-outline-primary order-by-link" data-order-by="desc">Order By Date Desc</button>
-            
+                <button class="btn btn-outline-primary order-by-link" data-order-by="des">Order By Date Desc</button>
+                <button class="btn btn-outline-primary order-by-link" data-order-by="normal">Show All</button>
+
                 <hr />
                 <h4>Select a Year</h4>
                 <select class="form-control" id="yearPicker">
@@ -62,7 +63,7 @@
                 <div id="noResultsMessage" class="col-md-9 mt-4" style="display: none;">
                     <p>Artigo não encontrado.</p>
                 </div>
-                <div class="mt-4">
+                <div class="mt-4 normal">
                         @foreach (var article in Model.OrderByDescending(a => a.Stars).Take(1))
                         {
                             <div class="category-article" data-category="@article.Category">
@@ -103,7 +104,29 @@
                     </div>
                 }
                 <div class="des">
+                    <h1>descendente</h1>
+
                     @foreach (var article in Model.OrderByDescending(a => a.CreatedAt).Where(a => User.Identity.IsAuthenticated || !a.isPrivate))
+                    {
+                        <div class="col-4 mb-3 category-article" data-category="@article.Category">
+                            <div class="card">
+                                <img src="@article.Picture" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">@article.Title</h5>
+                                    <p class="card-text">@article.Description</p>
+                                    <a href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary">Read More</a>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <button class="btn btn-warning btn-star" data-article-id="@article.ArticleId">Star: <span class="star-count" data-article-id="@article.ArticleId">@article.Stars</span></button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="asc">
+                    <h1>ascendente</h1>
+                    @foreach (var article in Model.OrderBy(a => a.CreatedAt).Where(a => User.Identity.IsAuthenticated || !a.isPrivate))
                     {
                         <div class="col-4 mb-3 category-article" data-category="@article.Category">
                             <div class="card">
@@ -195,16 +218,26 @@
 
         // Initially hide the .des div
         $('.des').hide();
+        $('.asc').hide();
+        $('.normal').show();
 
-        // Button click event
         $('.order-by-link').click(function () {
             var orderBy = $(this).data('order-by');
-            if (orderBy === 'desc') {
-                // If descending, show .des div
-                $('.des').show();
-            } else {
-                // If ascending, hide .des div
-                $('.des').hide();
+
+            // Hide all articles initially
+            $('.category-article').hide();
+            $('#noResultsMessage').hide();
+
+            // Show top 3 articles regardless of the order
+            $('.overflow-container .category-article').slice(0, 3).show();
+
+            // Show articles based on the selected order
+            if (orderBy === 'des') {
+                showArticles(Model.OrderByDescending(a => a.CreatedAt));
+            } else if (orderBy === 'asc') {
+                showArticles(Model.OrderBy(a => a.CreatedAt));
+            } else if (orderBy === 'normal') {
+                showArticles(Model);
             }
         });
 
