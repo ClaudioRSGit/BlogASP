@@ -57,7 +57,7 @@ namespace BlogASP.Controllers
             else
             {
                 TempData["CustomError"] = "Username or Password incorrect. Try again!";
-                return View("Index");
+                return Redirect("/Login");
             }
         }
     }
