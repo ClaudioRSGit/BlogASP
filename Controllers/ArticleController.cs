@@ -80,15 +80,10 @@ namespace BlogASP.Controllers
 
             if (article != null)
             {
-                // Verificar se o usuário já deu estrela (usando cookies como exemplo)
-                bool userHasStarred = HttpContext.Request.Cookies["userHasStarred-" + articleId] == "true";
+                // Always add one star
+                article.Stars += 1;
 
-                // Adicionar ou remover estrela com base na verificação
-                article.Stars += userHasStarred ? -1 : 1;
-
-                // Atualizar o status de estrela do usuário (usando cookies como exemplo)
-                HttpContext.Response.Cookies.Append("userHasStarred-" + articleId, (!userHasStarred).ToString());
-
+                // Update the status of star in the repository
                 _articleRepository.UpdateArticle(article);
             }
 

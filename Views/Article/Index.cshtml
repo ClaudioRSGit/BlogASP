@@ -85,7 +85,6 @@
                 {
                     <span class="text-muted" style="font-size: 16px;">(Login to see more! 👉)</span>
                 }
-                
                 @foreach (var article in Model.Where(a => User.Identity.IsAuthenticated || !a.isPrivate))
                 {
                     <div class="col-4 mb-3 category-article" data-category="@article.Category" data-created-at="@article.CreatedAt">
@@ -213,11 +212,34 @@
             var selectedYear = $(this).val();
             filterArticlesByYear(selectedYear);
         });
+        $('.btn-star').click(function () {
+            var articleId = $(this).data('article-id');
+            var isStarred = $(this).hasClass('starred'); // Check the class here
+
+            starArticle(articleId, isStarred);
+        });
 
         $('#monthPicker').change(function () {
             var selectedMonth = $(this).val();
             filterArticlesByMonth(selectedMonth);
         });
+        function starArticle(articleId) {
+            $.ajax({
+                url: '/Article/StarArticle',
+                method: 'POST',
+                data: { articleId: articleId },
+                success: function (result) {
+                    var starsElement = $('.star-count[data-article-id="' + articleId + '"]');
+                    if (starsElement.length > 0) {
+                        // Update the star count in the user interface
+                        starsElement.text(result.stars);
+                    }
+                },
+                error: function (error) {
+                    console.error('Error starring article:', error);
+                }
+            });
+        }
 
         function filterArticlesByCategory(category) {
             // Hide all articles initially
@@ -267,23 +289,6 @@
                 var articleMonth = new Date($(this).data('created-at')).getMonth() + 1; // Months are 0-based
                 if (articleMonth.toString() === selectedMonth) {
                     $(this).show();
-                }
-            });
-        }
-
-        function starArticle(articleId) {
-            $.ajax({
-                url: '/Article/StarArticle',
-                method: 'POST',
-                data: { articleId: articleId },
-                success: function (result) {
-                    var starsElement = $('.star-count[data-article-id="' + articleId + '"]');
-                    if (starsElement.length > 0) {
-                        starsElement.text(result.stars);
-                    }
-                },
-                error: function (error) {
-                    console.error('Erro ao dar estrela:', error);
                 }
             });
         }
