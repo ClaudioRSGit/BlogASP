@@ -1,4 +1,5 @@
-﻿@model List<BlogASP.Models.ArticleModel>
+﻿@using System.Globalization;
+@model List<BlogASP.Models.ArticleModel>
 
 <div class="container-fluid">
     <div class="row">
@@ -7,21 +8,46 @@
             <br />
             @if (User.Identity.IsAuthenticated)
             {
-            <a href="@Url.Action("Create", "Article")" class="btn btn-primary">Create New Article</a>
+            <a href="@Url.Action("Create", "Article")" class="btn btn-secondary w-100">Create New Article</a>
             }
             <!-- Search Box and Button -->
             <div class="mt-4">
                 <input type="text" id="searchTerm" class="form-control" placeholder="Enter title">
                 <br />
-                <button id="searchButton" class="btn btn-primary">Search</button>
+                <button id="searchButton" class="btn btn-primary w-100">Search</button>
             </div>
             
             <div id="filteredArticles" class="mt-4">
+                <h4>Select a Category</h4>
                 <a href="#" class="btn btn-primary category-link" data-category="all">All</a>
                 @foreach (var category in Model.Select(a => a.Category).Distinct())
                 {
                     <a href="#" class="btn btn-outline-primary category-link" data-category="@category">@category</a>
                 }
+                <hr />
+                <h4>Order By</h4>
+
+                <button class="btn btn-outline-primary order-by-link" data-order-by="asc">Order By Date Asc</button>
+                <button class="btn btn-outline-primary order-by-link" data-order-by="desc">Order By Date Desc</button>
+            
+                <hr />
+                <h4>Select a Year</h4>
+                <select class="form-control" id="yearPicker">
+                    @for (int year = DateTime.Now.Year; year >= 1900; year--)
+                    {
+                        <option value="@year">@year</option>
+                    }
+                </select>
+
+                <hr />
+                <h4>Select a Month</h4>
+
+                <select class="form-control" id="monthPicker">
+                    @for (int month = 1; month <= 12; month++)
+                    {
+                        <option value="@month">@DateTimeFormatInfo.CurrentInfo.GetMonthName(month)</option>
+                    }
+                </select>
             </div>
         </div>
 
@@ -59,9 +85,10 @@
                 {
                     <span class="text-muted" style="font-size: 16px;">(Login to see more! 👉)</span>
                 }
+                
                 @foreach (var article in Model.Where(a => User.Identity.IsAuthenticated || !a.isPrivate))
                 {
-                    <div class="col-4 mb-3 category-article" data-category="@article.Category">
+                    <div class="col-4 mb-3 category-article" data-category="@article.Category" data-created-at="@article.CreatedAt">
                         <div class="card">
                             <img src="@article.Picture" class="card-img-top" alt="...">
                             <div class="card-body">
@@ -76,39 +103,79 @@
                         </div>
                     </div>
                 }
+                <div class="des">
+                    @foreach (var article in Model.OrderByDescending(a => a.CreatedAt).Where(a => User.Identity.IsAuthenticated || !a.isPrivate))
+                    {
+                        <div class="col-4 mb-3 category-article" data-category="@article.Category">
+                            <div class="card">
+                                <img src="@article.Picture" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title">@article.Title</h5>
+                                    <p class="card-text">@article.Description</p>
+                                    <a href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary">Read More</a>
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
+                                        <button class="btn btn-warning btn-star" data-article-id="@article.ArticleId">Star: <span class="star-count" data-article-id="@article.ArticleId">@article.Stars</span></button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
     </div>
     <div class="col-md-12 mt-4">
+        <!--Recent Articles-->
+        <h2>Recent Articles</h2>
+
+        <div class="overflow-container" style="overflow-x: auto; white-space: nowrap;">
+            <div class="row">
+                @foreach (var article in Model.OrderByDescending(a => a.CreatedAt).Take(3).Where(a => User.Identity.IsAuthenticated || !a.isPrivate))
+                {
+                    <div class="col-4 mb-3 category-article">
+                        <div class="card">
+                            <img src="@article.Picture" class="card-img-top" alt="...">
+                            <div class="card-body" style="max-height: 200px; overflow: hidden;">
+                                <h5 class="card-title">@article.Title</h5>
+                                <p class="card-text" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">@article.Description</p>
+                                <a href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary">Read More</a>
+                                <p class="card-text">Stars: <span class="star-count" data-article-id="@article.ArticleId">@article.Stars</span></p>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
         <!-- Top 3 Articles -->
         <h2>Top 3 Articles</h2>
         @if (!User.Identity.IsAuthenticated)
         {
             <span class="text-muted" style="font-size: 16px;">(Login to see more! 👉)</span>
         }
-        
-            <div class="overflow-container" style="overflow-x: auto; white-space: nowrap;">
-                <div class="row">
+        <div class="overflow-container" style="overflow-x: auto; white-space: nowrap;">
+            <div class="row">
                 @foreach (var article in Model.OrderByDescending(a => a.Stars).Take(3).Where(a => User.Identity.IsAuthenticated || !a.isPrivate))
                 {
-                        <div class="col-4 mb-3 category-article" data-category="@article.Category">
-                            <div class="card">
-                                <img src="@article.Picture" class="card-img-top" alt="...">
-                                <div class="card-body" style="max-height: 200px; overflow: hidden;">
-                                    <h5 class="card-title">@article.Title</h5>
-                                    <p class="card-text" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">@article.Description</p>
-                                    <a href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary">Read More</a>
-                                    <p class="card-text">Stars: <span class="star-count" data-article-id="@article.ArticleId">@article.Stars</span></p>
-                                </div>
+                    <div class="col-4 mb-3 category-article">
+                        <div class="card">
+                            <img src="@article.Picture" class="card-img-top" alt="...">
+                            <div class="card-body" style="max-height: 200px; overflow: hidden;">
+                                <h5 class="card-title">@article.Title</h5>
+                                <p class="card-text" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">@article.Description</p>
+                                <a href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary">Read More</a>
+                                <p class="card-text">Stars: <span class="star-count" data-article-id="@article.ArticleId">@article.Stars</span></p>
                             </div>
                         </div>
+                    </div>
                 }
             </div>
-            </div>
+        </div>
     </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
 <script>
     $(document).ready(function () {
         $('.category-link').click(function (e) {
@@ -127,10 +194,36 @@
             filterArticlesByTitle(searchTerm);
         });
 
+        // Initially hide the .des div
+        $('.des').hide();
+
+        // Button click event
+        $('.order-by-link').click(function () {
+            var orderBy = $(this).data('order-by');
+            if (orderBy === 'desc') {
+                // If descending, show .des div
+                $('.des').show();
+            } else {
+                // If ascending, hide .des div
+                $('.des').hide();
+            }
+        });
+
+        $('#yearPicker').change(function () {
+            var selectedYear = $(this).val();
+            filterArticlesByYear(selectedYear);
+        });
+
+        $('#monthPicker').change(function () {
+            var selectedMonth = $(this).val();
+            filterArticlesByMonth(selectedMonth);
+        });
+
         function filterArticlesByCategory(category) {
             // Hide all articles initially
             $('.category-article').hide();
             $('#noResultsMessage').hide();
+
             // Show top 3 articles regardless of the category
             $('.overflow-container .category-article').slice(0, 3).show();
 
@@ -142,7 +235,41 @@
             }
         }
 
-        
+        function filterArticlesByYear(selectedYear) {
+            // Hide all articles initially
+            $('.category-article').hide();
+            $('#noResultsMessage').hide();
+
+            // Show top 3 articles regardless of the year
+            $('.overflow-container .category-article').slice(0, 3).show();
+
+            // Show articles based on the selected year
+            $('.category-article').each(function () {
+                var articleCreatedAt = $(this).data('created-at'); // Assuming data('created-at') holds the database date string
+                var articleYear = new Date(articleCreatedAt).getFullYear().toString();
+
+                if (articleYear === selectedYear) {
+                    $(this).show();
+                }
+            });
+        }
+
+        function filterArticlesByMonth(selectedMonth) {
+            // Hide all articles initially
+            $('.category-article').hide();
+            $('#noResultsMessage').hide();
+
+            // Show top 3 articles regardless of the month
+            $('.overflow-container .category-article').slice(0, 3).show();
+
+            // Show articles based on the selected month
+            $('.category-article').each(function () {
+                var articleMonth = new Date($(this).data('created-at')).getMonth() + 1; // Months are 0-based
+                if (articleMonth.toString() === selectedMonth) {
+                    $(this).show();
+                }
+            });
+        }
 
         function starArticle(articleId) {
             $.ajax({
@@ -160,6 +287,7 @@
                 }
             });
         }
+
         function filterArticlesByTitle(title) {
             // Oculta todos os artigos inicialmente
             $('.category-article').hide();
@@ -188,6 +316,5 @@
                 $('#noResultsMessage').hide();
             }
         }
-    }); 
-
+    });
 </script>

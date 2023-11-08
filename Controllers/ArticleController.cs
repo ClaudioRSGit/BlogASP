@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Security.Claims;
+using System.Security.Principal;
 
 namespace BlogASP.Controllers
 {
@@ -64,7 +65,6 @@ namespace BlogASP.Controllers
             if (ModelState.IsValid)
             {
                 article.Stars = 0;
-
                 article.Picture = GetRandomImageLink();
 
                 _articleRepository.CreateArticle(article);
@@ -114,13 +114,6 @@ namespace BlogASP.Controllers
             return imageLinks[index];
         }
 
-        //public void EditArticle(ArticleModel article)
-        //{
-        //    article.UpdatedAt = DateTime.Now;
-        //    _context.Articles.Update(article);
-        //    _context.SaveChanges();
-        //}
-
         [HttpPost]
         public IActionResult AddComment(int articleId, string commentDescription)
         {
@@ -142,7 +135,6 @@ namespace BlogASP.Controllers
                     ArticleId = articleId,
                     UserName = User.Identity.Name,
                     Description = commentDescription,
-                    // You might want to set other properties like timestamp, etc.
                 };
 
                 // Add the comment to the article

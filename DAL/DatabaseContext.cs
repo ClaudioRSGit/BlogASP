@@ -11,7 +11,6 @@
             {
 
             }
-
             public DbSet<UserModel> Users { get; set; }
             public DbSet<ArticleModel> Articles { get; set; }
             public DbSet<CommentModel> Comments { get; set; }
