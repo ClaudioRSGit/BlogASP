@@ -41,9 +41,6 @@
                                 </div>
                             </li>
                         }
-                        <li class="nav-item">
-                            <span class="nav-link text-dark">Hello @User.Identity.Name !</span>
-                        </li>
                     </ul>
                     <ul class="navbar-nav">
                         @if (!User.Identity.IsAuthenticated)
@@ -61,6 +58,9 @@
                         }
                         @if (User.Identity.IsAuthenticated)
                         {
+                            <li class="nav-item d-flex align-items-center">
+                                <span class="nav-link text-dark">Logged: @User.Identity.Name </span>
+                            </li>
                             <li class="nav-item">
                                 <button class="btn btn-light">
                                     <a class="nav-link text-dark" asp-action="Logout" asp-controller="Login" method="post">Logout</a>
