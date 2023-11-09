@@ -1,0 +1,64 @@
+﻿@model AdminPanelViewModel
+
+
+<div id="articles" class="table-container">
+    <h1>Articles</h1>
+    <br />
+    <table class="table">
+        <thead>
+            <tr>
+                <th style="text-align: center;">#</th>
+                <th style="text-align: center;">Title</th>
+                <th style="text-align: center;">Category</th>
+                <th style="text-align: center;">Stars</th>
+                <th style="text-align: center;">Private</th>
+                <th style="text-align: center;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (ArticleModel article in Model.Articles)
+            {
+                <tr>
+                    <td style="text-align: center;">@article.ArticleId</td>
+                    <td style="text-align: center;">@article.Title</td>
+                    <td style="text-align: center;">@article.Category</td>
+                    <td style="text-align: center;">
+                        @{
+                            if (article.Stars == null)
+                            {
+                                @: 0
+                            }
+                            else
+                            {
+                                @article.Stars
+                            }
+                        }
+                    </td>
+                    <td style="text-align: center;">@article.isPrivate</td>
+                    <td style="text-align: center;">
+                        @if (article.isDisabled == true)
+                        {
+                            <form asp-controller="AdminPanel" asp-action="EnableArticle" method="post">
+                                <input type="hidden" name="id" value="@article.ArticleId" />
+                                <div class="btn-group" role="group">
+                                    <button type="submit" class="btn btn-success rounded-pill">Enable</button>
+                                </div>
+                            </form>
+                        }
+                        else
+                        {
+                            <form asp-controller="AdminPanel" asp-action="DisableArticle" method="post">
+                                <input type="hidden" name="id" value="@article.ArticleId" />
+                                <div class="btn-group" role="group">
+                                    <button type="submit" class="btn btn-danger rounded-pill" style="margin-right: 5px;">Disable</button>
+                                    <a role="button" href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary rounded-pill" style="margin-right: 5px;">Show</a>
+                                    <a role="button" href="@Url.Action("EditArticle", "AdminPanel", new { id = article.ArticleId })" class="btn btn-warning btn-sm rounded-pill" style="margin-right: 5px;">Edit</a>
+                                </div>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

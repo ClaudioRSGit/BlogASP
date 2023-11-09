@@ -68,7 +68,23 @@ namespace BlogASP.Controllers
                 user.Role = "Privileged";
                 _userRepository.Edit(user);
 
-                return RedirectToAction("Index");
+                return Redirect("/AdminPanel/Users");
+            }
+
+            return View("Error");
+        }
+
+        [HttpPost]
+        public IActionResult SetAsPrivilegedPending(int id)
+        {
+            UserModel user = _userRepository.ListById(id);
+
+            if (user != null && (user.Role == "Public" || user.Role == "Administrator"))
+            {
+                user.Role = "Privileged";
+                _userRepository.Edit(user);
+
+                return Redirect("/AdminPanel/PendingUsers");
             }
 
             return View("Error");
@@ -84,7 +100,7 @@ namespace BlogASP.Controllers
                 user.Role = "Public";
                 _userRepository.Edit(user);
 
-                return RedirectToAction("Index");
+                return Redirect("/AdminPanel/Users");
             }
 
             return View("Error");
@@ -100,7 +116,7 @@ namespace BlogASP.Controllers
                 user.Role = "Administrator";
                 _userRepository.Edit(user);
 
-                return RedirectToAction("Index");
+                return Redirect("/AdminPanel/Users");
             }
 
             return View("Error");
@@ -118,7 +134,22 @@ namespace BlogASP.Controllers
                 _userRepository.Edit(user);
             }
 
-            return RedirectToAction("Index");
+            return Redirect("/AdminPanel/Users");
+        }
+
+        [HttpPost]
+        public IActionResult DisableUserPending(int id)
+        {
+            UserModel user = _userRepository.ListById(id);
+
+            if (user != null)
+            {
+                user.Role = "Disabled";
+                user.DeletedAt = DateTime.Now;
+                _userRepository.Edit(user);
+            }
+
+            return Redirect("/AdminPanel/PendingUsers");
         }
 
         [HttpPost]
@@ -133,7 +164,7 @@ namespace BlogASP.Controllers
                 _articleRepository.Edit(article);
             }
 
-            return RedirectToAction("Index");
+            return Redirect("/AdminPanel/Articles");
         }
 
         [HttpPost]
@@ -147,7 +178,7 @@ namespace BlogASP.Controllers
                 article.UpdatedAt = DateTime.Now;
                 _articleRepository.Edit(article);
             }
-            return RedirectToAction("Index");
+            return Redirect("/AdminPanel/Articles");
         }
 
         [HttpPost]
@@ -161,7 +192,7 @@ namespace BlogASP.Controllers
                 _userRepository.Edit(user);
             }
 
-            return RedirectToAction("Index");
+            return Redirect("/AdminPanel/Users");
         }
 
         public IActionResult EditArticle(int id)
@@ -183,8 +214,8 @@ namespace BlogASP.Controllers
             {
                 _articleRepository.UpdateArticle(article);
 
-                
-                return RedirectToAction("Index");
+
+                return Redirect("/AdminPanel/Articles");
             }
             return View("EditArticle", article);
         }
@@ -239,6 +270,32 @@ namespace BlogASP.Controllers
             return File(csvBytes, "text/csv", csvFileName);
         }
 
+        public IActionResult PendingUsers()
+        {
+            var viewModel = new AdminPanelViewModel
+            {
+                Users = _userRepository.GetAll()
+            };
+            return View(viewModel);
+        }
+
+        public IActionResult Users()
+        {
+            var viewModel = new AdminPanelViewModel
+            {
+                Users = _userRepository.GetAll()
+            };
+            return View(viewModel);
+        }
+
+        public IActionResult Articles()
+        {
+            var viewModel = new AdminPanelViewModel
+            {
+                Articles = _articleRepository.GetAllArticles()
+            };
+            return View(viewModel);
+        }
 
     }
 }
