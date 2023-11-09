@@ -1,0 +1,41 @@
+﻿@model AdminPanelViewModel
+
+
+<div id="pending-users" class="table-container">
+    <h1>Pending Users</h1>
+    <br />
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col" style="text-align: center;">#</th>
+                <th scope="col" style="text-align: center;">Name</th>
+                <th scope="col" style="text-align: center;">UserName</th>
+                <th scope="col" style="text-align: center;">Email</th>
+                <th scope="col" style="text-align: center;">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (UserModel user in Model.Users.Where(u => u.Role == "Public"))
+            {
+                <tr>
+                    <td style="text-align: center;">@user.UserId</td>
+                    <td style="text-align: center;">@user.Name</td>
+                    <td style="text-align: center;">@user.Username</td>
+                    <td style="text-align: center;">@user.Email</td>
+                    <td style="text-align: center;">
+                        <div class="btn-group" role="group">
+                            <form asp-controller="AdminPanel" asp-action="SetAsPrivilegedPending" method="post">
+                                <input type="hidden" name="id" value="@user.UserId" />
+                                <button type="submit" class="btn btn-success rounded-pill" style="margin-right: 5px;">Accept</button>
+                            </form>
+                            <form asp-controller="AdminPanel" asp-action="DisableUserPending" method="post">
+                                <input type="hidden" name="id" value="@user.UserId" />
+                                <button type="submit" class="btn btn-danger rounded-pill">Disable</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

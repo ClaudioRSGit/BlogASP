@@ -13,6 +13,7 @@ namespace BlogASP.Controllers
     {
         private readonly DatabaseContext _context;
         private readonly IArticleRepository _articleRepository;
+
         public IActionResult Create()
         {
             return View();
