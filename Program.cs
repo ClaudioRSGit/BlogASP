@@ -29,6 +29,7 @@ builder.Services.AddAuthorization();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
+builder.Services.AddScoped<IRatingService, RatingService>();
 
 builder.Services.AddControllersWithViews();
 

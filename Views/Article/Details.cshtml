@@ -12,7 +12,10 @@
         <div class="mt-4">
             <p>@Model.Description</p>
         </div>
-
+        <div class="mt-4">
+            <p>@Model.Description</p>
+            <p>Stars: <span id="starCount">@Model.Stars</span></p>
+        </div>
         <div class="mt-4">
             @if (@Model.UpdatedAt != null && @Model.CreatedAt != null)
             {

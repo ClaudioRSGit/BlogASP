@@ -13,7 +13,11 @@ namespace BlogASP.Controllers
     {
         private readonly DatabaseContext _context;
         private readonly IArticleRepository _articleRepository;
+<<<<<<< HEAD
+        private readonly IRatingService _ratingService;
+=======
 
+>>>>>>> bd7001d0b4a74dfaf4a0e7181e92e9873f8f44d7
         public IActionResult Create()
         {
             return View();
@@ -32,10 +36,11 @@ namespace BlogASP.Controllers
                 return null;
             }
         }
-        public ArticleController(DatabaseContext context, IArticleRepository articleRepository)
+        public ArticleController(DatabaseContext context, IArticleRepository articleRepository, IRatingService ratingService)
         {
             _context = context;
             _articleRepository = articleRepository;
+            _ratingService = ratingService;
         }
         [HttpGet]
         public IActionResult Index()
@@ -74,22 +79,40 @@ namespace BlogASP.Controllers
 
             return View(article);
         }
+
         [HttpPost]
-        public IActionResult StarArticle(int articleId)
+        public IActionResult ToggleStar(int articleId, bool isStarred)
         {
-            var article = _articleRepository.GetArticleById(articleId);
-
-            if (article != null)
+            try
             {
-                // Always add one star
-                article.Stars += 1;
+                var username = User.Identity.Name;
 
-                // Update the status of star in the repository
-                _articleRepository.UpdateArticle(article);
+                // Check if the user has starred the article
+                var hasStarred = _ratingService.HasStarred(username, articleId);
+
+                if (isStarred && hasStarred)
+                {
+                    _ratingService.RemoveRating(username, articleId);
+                }
+                else if (!isStarred && !hasStarred)
+                {
+                    _ratingService.AddRating(username, articleId);
+                }
+
+                var starCount = _ratingService.GetRatingCount(articleId);
+
+                return Json(new { success = true, starCount });
             }
-
-            return Json(new { stars = article?.Stars });
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"Error in ToggleStar: {ex.Message}");
+                return Json(new { success = false, error = "Internal server error: " + ex.Message });
+            }
         }
+
+
+
+
         private string GetRandomImageLink()
         {
             //obter um link de imagem aleatório
