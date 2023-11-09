@@ -108,6 +108,31 @@ namespace BlogASP.Migrations
                     b.ToTable("Comments");
                 });
 
+            modelBuilder.Entity("BlogASP.Models.RatingModel", b =>
+                {
+                    b.Property<int>("RatingId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RatingId"));
+
+                    b.Property<int>("ArticleId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Stars")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("RatingId");
+
+                    b.HasIndex("ArticleId");
+
+                    b.ToTable("Ratings");
+                });
+
             modelBuilder.Entity("BlogASP.Models.UserModel", b =>
                 {
                     b.Property<int>("UserId")
@@ -169,9 +194,22 @@ namespace BlogASP.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("BlogASP.Models.RatingModel", b =>
+                {
+                    b.HasOne("BlogASP.Models.ArticleModel", "Article")
+                        .WithMany("Ratings")
+                        .HasForeignKey("ArticleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Article");
+                });
+
             modelBuilder.Entity("BlogASP.Models.ArticleModel", b =>
                 {
                     b.Navigation("Comments");
+
+                    b.Navigation("Ratings");
                 });
 
             modelBuilder.Entity("BlogASP.Models.UserModel", b =>
