@@ -62,21 +62,25 @@ namespace BlogASP.Repository
         {
             try
             {
-                return _databaseContext.Articles.ToList();
+                var articles = _databaseContext.Articles
+                    .Include(a => a.User)
+                    .ToList();
+                return articles;
             }
             catch (Exception ex)
             {
-                // Handle or log the exception as needed
+                // Log the exception using a proper logging framework
                 Console.Error.WriteLine($"Error fetching articles: {ex.Message}");
-                return null; // Or another way to signal a failure
+                throw; // Re-throw the exception after logging
             }
         }
 
-        public ArticleModel CreateArticle(ArticleModel article)
+        public ArticleModel CreateArticle(ArticleModel article, string userName)
         {
             article.isDisabled = false;
             article.CreatedAt = DateTime.Now;
             article.UpdatedAt = DateTime.Now;
+            article.UserName = userName;
             _databaseContext.Articles.Add(article);
             _databaseContext.SaveChanges();
             return article;
@@ -110,6 +114,11 @@ namespace BlogASP.Repository
             _databaseContext.Articles.Remove(articleDB);
             _databaseContext.SaveChanges();
             return true;
+        }
+        public bool IsUserAuthor(string username, int articleId)
+        {
+            var article = _databaseContext.Articles.FirstOrDefault(a => a.ArticleId == articleId && a.User.Username == username);
+            return article != null;
         }
     }
 }

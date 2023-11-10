@@ -10,8 +10,11 @@
         {
         <a href="@Url.Action("Create", "Article")" class="btn btn-secondary w-100">Create New Article</a>
         }
+            
+
         <!-- Search Box and Button -->
         <div class="mt-4">
+                <h4>Select a Title</h4>
             <input type="text" id="searchTerm" class="form-control" placeholder="Enter title">
             <br />
             <button id="searchButton" class="btn btn-primary w-100">Search</button>
@@ -24,12 +27,6 @@
             {
                 <a href="#" class="btn btn-outline-primary category-link" data-category="@category">@category</a>
             }
-            <hr />
-            <h4>Order By</h4>
-
-            <button class="btn btn-outline-primary order-by-link" data-order-by="asc">Order By Date Asc</button>
-            <button class="btn btn-outline-primary order-by-link" data-order-by="des">Order By Date Desc</button>
-            <button class="btn btn-outline-primary order-by-link" data-order-by="normal">Show All</button>
 
             <hr />
             <h4>Select a Year</h4>
@@ -65,12 +62,11 @@
                     {
                         <div class="category-article" data-category="@article.Category">
                             <div class="card">
-                                <img src="@article.Picture" class="card-img-top" alt="...">
+                                <img src="@article.Picture" class="card-img-top " alt="...">
                                 <div class="card-body">
                                     <h5 class="card-title">@article.Title</h5>
                                     <p class="card-text">@article.Description</p>
                                     <a href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary">Read More</a>
-                                <a role="button" href="@Url.Action("Edit", "Article", new { id = article.ArticleId })" class="btn btn-primary btn-sm rounded-pill">Edit</a>
                             </div>
                             </div>
                         </div>
@@ -86,7 +82,7 @@
             {
                 <div class="col-4 mb-3 category-article" data-category="@article.Category" data-created-at="@article.CreatedAt">
                     <div class="card">
-                        <img src="@article.Picture" class="card-img-top" alt="...">
+                            <img src="@article.Picture" class="card-img-top" alt="..." style="height: 200px; object-fit: cover;">
                         <div class="card-body">
                             <h5 class="card-title">@article.Title</h5>
                             <p class="card-text">@article.Description</p>
@@ -97,6 +93,10 @@
                                     <i class="fa fa-star"></i> Star
                                 </button>
                             }
+                                @if (User.Identity.IsAuthenticated && User.Identity.Name == article.UserName)
+                                {
+                                    <a role="button" href="@Url.Action("Edit", "Article", new { id = article.ArticleId })" class="btn btn-primary btn-sm rounded-pill">Edit</a>
+                                }
                         </div>
                     </div>
                 </div>
@@ -107,7 +107,10 @@
 <div class="col-md-12 mt-4">
     <!--Recent Articles-->
     <h2>Recent Articles</h2>
-
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <span class="text-muted" style="font-size: 16px;">(Login to see more! 👉)</span>
+        }
     <div class="overflow-container" style="overflow-x: auto; white-space: nowrap;">
         <div class="row">
             @foreach (var article in Model.OrderByDescending(a => a.CreatedAt).Take(3).Where(a => User.Identity.IsAuthenticated || !a.isPrivate))
@@ -152,7 +155,15 @@
     </div>
 </div>
 </div>
+<style>
+    .card-title,
+    .card-text {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 
+</style>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <script>
@@ -180,6 +191,10 @@
 
         $('.star-button').click(function (e) {
             e.preventDefault();
+
+            // Disable the button to prevent multiple clicks
+            $(this).prop('disabled', true);
+
             var articleId = $(this).data('article-id');
             var starCountElement = $('.star-count[data-article-id="' + articleId + '"]');
             var isStarred = $(this).hasClass('btn-warning');
@@ -203,6 +218,10 @@
                 },
                 error: function () {
                     // Lógica de tratamento de erro, se necessário
+                },
+                complete: function () {
+                    // Re-enable the button after the request is complete
+                    $('.star-button[data-article-id="' + articleId + '"]').prop('disabled', false);
                 }
             });
         });

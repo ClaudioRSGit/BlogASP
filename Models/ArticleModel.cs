@@ -28,5 +28,8 @@ namespace BlogASP.Models
         public UserModel? User { get; set; }
         public ICollection<CommentModel>? Comments { get; set; }
         public ICollection<RatingModel>? Ratings { get; set; }
+        public bool CanEdit { get; set; }
+        public string? UserName { get; set; }
+
     }
 }
