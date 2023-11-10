@@ -1,7 +1,7 @@
 ﻿@using System.Security.Claims;
 
 <div class="container">
-    <div class="text-center">
+    <div class="text-center ">
         <h2>@Model.Title</h2>
         <p>Category: @Model.Category</p>
 
@@ -31,11 +31,11 @@
     <hr>
     <!-- Display Comments -->
     <h2>Comments</h2>
-    <div id="comments-container" style="border: 1px solid #ccc; padding: 10px; border-radius: 5px; background-color: #f9f9f9;">
+    <div id="comments-container"">
         @foreach (var comment in Model.Comments)
         {
-            <div class="comment" style="border-bottom: 1px solid #eee; padding: 8px;">
-                <div style="display: flex; justify-content: space-between;">
+            <div class="comment">
+                <div>
                     <div>
                         @if (comment.User != null)
                         {
@@ -43,10 +43,10 @@
                         }
                         else
                         {
-                            <span style="font-weight: bold;">User: @comment.UserName</span> <p>@comment.Description</p>
+                            <span style="font-weight: bold;">@comment.UserName</span> <p>  &nbsp; @comment.Description</p>
                         }
                     </div>
-                    <div style="color: #888; font-size: 0.8em;">
+                    <div>
                         @if (comment.UpdatedAt != null)
                         {
                             <p>@comment.UpdatedAt.ToString("MMMM dd, yyyy h:mm tt")</p>
@@ -118,7 +118,7 @@
     }
     <!-- Most Starred Articles -->
     <h2>Top 3 Articles</h2>
-    <div class="overflow-container" style="overflow-x: auto; white-space: nowrap;">
+    <div class="overflow-container" style="white-space: nowrap;">
         <div class="row">
             @{
                 var mostStarredArticles = ViewBag.ArticleRepository.GetMostStarredArticles();
@@ -142,6 +142,94 @@
 
 
 </div>
+<style>
+    .comments-section {
+        margin-top: 20px;
+    }
+
+    .article-container {
+        position: relative;
+    }
+
+    .article-line {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 100%;
+        border-left: 1px solid #ccc;
+    }
+
+    .comments-container {
+        padding: 15px;
+        background-color: #f9f9f9;
+        margin-top: 10px;
+        position: relative;
+    }
+
+    .comment {
+        margin-bottom: 15px;
+        position: relative;
+        border: 1px solid #ccc;
+        padding: 15px;
+    }
+
+        .comment span {
+            font-weight: bold;
+        }
+
+        .comment p {
+            margin: 0;
+        }
+
+        .comment:not(:last-child)::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            border-left: 1px solid #ccc;
+        }
+
+        .comment div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+    #addCommentForm {
+        margin-top: 20px;
+    }
+
+        #addCommentForm textarea {
+            resize: vertical;
+        }
+
+    .related-articles-container {
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        margin-top: 20px;
+    }
+
+    .related-article-card {
+        width: 18rem;
+        margin-right: 10px;
+    }
+
+    .top-articles-container {
+        overflow-x: auto;
+        white-space: nowrap;
+        margin-top: 20px;
+    }
+
+    .top-article-card {
+        width: 18rem;
+        margin-right: 10px;
+    }
+</style>
+
 
 <script>
     function addComment(articleId) {

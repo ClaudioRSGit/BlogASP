@@ -111,7 +111,7 @@
         {
             <span class="text-muted" style="font-size: 16px;">(Login to see more! 👉)</span>
         }
-    <div class="overflow-container" style="overflow-x: auto; white-space: nowrap;">
+    <div class="overflow-container" style="white-space: nowrap;">
         <div class="row">
             @foreach (var article in Model.OrderByDescending(a => a.CreatedAt).Take(3).Where(a => User.Identity.IsAuthenticated || !a.isPrivate))
             {
@@ -135,7 +135,7 @@
     {
         <span class="text-muted" style="font-size: 16px;">(Login to see more! 👉)</span>
     }
-    <div class="overflow-container" style="overflow-x: auto; white-space: nowrap;">
+    <div class="overflow-container" style="white-space: nowrap;">
         <div class="row">
             @foreach (var article in Model.OrderByDescending(a => a.Stars).Take(3).Where(a => User.Identity.IsAuthenticated || !a.isPrivate))
             {
