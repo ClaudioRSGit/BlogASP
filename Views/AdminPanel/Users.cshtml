@@ -1,33 +1,152 @@
 ﻿@model AdminPanelViewModel
 
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+    }
 
+    .table-container {
+        max-width: 1500px;
+        margin: 50px auto 10px auto;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #343a40;
+    }
+
+    table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: center;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    th {
+        background-color: #f8f9fa;
+        color: #343a40;
+    }
+
+    tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+
+    .btn-group {
+        text-align: center;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+        font-size: 14px;
+        transition: box-shadow 0.3s ease;
+    }
+
+    .btn-success {
+        background-color: #8cb742;
+        color: #fff;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-danger {
+        background-color: #d54a4a;
+        color: #fff;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-warning {
+        background-color: #ecec53;
+        color: #fff;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    }
+
+        .btn-warning:hover {
+            background-color: #cbcf00;
+            color: #fff;
+        }
+
+    .btn-group .btn {
+        margin-right: 5px;
+    }
+
+    .btn-export {
+        display: inline-block;
+        margin-left: 1%;
+        background-color: #0088ff;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 4px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        color: #fff;
+    }
+
+        .btn-export:hover {
+            background-color: #00008b;
+            color: #fff;
+        }
+
+    .btn-primary {
+        display: inline-block;
+        background-color: #0088ff;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 4px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        color: #fff;
+    }
+
+        .btn-primary:hover {
+            background-color: #00008b;
+            color: #fff;
+        }
+
+    h1 img {
+        margin-left: 15px;
+        width: 50px;
+    }
+</style>
+
+<body>
 <div id="all-users" class="table-container">
-    <h1>Users</h1>
-    <br />
-    <table class="table">
+        <h1>Users <img src="https://images.freeimages.com/fic/images/icons/1994/vista_style_business_and_data/256/users.png" alt="Users Icon" /></h1>
+    <table>
         <thead>
             <tr>
-                <th style="text-align: center;">#</th>
-                <th style="text-align: center;">Username</th>
-                <th style="text-align: center;">Email</th>
-                <th style="text-align: center;">Role</th>
-                <th style="text-align: center;">CreatedAt</th>
-                <th style="text-align: center;">UpdatedAt</th>
-                <th style="text-align: center;">DeletedAt</th>
-                <th style="text-align: center;">Actions</th>
+                <th>#</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>DeletedAt</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             @foreach (UserModel user in Model.Users.Where(u => u.Role == "Privileged" || u.Role == "Administrator" || u.Role == "Disabled"))
             {
                 <tr>
-                    <td style="text-align: center;">@user.UserId</td>
-                    <td style="text-align: center;">@user.Username</td>
-                    <td style="text-align: center;">@user.Email</td>
-                    <td style="text-align: center;">@user.Role</td>
-                    <td style="text-align: center;">@user.CreatedAt</td>
-                    <td style="text-align: center;">@user.UpdatedAt</td>
-                    <td style="text-align: center;">
+                    <td>@user.UserId</td>
+                    <td>@user.Username</td>
+                    <td>@user.Email</td>
+                    <td>@user.Role</td>
+                    <td>@user.CreatedAt</td>
+                    <td>@user.UpdatedAt</td>
+                    <td>
                         @{
                             if (user.DeletedAt == null)
                             {
@@ -39,12 +158,12 @@
                             }
                         }
                     </td>
-                    <td style="text-align: center;">
+                    <td>
                         @if (user.Role == "Disabled")
                         {
                             <form asp-controller="AdminPanel" asp-action="EnableUser" method="post">
                                 <input type="hidden" name="id" value="@user.UserId" />
-                                <button type="submit" class="btn btn-primary">Enable</button>
+                                <button type="submit" class="btn btn-success">Enable</button>
                             </form>
                         }
                         else
@@ -52,23 +171,23 @@
                             <div class="btn-group" role="group" style="display: flex;">
                                 <form asp-controller="AdminPanel" asp-action="DisableUser" method="post">
                                     <input type="hidden" name="id" value="@user.UserId" />
-                                    <button type="submit" class="btn btn-danger rounded-pill" style="margin-right: 5px;">Disable</button>
+                                    <button type="submit" class="btn btn-danger">Disable</button>
                                 </form>
-                                <a role="button" class="btn btn-warning btn-sm rounded-pill" style="margin-right: 5px;" asp-route-id="@user.UserId" asp-controller="AdminPanel" asp-action="Edit">Edit</a>
+                                <a role="button" class="btn btn-warning" asp-route-id="@user.UserId" asp-controller="AdminPanel" asp-action="Edit">Edit</a>
                                 <form asp-controller="AdminPanel" asp-action="SetAsPublicUser" method="post" style="display: inline-block;">
                                     <input type="hidden" name="id" value="@user.UserId" />
-                                    <button type="submit" class="btn btn-primary rounded-pill" style="margin-right: 5px;">Public</button>
+                                        <button type="submit" class="btn btn-primary">Public</button>
                                 </form>
                                 <form asp-controller="AdminPanel" asp-action="SetAsPrivileged" method="post" style="display: inline-block;">
                                     <input type="hidden" name="id" value="@user.UserId" />
-                                    <button type="submit" class="btn btn-primary rounded-pill" style="margin-right: 5px;" @if (user.Role == "Privileged")
+                                        <button type="submit" class="btn btn-primary" @if (user.Role == "Privileged")
                                     {
                                         <text>disabled</text>
                                     }>Privileged</button>
                                 </form>
                                 <form asp-controller="AdminPanel" asp-action="SetAsAdministrator" method="post" style="display: inline-block;">
                                     <input type="hidden" name="id" value="@user.UserId" />
-                                    <button type="submit" class="btn btn-primary rounded-pill" @if (user.Role == "Administrator")
+                                        <button type="submit" class="btn btn-primary" @if (user.Role == "Administrator")
                                     {
                                         <text>disabled</text>
                                     }>Administrator</button>
@@ -81,4 +200,5 @@
         </tbody>
     </table>
 </div>
-<a href="@Url.Action("ExportUsersToCSV", "AdminPanel")" class="btn btn-primary">Export Data</a>
+    <a href="@Url.Action("ExportUsersToCSV", "AdminPanel")" class="btn btn-export">Export Data</a>
+</body>
