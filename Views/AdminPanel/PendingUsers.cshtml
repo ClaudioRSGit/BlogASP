@@ -1,42 +1,132 @@
 ﻿@model AdminPanelViewModel
 
 
-<div id="pending-users" class="table-container">
-    <h1>Pending Users</h1>
-    <br />
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th scope="col" style="text-align: center;">#</th>
-                <th scope="col" style="text-align: center;">Name</th>
-                <th scope="col" style="text-align: center;">UserName</th>
-                <th scope="col" style="text-align: center;">Email</th>
-                <th scope="col" style="text-align: center;">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (UserModel user in Model.Users.Where(u => u.Role == "Public"))
-            {
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+    }
+
+    .table-container {
+        max-width: 800px;
+        margin: 50px auto 10px auto;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #343a40;
+    }
+
+    table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: center;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    th {
+        background-color: #f8f9fa;
+        color: #343a40;
+    }
+
+    tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+
+    .btn-group {
+        text-align: center;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+        font-size: 14px;
+        transition: box-shadow 0.3s ease;
+        
+    }
+
+    .btn-success {
+        background-color: #8cb742;
+        color: #fff;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-danger {
+        background-color: #d54a4a;
+        color: #fff;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-group .btn {
+        margin-right: 5px;
+    }
+
+    .btn-primary {
+        display: inline-block;
+        margin-left: 20%;
+        background-color: #0088ff;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 4px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-primary:hover {
+            background-color: #0000cd;
+    }
+</style>
+
+<body>
+
+    <div class="table-container">
+        <h1>Pending Users</h1>
+        <table>
+            <thead>
                 <tr>
-                    <td style="text-align: center;">@user.UserId</td>
-                    <td style="text-align: center;">@user.Name</td>
-                    <td style="text-align: center;">@user.Username</td>
-                    <td style="text-align: center;">@user.Email</td>
-                    <td style="text-align: center;">
-                        <div class="btn-group" role="group">
-                            <form asp-controller="AdminPanel" asp-action="SetAsPrivilegedPending" method="post">
-                                <input type="hidden" name="id" value="@user.UserId" />
-                                <button type="submit" class="btn btn-success rounded-pill" style="margin-right: 5px;">Accept</button>
-                            </form>
-                            <form asp-controller="AdminPanel" asp-action="DisableUserPending" method="post">
-                                <input type="hidden" name="id" value="@user.UserId" />
-                                <button type="submit" class="btn btn-danger rounded-pill">Disable</button>
-                            </form>
-                        </div>
-                    </td>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>UserName</th>
+                    <th>Email</th>
+                    <th>Actions</th>
                 </tr>
-            }
-        </tbody>
-    </table>
-</div>
-<a href="@Url.Action("ExportPendingUsersToCSV", "AdminPanel")" class="btn btn-primary">Export Data</a>
+            </thead>
+            <tbody>
+                @foreach (UserModel user in Model.Users.Where(u => u.Role == "Public"))
+                {
+                    <tr>
+                        <td>@user.UserId</td>
+                        <td>@user.Name</td>
+                        <td>@user.Username</td>
+                        <td>@user.Email</td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <form asp-controller="AdminPanel" asp-action="SetAsPrivilegedPending" method="post">
+                                    <input type="hidden" name="id" value="@user.UserId" />
+                                    <button type="submit" class="btn btn-success ">Accept</button>
+                                </form>
+                                <form asp-controller="AdminPanel" asp-action="DisableUserPending" method="post">
+                                    <input type="hidden" name="id" value="@user.UserId" />
+                                    <button type="submit" class="btn btn-danger">Disable</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <a href="@Url.Action("ExportPendingUsersToCSV", "AdminPanel")" class="btn btn-primary">Export Data</a>
+</body>
