@@ -65,6 +65,7 @@ using (var scope = builder.Services.BuildServiceProvider().CreateScope())
     var userRepository = services.GetRequiredService<IUserRepository>();
 
     var existingAdmin = userRepository.GetUserByUsername("Administrator");
+    dbContext.Database.EnsureCreated();
 
     if (existingAdmin == null)
     {
@@ -120,6 +121,7 @@ using (var scope = app.Services.CreateScope())
             UpdatedAt = DateTime.Now,
             UserName = "Anonymous",
             Stars = 2,
+            isPrivate = true,
             Picture = "https://wallpaperbat.com/img/873635-devops-testing-services-agile-testing.jpg",
         };
         dbContext.Articles.Add(article2);
@@ -133,6 +135,7 @@ using (var scope = app.Services.CreateScope())
             UpdatedAt = DateTime.Now,
             UserName = "Anonymous",
             Stars = 5,
+            isPrivate = true,
             Picture = "https://e0.pxfuel.com/wallpapers/185/259/desktop-wallpaper-front-end-web-developer-vacancy-egeniq.jpg",
         };
         dbContext.Articles.Add(article3);
