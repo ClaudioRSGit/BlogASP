@@ -180,6 +180,10 @@
 
         $('.star-button').click(function (e) {
             e.preventDefault();
+
+            // Disable the button to prevent multiple clicks
+            $(this).prop('disabled', true);
+
             var articleId = $(this).data('article-id');
             var starCountElement = $('.star-count[data-article-id="' + articleId + '"]');
             var isStarred = $(this).hasClass('btn-warning');
@@ -203,6 +207,10 @@
                 },
                 error: function () {
                     // Lógica de tratamento de erro, se necessário
+                },
+                complete: function () {
+                    // Re-enable the button after the request is complete
+                    $('.star-button[data-article-id="' + articleId + '"]').prop('disabled', false);
                 }
             });
         });
