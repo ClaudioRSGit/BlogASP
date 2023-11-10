@@ -11,28 +11,28 @@
     <input type="hidden" asp-for="ArticleId" />
     <div class="form-group">
         <label for="title">Title:</label>
-        <input type="text" asp-for="Title" class="form-control" id="title" placeholder="Enter the Title">
+        <input type="text" asp-for="Title" class="form-control" id="title" placeholder="Enter the Title" required>
     </div>
 
     <div class="form-group">
         <label for="category">Category:</label>
-        <input type="text" asp-for="Category" class="form-control" id="category" placeholder="Enter the Category">
+        <input type="text" asp-for="Category" class="form-control" id="category" placeholder="Enter the Category" required>
     </div>
 
     <div class="form-group">
         <label for="description">Description:</label>
-        <input type="text" asp-for="Description" class="form-control" id="description" placeholder="Description">
+        <input type="text" asp-for="Description" class="form-control" id="description" placeholder="Description" required>
     </div>
 
     <div class="form-group">
         <label asp-for="isPrivate" class="control-label">Visibility:</label>
         <div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" asp-for="isPrivate" value="true" />
+                <input class="form-check-input" type="radio" asp-for="isPrivate" value="true" required />
                 <label class="form-check-label">Private</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" asp-for="isPrivate" value="false" />
+                <input class="form-check-input" type="radio" asp-for="isPrivate" value="false" required />
                 <label class="form-check-label">Public</label>
             </div>
         </div>

@@ -12,19 +12,16 @@
     <div class="form-group">
         <label for="title">Title:</label>
         <input type="text" asp-for="Title" class="form-control" id="title" placeholder="Enter the Title" required />
-        <span asp-validation-for="Title" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label for="category">Category:</label>
         <input type="text" asp-for="Category" class="form-control" id="category" placeholder="Enter the Category" required />
-        <span asp-validation-for="Category" class="text-danger"></span>
     </div>
 
     <div class="form-group">
         <label for="description">Description:</label>
         <input type="text" asp-for="Description" class="form-control" id="description" placeholder="Description" required />
-        <span asp-validation-for="Description" class="text-danger"></span>
     </div>
 
     <div class="form-group">
@@ -39,7 +36,6 @@
                 <label class="form-check-label">Public</label>
             </div>
         </div>
-        <span asp-validation-for="isPrivate" class="text-danger"></span>
     </div>
 
     <input type="hidden" asp-for="Picture" />
