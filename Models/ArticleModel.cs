@@ -27,6 +27,6 @@ namespace BlogASP.Models
         [ForeignKey("UserId")]
         public UserModel? User { get; set; }
         public ICollection<CommentModel>? Comments { get; set; }
-        public ICollection<RatingModel> Ratings { get; set; }
+        public ICollection<RatingModel>? Ratings { get; set; }
     }
 }
