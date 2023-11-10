@@ -54,7 +54,7 @@ namespace BlogASP.Controllers
         public IActionResult Edit(UserModel user)
         {
             _userRepository.Edit(user);
-            return RedirectToAction("Index");
+            return Redirect("/AdminPanel/Users");
         }
 
 
