@@ -74,7 +74,6 @@ using (var scope = builder.Services.BuildServiceProvider().CreateScope())
             Name = "Administrator",
             Username = "Administrator",
             Email = "administrator@admin.com"
-            // Defina a senha e outras propriedades aqui
         };
 
         string adminPassword = "Admin123!"; 
