@@ -36,7 +36,7 @@
                                     <a class="dropdown-item" asp-area="" asp-controller="AdminPanel" asp-action="Users">Users</a>
                                     <a class="dropdown-item" asp-area="" asp-controller="AdminPanel" asp-action="Articles">Articles</a>
                                     <a class="dropdown-item" asp-controller="AdminPanel" asp-action="Create" >New User</a>
-                                    <a class="dropdown-item" href="@Url.Action("ExportToCSV", "AdminPanel")">Export Data</a>
+                                    <a class="dropdown-item" asp-controller="AdminPanel" asp-action="ExportAllToCSV">Export All Data</a>
                                 </div>
                             </li>
                         }
