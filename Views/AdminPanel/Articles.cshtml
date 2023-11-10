@@ -1,65 +1,164 @@
 ﻿@model AdminPanelViewModel
 
+<style>
+    body {
+        font-family: 'Arial', sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 0;
+    }
 
-<div id="articles" class="table-container">
-    <h1>Articles</h1>
-    <br />
-    <table class="table">
-        <thead>
-            <tr>
-                <th style="text-align: center;">#</th>
-                <th style="text-align: center;">Title</th>
-                <th style="text-align: center;">Category</th>
-                <th style="text-align: center;">Stars</th>
-                <th style="text-align: center;">Private</th>
-                <th style="text-align: center;">Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (ArticleModel article in Model.Articles)
-            {
+    .table-container {
+        max-width: 800px;
+        margin: 50px auto 10px auto;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+    }
+
+    h1 {
+        text-align: center;
+        color: #343a40;
+    }
+
+    table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: center;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    th {
+        background-color: #f8f9fa;
+        color: #343a40;
+    }
+
+    tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+
+    .btn-group {
+        text-align: center;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        border: none;
+        cursor: pointer;
+        border-radius: 4px;
+        font-size: 14px;
+        transition: box-shadow 0.3s ease;
+    }
+
+    .btn-success {
+        background-color: #8cb742;
+        color: #fff;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-danger {
+        background-color: #d54a4a;
+        color: #fff;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-warning {
+        background-color: #ecec53;
+        color: #fff;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .btn-warning:hover {
+            background-color: #cbcf00;
+            color: #fff;
+    }
+
+    .btn-group .btn {
+        margin-right: 5px;
+    }
+
+    .btn-primary {
+        display: inline-block;
+        margin-left: 20%;
+        background-color: #0088ff;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 4px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+    }
+
+        .btn-primary:hover {
+            background-color: #1b00e6;
+        }
+</style>
+
+<body>
+    <div id="articles" class="table-container">
+        <h1>Articles</h1>
+       
+        <table>
+            <thead>
                 <tr>
-                    <td style="text-align: center;">@article.ArticleId</td>
-                    <td style="text-align: center;">@article.Title</td>
-                    <td style="text-align: center;">@article.Category</td>
-                    <td style="text-align: center;">
-                        @{
-                            if (article.Stars == null)
+                    <th>#</th>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Stars</th>
+                    <th>Private</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ArticleModel article in Model.Articles)
+                {
+                    <tr>
+                        <td>@article.ArticleId</td>
+                        <td>@article.Title</td>
+                        <td>@article.Category</td>
+                        <td>
+                            @{
+                                if (article.Stars == null)
+                                {
+                                    @: 0
+                                }
+                                else
+                                {
+                                    @article.Stars
+                                }
+                            }
+                        </td>
+                        <td>@article.isPrivate</td>
+                        <td>
+                            @if (article.isDisabled == true)
                             {
-                                @: 0
+                                <form asp-controller="AdminPanel" asp-action="EnableArticle" method="post">
+                                    <input type="hidden" name="id" value="@article.ArticleId" />
+                                        <div class="btn-group" role="group">
+                                        <button type="submit" class="btn btn-success">Enable</button>
+                                    </div>
+                                </form>
                             }
                             else
                             {
-                                @article.Stars
+                                <form asp-controller="AdminPanel" asp-action="DisableArticle" method="post">
+                                    <input type="hidden" name="id" value="@article.ArticleId" />
+                                    <div class="btn-group" role="group">
+                                        <button type="submit" class="btn btn-danger">Disable</button>
+                                        <a role="button" href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary" >Show</a>
+                                        <a role="button" href="@Url.Action("EditArticle", "AdminPanel", new { id = article.ArticleId })" class="btn btn-warning">Edit</a>
+                                    </div>
+                                </form>
                             }
-                        }
-                    </td>
-                    <td style="text-align: center;">@article.isPrivate</td>
-                    <td style="text-align: center;">
-                        @if (article.isDisabled == true)
-                        {
-                            <form asp-controller="AdminPanel" asp-action="EnableArticle" method="post">
-                                <input type="hidden" name="id" value="@article.ArticleId" />
-                                <div class="btn-group" role="group">
-                                    <button type="submit" class="btn btn-success rounded-pill">Enable</button>
-                                </div>
-                            </form>
-                        }
-                        else
-                        {
-                            <form asp-controller="AdminPanel" asp-action="DisableArticle" method="post">
-                                <input type="hidden" name="id" value="@article.ArticleId" />
-                                <div class="btn-group" role="group">
-                                    <button type="submit" class="btn btn-danger rounded-pill" style="margin-right: 5px;">Disable</button>
-                                    <a role="button" href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary rounded-pill" style="margin-right: 5px;">Show</a>
-                                    <a role="button" href="@Url.Action("EditArticle", "AdminPanel", new { id = article.ArticleId })" class="btn btn-warning btn-sm rounded-pill" style="margin-right: 5px;">Edit</a>
-                                </div>
-                            </form>
-                        }
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
-<a href="@Url.Action("ExportArticlesToCSV", "AdminPanel")" class="btn btn-primary">Export Data</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <a href="@Url.Action("ExportArticlesToCSV", "AdminPanel")" class="btn btn-primary">Export Data</a>
+</body>
