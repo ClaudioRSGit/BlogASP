@@ -69,7 +69,8 @@
                 <label for="commentDescription">Add a comment:</label>
                 <textarea class="form-control" id="commentDescription" name="commentDescription" rows="3"></textarea>
             </div>
-            <button type="button" class="btn btn-primary" onclick="addComment(@Model.ArticleId)">Add Comment</button>
+            <br>
+            <button type="button" class="btn btn-secondary w-100" onclick="addComment(@Model.ArticleId)">Add Comment</button>
         </form>
     }
     else
@@ -90,10 +91,10 @@
                 foreach (var article in relatedArticles)
                 {
                     <div class="card" style="width: 18rem; margin-right: 10px;">
-                        <img src="@article.Picture" class="card-img-top" alt="Article Image">
+                        <img src="@article.Picture" class="card-img-top" alt="Article Image" style="height: 200px; object-fit: cover;">
                         <div class="card-body">
-                            <h5 class="card-title">@article.Title</h5>
-                            <p class="card-text">@Truncate(article.Description, 100)</p>
+                            <h5 class="card-title title-container">@article.Title</h5>
+                            <p class="card-text description-container">@Truncate(article.Description, 100)</p>
                             <a href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary">Read More</a>
                         </div>
                     </div>
@@ -126,10 +127,10 @@
                 {
                     <div class="col-md-4 mb-3">
                         <div class="card">
-                            <img src="@article.Picture" class="card-img-top" alt="Article Image">
+                            <img src="@article.Picture" class="card-img-top" alt="Article Image" style="height: 200px; object-fit: cover;">
                             <div class="card-body">
-                                <h5 class="card-title">@article.Title</h5>
-                                <p class="card-text">@article.Description</p>
+                                <h5 class="card-title title-container">@article.Title</h5>
+                                <p class="card-text description-container">@article.Description</p>
                                 <a href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary">Read More</a>
                                 <p class="card-text">Stars: <span class="star-count" data-article-id="@article.ArticleId">@article.Stars</span></p>
                             </div>
@@ -209,7 +210,6 @@
     .related-articles-container {
         display: flex;
         overflow-x: auto;
-        white-space: nowrap;
         margin-top: 20px;
     }
 
@@ -220,13 +220,20 @@
 
     .top-articles-container {
         overflow-x: auto;
-        white-space: nowrap;
         margin-top: 20px;
     }
 
     .top-article-card {
         width: 18rem;
         margin-right: 10px;
+    }
+
+
+    .title-container, .description-container {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        word-wrap: break-word;
     }
 </style>
 
