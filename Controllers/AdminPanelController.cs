@@ -54,7 +54,7 @@ namespace BlogASP.Controllers
         public IActionResult Edit(UserModel user)
         {
             _userRepository.Edit(user);
-            return RedirectToAction("Index");
+            return Redirect("/AdminPanel/Users");
         }
 
 
@@ -241,35 +241,6 @@ namespace BlogASP.Controllers
             return View("Create");
         }
 
-        [HttpGet]
-        [HttpPost]
-        public IActionResult ExportToCSV()
-        {
-            var users = _userRepository.GetAll();
-            var articles = _articleRepository.GetAllArticles(); 
-
-            var csvData = new StringBuilder();
-            csvData.AppendLine("UserId,Name,Username,Email,Role,CreatedAt,UpdatedAt,DeletedAt");
-
-            foreach (var user in users)
-            {
-                csvData.AppendLine($"{user.UserId},{user.Name},{user.Username},{user.Email},{user.Role},{user.CreatedAt},{user.UpdatedAt},{user.DeletedAt}");
-            }
-
-            csvData.AppendLine();
-
-            csvData.AppendLine("ArticleId,Title,Category,Stars,isPrivate,isDisabled,DeletedAt");
-
-            foreach (var article in articles)
-            {
-                csvData.AppendLine($"{article.ArticleId},{article.Title},{article.Category},{article.Stars},{article.isPrivate},{article.isDisabled},{article.DeletedAt}");
-            }
-
-            var csvFileName = "exported_data.csv";
-            var csvBytes = Encoding.UTF8.GetBytes(csvData.ToString());
-            return File(csvBytes, "text/csv", csvFileName);
-        }
-
         public IActionResult PendingUsers()
         {
             var viewModel = new AdminPanelViewModel
@@ -295,6 +266,92 @@ namespace BlogASP.Controllers
                 Articles = _articleRepository.GetAllArticles()
             };
             return View(viewModel);
+        }
+
+        [HttpGet]
+        [HttpPost]
+        public IActionResult ExportPendingUsersToCSV()
+        {
+            var pendingUsers = _userRepository.GetAll().Where(u => u.Role == "Public");
+
+            var csvData = new StringBuilder();
+            csvData.AppendLine("UserId,Name,Username,Email");
+
+            foreach (var user in pendingUsers)
+            {
+                csvData.AppendLine($"{user.UserId},{user.Name},{user.Username},{user.Email}");
+            }
+
+            var csvFileName = "exported_pending_users.csv";
+            var csvBytes = Encoding.UTF8.GetBytes(csvData.ToString());
+            return File(csvBytes, "text/csv", csvFileName);
+        }
+
+        [HttpGet]
+        [HttpPost]
+        public IActionResult ExportUsersToCSV()
+        {
+            var users = _userRepository.GetAll();
+
+            var csvData = new StringBuilder();
+            csvData.AppendLine("UserId,Name,Username,Email,Role,CreatedAt,UpdatedAt,DeletedAt");
+
+            foreach (var user in users)
+            {
+                csvData.AppendLine($"{user.UserId},{user.Name},{user.Username},{user.Email},{user.Role},{user.CreatedAt},{user.UpdatedAt},{user.DeletedAt}");
+            }
+
+            var csvFileName = "exported_users.csv";
+            var csvBytes = Encoding.UTF8.GetBytes(csvData.ToString());
+            return File(csvBytes, "text/csv", csvFileName);
+        }
+
+        [HttpGet]
+        [HttpPost]
+        public IActionResult ExportArticlesToCSV()
+        {
+            var articles = _articleRepository.GetAllArticles();
+
+            var csvData = new StringBuilder();
+            csvData.AppendLine("ArticleId,Title,Category,Stars,isPrivate,isDisabled,DeletedAt");
+
+            foreach (var article in articles)
+            {
+                csvData.AppendLine($"{article.ArticleId},{article.Title},{article.Category},{article.Stars},{article.isPrivate},{article.isDisabled},{article.DeletedAt}");
+            }
+
+            var csvFileName = "exported_articles.csv";
+            var csvBytes = Encoding.UTF8.GetBytes(csvData.ToString());
+            return File(csvBytes, "text/csv", csvFileName);
+        }
+
+        [HttpGet]
+        [HttpPost]
+        public IActionResult ExportAllToCSV()
+        {
+            var users = _userRepository.GetAll();
+            var articles = _articleRepository.GetAllArticles();
+
+            var csvData = new StringBuilder();
+            csvData.AppendLine("UserId,Name,Username,Email,Role,CreatedAt,UpdatedAt,DeletedAt");
+
+            foreach (var user in users)
+            {
+                csvData.AppendLine($"{user.UserId},{user.Name},{user.Username},{user.Email},{user.Role},{user.CreatedAt},{user.UpdatedAt},{user.DeletedAt}");
+            }
+
+            csvData.AppendLine();
+
+            csvData.AppendLine("ArticleId,Title,Category,Stars,isPrivate,isDisabled,DeletedAt");
+
+            foreach (var article in articles)
+            {
+                csvData.AppendLine($"{article.ArticleId},{article.Title},{article.Category},{article.Stars},{article.isPrivate},{article.isDisabled},{article.DeletedAt}");
+            }
+
+            var csvFileName = "exported_data.csv";
+            var csvBytes = Encoding.UTF8.GetBytes(csvData.ToString());
+            return File(csvBytes, "text/csv", csvFileName);
         }
 
     }

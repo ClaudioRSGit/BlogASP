@@ -13,11 +13,10 @@ namespace BlogASP.Controllers
     {
         private readonly DatabaseContext _context;
         private readonly IArticleRepository _articleRepository;
-<<<<<<< HEAD
-        private readonly IRatingService _ratingService;
-=======
 
->>>>>>> bd7001d0b4a74dfaf4a0e7181e92e9873f8f44d7
+        private readonly IRatingService _ratingService;
+
+
         public IActionResult Create()
         {
             return View();
