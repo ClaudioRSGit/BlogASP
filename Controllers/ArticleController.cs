@@ -41,10 +41,17 @@ namespace BlogASP.Controllers
             _articleRepository = articleRepository;
             _ratingService = ratingService;
         }
-        [HttpGet]
         public IActionResult Index()
         {
             var articles = _articleRepository.GetAllArticles();
+
+            // Verifique se o usuário logado é o autor de cada artigo
+            var username = User.Identity.Name;
+            foreach (var article in articles)
+            {
+                article.CanEdit = _articleRepository.IsUserAuthor(username, article.ArticleId);
+            }
+
             return View(articles);
         }
 
@@ -67,12 +74,17 @@ namespace BlogASP.Controllers
         {
             article.CreatedAt = DateTime.Now;
             article.UpdatedAt = DateTime.Now;
+
+            article.UserName = User.Identity.Name;
+
             if (ModelState.IsValid)
             {
                 article.Stars = 0;
                 article.Picture = GetRandomImageLink();
 
-                _articleRepository.CreateArticle(article);
+
+                _articleRepository.CreateArticle(article, User.Identity.Name);
+
                 return RedirectToAction("Details", "Article", new { id = article.ArticleId });
             }
 

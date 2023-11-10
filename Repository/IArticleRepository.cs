@@ -10,9 +10,10 @@ namespace BlogASP.Repository
         List<ArticleModel> GetArticlesByCategory(string category);
         ArticleModel GetArticleById(int id);
         List<ArticleModel> GetAllArticles();
-        ArticleModel CreateArticle(ArticleModel article);
+        ArticleModel CreateArticle(ArticleModel article, string userName);
         ArticleModel Edit(ArticleModel article);
         bool DeleteArticle(int id);
         void UpdateArticle(ArticleModel article);
+        bool IsUserAuthor(string? username, int articleId);
     }
 }

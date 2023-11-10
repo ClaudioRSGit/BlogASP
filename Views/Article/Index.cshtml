@@ -94,6 +94,10 @@
                                     <i class="fa fa-star"></i> Star
                                 </button>
                             }
+                                @if (User.Identity.IsAuthenticated && article.CanEdit && User.Identity.Name == article.UserName)
+                                {
+                                    <a role="button" href="@Url.Action("Edit", "Article", new { id = article.ArticleId })" class="btn btn-primary btn-sm rounded-pill">Edit</a>
+                                }
                         </div>
                     </div>
                 </div>
@@ -104,7 +108,10 @@
 <div class="col-md-12 mt-4">
     <!--Recent Articles-->
     <h2>Recent Articles</h2>
-
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <span class="text-muted" style="font-size: 16px;">(Login to see more! 👉)</span>
+        }
     <div class="overflow-container" style="overflow-x: auto; white-space: nowrap;">
         <div class="row">
             @foreach (var article in Model.OrderByDescending(a => a.CreatedAt).Take(3).Where(a => User.Identity.IsAuthenticated || !a.isPrivate))
