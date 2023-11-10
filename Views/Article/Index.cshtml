@@ -10,8 +10,11 @@
         {
         <a href="@Url.Action("Create", "Article")" class="btn btn-secondary w-100">Create New Article</a>
         }
+            
+
         <!-- Search Box and Button -->
         <div class="mt-4">
+                <h4>Select a Title</h4>
             <input type="text" id="searchTerm" class="form-control" placeholder="Enter title">
             <br />
             <button id="searchButton" class="btn btn-primary w-100">Search</button>
@@ -59,7 +62,7 @@
                     {
                         <div class="category-article" data-category="@article.Category">
                             <div class="card">
-                                <img src="@article.Picture" class="card-img-top" alt="...">
+                                <img src="@article.Picture" class="card-img-top " alt="...">
                                 <div class="card-body">
                                     <h5 class="card-title">@article.Title</h5>
                                     <p class="card-text">@article.Description</p>
@@ -80,7 +83,7 @@
             {
                 <div class="col-4 mb-3 category-article" data-category="@article.Category" data-created-at="@article.CreatedAt">
                     <div class="card">
-                        <img src="@article.Picture" class="card-img-top" alt="...">
+                            <img src="@article.Picture" class="card-img-top" alt="..." style="height: 200px; object-fit: cover;">
                         <div class="card-body">
                             <h5 class="card-title">@article.Title</h5>
                             <p class="card-text">@article.Description</p>
@@ -153,6 +156,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
+
 </style>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
