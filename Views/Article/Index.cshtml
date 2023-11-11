@@ -9,7 +9,7 @@
         <!-- Search Box and Button -->
         <div class="mt-4">
                 <h4>Select a Title</h4>
-            <input type="text" id="searchTerm" class="form-control" placeholder="Enter title">
+                <input type="text" id="searchTerm" class="form-control mt-2" placeholder="Enter title">
             <br />
             <button id="searchButton" class="btn btn-primary w-100">Search</button>
         </div>
@@ -25,7 +25,7 @@
             <hr />
             <h4>Select a Year</h4>
             <select class="form-control" id="yearPicker">
-                @for (int year = DateTime.Now.Year; year >= 1900; year--)
+                @for (int year = DateTime.Now.Year; year >= 2020; year--)
                 {
                     <option value="@year">@year</option>
                 }
@@ -44,7 +44,7 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <a href="@Url.Action("Create", "Article")">
-                            <img src="addAricle.png" alt="Add Post" style="width: 50px; height: 50px;">
+                            <img src="/addArticle.png" alt="Add Post" style="width: 75px; height: 75px;">
                         </a>
                     }
                 </div>
@@ -53,9 +53,6 @@
 
     <div class="col-md-9">
         <div class="row" id="article-container">
-            <div id="noResultsMessage" class="col-md-9 mt-4" style="display: none;">
-                <p>Artigo não encontrado.</p>
-            </div>
             <div class="mt-4 normal">
                     @foreach (var article in Model.OrderByDescending(a => a.Stars).Take(1))
                     {
@@ -82,6 +79,9 @@
             {
                 <span class="text-muted" style="font-size: 16px;">(Login to see more! 👉)</span>
             }
+            <div id="noResultsMessage" style="display: none; text-align: center;">
+                <img src="/404.png" style="height: 75vh; display: inline-block;">
+            </div>
             @foreach (var article in Model.Where(a => User.Identity.IsAuthenticated || !a.isPrivate))
             {
                 <div class="col-4 mb-3 category-article" data-category="@article.Category" data-created-at="@article.CreatedAt">
@@ -268,15 +268,24 @@
             // Show top 3 articles regardless of the year
             $('.overflow-container .category-article').slice(0, 3).show();
 
+            // Check if there are articles for the selected year
+            var articlesForYear = false;
+
             // Show articles based on the selected year
             $('.category-article').each(function () {
                 var articleCreatedAt = $(this).data('created-at'); // Assuming data('created-at') holds the database date string
                 var articleYear = new Date(articleCreatedAt).getFullYear().toString();
 
                 if (articleYear === selectedYear) {
+                    articlesForYear = true;
                     $(this).show();
                 }
             });
+
+            // Show noResultsMessage if there are no articles for the selected year
+            if (!articlesForYear) {
+                $('#noResultsMessage').show();
+            }
         }
 
         function filterArticlesByMonth(selectedMonth) {
@@ -284,16 +293,28 @@
             $('.category-article').hide();
             $('#noResultsMessage').hide();
 
+            // Check if there are articles for the selected month
+            var articlesForMonth = false;
+
             // Show top 3 articles regardless of the month
             $('.overflow-container .category-article').slice(0, 3).show();
+
+            // Contador para rastrear o número de artigos correspondentes
+            var matchingMonthCount = 0;
 
             // Show articles based on the selected month
             $('.category-article').each(function () {
                 var articleMonth = new Date($(this).data('created-at')).getMonth() + 1; // Months are 0-based
                 if (articleMonth.toString() === selectedMonth) {
+                    articlesForMonth = true
                     $(this).show();
                 }
             });
+
+            // Show noResultsMessage if there are no articles for the selected year
+            if (!articlesForMonth) {
+                $('#noResultsMessage').show();
+            }
         }
 
         function filterArticlesByTitle(title) {
