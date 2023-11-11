@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "LZJqTg+zrgC3EI+mY1LJZdo3k9hHnh9htDDXvjxuDFA=",
+  "Hash": "Nx6y/gOswJcQENjcpPS+GczYKZ6yIqfOiA0x6dNfcsc=",
   "Source": "BlogASP",
   "BasePath": "_content/BlogASP",
   "Mode": "Default",
@@ -49,6 +49,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\Claudio\\Desktop\\BlogASP\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\BlogASP.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\404.png",
+      "SourceId": "BlogASP",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\",
+      "BasePath": "_content/BlogASP",
+      "RelativePath": "404.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\404.png"
     },
     {
       "Identity": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\addArticle.png",
@@ -1086,6 +1103,57 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Identity": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\notStarred.png",
+      "SourceId": "BlogASP",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\",
+      "BasePath": "_content/BlogASP",
+      "RelativePath": "notStarred.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\notStarred.png"
+    },
+    {
+      "Identity": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\readmore.png",
+      "SourceId": "BlogASP",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\",
+      "BasePath": "_content/BlogASP",
+      "RelativePath": "readmore.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\readmore.png"
+    },
+    {
+      "Identity": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\Starred.png",
+      "SourceId": "BlogASP",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\",
+      "BasePath": "_content/BlogASP",
+      "RelativePath": "Starred.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Starred.png"
     }
   ]
 }

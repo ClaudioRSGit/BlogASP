@@ -5,6 +5,14 @@
       "PackagePath": "staticwebassets\\BlogASP.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\404.png",
+      "PackagePath": "staticwebassets\\404.png"
+    },
+    {
+      "Id": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\Starred.png",
+      "PackagePath": "staticwebassets\\Starred.png"
+    },
+    {
       "Id": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\addArticle.png",
       "PackagePath": "staticwebassets\\addArticle.png"
     },
@@ -247,6 +255,14 @@
     {
       "Id": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\notStarred.png",
+      "PackagePath": "staticwebassets\\notStarred.png"
+    },
+    {
+      "Id": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\readmore.png",
+      "PackagePath": "staticwebassets\\readmore.png"
     },
     {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.BlogASP.Microsoft.AspNetCore.StaticWebAssets.props",
