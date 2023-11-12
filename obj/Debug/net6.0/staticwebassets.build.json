@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Nx6y/gOswJcQENjcpPS+GczYKZ6yIqfOiA0x6dNfcsc=",
+  "Hash": "MZ/+0QMhuw+xyK8oPKNg4vnuFzuEK60sm7+ZZ9+FnM0=",
   "Source": "BlogASP",
   "BasePath": "_content/BlogASP",
   "Mode": "Default",
@@ -1154,6 +1154,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\Starred.png"
+    },
+    {
+      "Identity": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\techInSight.png",
+      "SourceId": "BlogASP",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\",
+      "BasePath": "_content/BlogASP",
+      "RelativePath": "techInSight.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\techInSight.png"
     }
   ]
 }
