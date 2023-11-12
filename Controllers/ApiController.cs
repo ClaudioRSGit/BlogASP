@@ -36,7 +36,29 @@ public class ApiController : ControllerBase
     [HttpPost]
     public IActionResult Post([FromBody] ArticleModel data)
     {
-        return Ok("Data received!");
+        try
+        {
+            var createdArticle = _articleRepository.APICreateArticle(data, User.Identity.Name);
+            return Ok(createdArticle);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, "Internal Server Error");
+        }
+    }
+
+    [HttpPut("{id}")]
+    public IActionResult Put(int id, [FromBody] ArticleModel data)
+    {
+        try
+        {
+            var updatedArticle = _articleRepository.APIEditArticle(id, data, User.Identity.Name);
+            return Ok(updatedArticle);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, "Internal Server Error");
+        }
     }
 }
 
@@ -84,5 +106,4 @@ public class UsersController : ControllerBase
             return StatusCode(500, "Internal Server Error");
         }
     }
-
 }

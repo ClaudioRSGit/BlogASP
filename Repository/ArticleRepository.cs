@@ -120,5 +120,34 @@ namespace BlogASP.Repository
             var article = _databaseContext.Articles.FirstOrDefault(a => a.ArticleId == articleId && a.User.Username == username);
             return article != null;
         }
+        public ArticleModel APICreateArticle(ArticleModel article, string userName)
+        {
+            article.isDisabled = false;
+            article.CreatedAt = DateTime.Now;
+            article.UpdatedAt = DateTime.Now;
+            article.UserName = userName;
+            _databaseContext.Articles.Add(article);
+            _databaseContext.SaveChanges();
+            return article;
+        }
+        public ArticleModel APIEditArticle(int id, ArticleModel newData, string userName)
+        {
+            var existingArticle = GetArticleById(id);
+
+            if (existingArticle == null)
+            {
+                throw new Exception("Article not found");
+            }
+
+            existingArticle.Title = newData.Title;
+            existingArticle.Category = newData.Category;
+            existingArticle.Description = newData.Description;
+            existingArticle.UpdatedAt = DateTime.Now;
+            existingArticle.Picture = newData.Picture;
+
+            _databaseContext.SaveChanges();
+
+            return existingArticle;
+        }
     }
 }

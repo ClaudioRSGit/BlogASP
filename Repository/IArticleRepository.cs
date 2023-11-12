@@ -15,5 +15,7 @@ namespace BlogASP.Repository
         bool DeleteArticle(int id);
         void UpdateArticle(ArticleModel article);
         bool IsUserAuthor(string? username, int articleId);
+        public ArticleModel APICreateArticle(ArticleModel article, string userName);
+        public ArticleModel APIEditArticle(int id, ArticleModel newData, string userName);
     }
 }
