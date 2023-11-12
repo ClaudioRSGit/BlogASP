@@ -106,4 +106,17 @@ public class UsersController : ControllerBase
             return StatusCode(500, "Internal Server Error");
         }
     }
+    [HttpPut("{id}")]
+    public IActionResult PutUser(int id, [FromBody] UserModel data)
+    {
+        try
+        {
+            var updatedUser = _userRepository.Edit(data);
+            return Ok(updatedUser);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, "Internal Server Error");
+        }
+    }
 }
