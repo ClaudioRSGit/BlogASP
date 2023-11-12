@@ -1,11 +1,6 @@
 ﻿using BlogASP.DAL;
-using BlogASP.Migrations;
 using BlogASP.Models;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace BlogASP.Repository
 {
@@ -95,6 +90,10 @@ namespace BlogASP.Repository
             articleDB.Title = article.Title;
             articleDB.Category = article.Category;
             articleDB.Description = article.Description;
+            articleDB.isDisabled = false;
+            articleDB.UpdatedAt = DateTime.Now;
+            articleDB.UserName = article.UserName;
+            articleDB.Stars = article.Stars;
 
             _databaseContext.Articles.Update(articleDB);
             _databaseContext.SaveChanges();

@@ -45,7 +45,6 @@ namespace BlogASP.Controllers
         {
             var articles = _articleRepository.GetAllArticles();
 
-            // Verifique se o usuário logado é o autor de cada artigo
             var username = User.Identity.Name;
             foreach (var article in articles)
             {

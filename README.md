@@ -1,5 +1,4 @@
 <div align="center">
-    <h1>TechInSight</h1>
 <img src="wwwroot/techInSight.png">
 </div>
 

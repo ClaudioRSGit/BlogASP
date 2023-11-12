@@ -86,7 +86,7 @@
             </div>
                 @foreach (var article in Model.Where(a => User.Identity.IsAuthenticated || !a.isPrivate))
                 {
-                    @if (article.isDisabled == false && article.isDisabled != null)
+                    @if (article.isDisabled == false || article.isDisabled == null)
                     {
                         <div class="col-6 col-md-4 mb-3 mt-3 category-article" data-category="@article.Category" data-created-at="@article.CreatedAt">
                             <div class="card">
@@ -94,10 +94,10 @@
                                 <div class="card-body">
                                     <h5 class="card-title">@article.Title</h5>
                                     <p class="card-text">@article.Description</p>
-                                    <a href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-secondary">Read More</a>
+                                    <a href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-secondary w-50">Read More</a>
                                     @if (User.Identity.IsAuthenticated)
                                     {
-                                        <button class="btn btn-warning star-button" data-article-id="@article.ArticleId">
+                                        <button class="btn btn-warning star-button w-25" data-article-id="@article.ArticleId">
                                             <i class="fa fa-star"></i> Star
                                         </button>
                                     }
@@ -131,7 +131,7 @@
         }
     <div class="overflow-container" style="white-space: nowrap;">
         <div class="row">
-            @foreach (var article in Model.OrderByDescending(a => a.CreatedAt).Take(3).Where(a => User.Identity.IsAuthenticated || !a.isPrivate))
+                @foreach (var article in Model.OrderByDescending(a => a.CreatedAt).Take(3).Where(a => User.Identity.IsAuthenticated || !a.isPrivate && a.isDisabled == false))
             {
                 @if (article.isDisabled == false && article.isDisabled != null)
                 {
@@ -157,10 +157,8 @@
     }
     <div class="overflow-container" style="white-space: nowrap;">
         <div class="row">
-            @foreach (var article in Model.OrderByDescending(a => a.Stars).Take(3).Where(a => User.Identity.IsAuthenticated || !a.isPrivate))
-            {
-                    @if (article.isDisabled == false && article.isDisabled != null)
-                    {
+                @foreach (var article in Model.OrderByDescending(a => a.Stars).Take(3).Where(a => User.Identity.IsAuthenticated || !a.isPrivate && a.isDisabled == false))
+                {
                         <div class="col-4 mb-3 category-article">
                             <div class="card">
                                 <img src="@article.Picture" class="card-img-top" alt="..." style="height: 200px; object-fit: cover;">
@@ -181,7 +179,6 @@
                                 </div>
                             </div>
                         </div>
-                    }
                 }
         </div>
     </div>
