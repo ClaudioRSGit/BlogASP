@@ -2,7 +2,7 @@
 using BlogASP.Repository;
 using Microsoft.AspNetCore.Mvc;
 
-[Route("api")]
+[Route("api/Articles")]
 [ApiController]
 public class ApiController : ControllerBase
 {
@@ -38,4 +38,51 @@ public class ApiController : ControllerBase
     {
         return Ok("Data received!");
     }
+}
+
+[Route("api/Users")]
+[ApiController]
+public class UsersController : ControllerBase
+{
+    private readonly IUserRepository _userRepository;
+
+    public UsersController(IUserRepository userRepository)
+    {
+        _userRepository = userRepository;
+    }
+
+    [HttpGet]
+    public IActionResult Get()
+    {
+        try
+        {
+            var users = _userRepository.GetAll();
+            return Ok(users);
+        }
+        catch (Exception ex)
+        {
+            var sampleUsers = new List<UserModel>
+            {
+                new UserModel { UserId = 1, Username = "User1" },
+                new UserModel { UserId = 2, Username = "User2" },
+            };
+
+            return Ok(sampleUsers);
+        }
+    }
+
+    [HttpPost]
+    public IActionResult Post([FromBody] UserModel data)
+    {
+        try
+        {
+            var createdUser = _userRepository.Create(data);
+            return Ok(createdUser);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, "Internal Server Error");
+        }
+    }
+
 }
