@@ -97,6 +97,22 @@
             background-color: #00008b;
         }
 
+    .btn-export {
+        display: inline-block;
+        margin-left: 20%;
+        margin-bottom: 50px;
+        background-color: #0088ff;
+        color: #fff;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 4px;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    }
+
+        .btn-primary:hover {
+            background-color: #00008b;
+        }
+
     h1 img {
         margin-left: 15px;
         width: 50px;
@@ -166,5 +182,5 @@
             </table>
         </div>
     </div>
-    <a href="@Url.Action("ExportArticlesToCSV", "AdminPanel")" class="btn btn-primary">Export Data</a>
+    <a href="@Url.Action("ExportArticlesToCSV", "AdminPanel")" class="btn btn-export">Export Data</a>
 </body>
