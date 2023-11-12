@@ -75,6 +75,7 @@ namespace BlogASP.Controllers
             article.UpdatedAt = DateTime.Now;
 
             article.UserName = User.Identity.Name;
+            article.isDisabled = false;
 
             if (ModelState.IsValid)
             {
