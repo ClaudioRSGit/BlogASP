@@ -14,7 +14,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddDbContext<DatabaseContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase")));
 
-//////////////////Login///////////////////
+//Login
 
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
@@ -25,21 +25,18 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 builder.Services.AddAuthorization();
 
-//////////////////Login///////////////////
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
 builder.Services.AddScoped<IRatingService, RatingService>();
 
 builder.Services.AddControllersWithViews();
-
 var app = builder.Build();
 
 // Configuration of the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
@@ -56,7 +53,7 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 
-//////////////////////////////// Admin Default
+//Admin Default
 using (var scope = builder.Services.BuildServiceProvider().CreateScope())
 {
     var services = scope.ServiceProvider;
@@ -85,7 +82,9 @@ using (var scope = builder.Services.BuildServiceProvider().CreateScope())
     }
 
 }
-//////////////////////// standard articles ////////////////////////
+
+
+//standard articles
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
@@ -173,6 +172,28 @@ using (var scope = app.Services.CreateScope())
     }
 
 }
+
+
+//Route Protection 
+app.Use(async (context, next) =>
+{
+    var user = context.User;
+    if (context.Request.Path.StartsWithSegments("/AdminPanel") && !user.IsInRole("Administrator"))
+    {
+        context.Response.StatusCode = 403;
+        context.Response.ContentType = "text/html";
+
+        await context.Response.WriteAsync(@"
+            <script>
+                alert('Access Denied! You do not have permission to access this page.');
+                window.location.href = '/';
+            </script>
+        ");
+        return;
+    }
+    await next();
+});
+
 app.MapControllers();
 
 app.Run();
