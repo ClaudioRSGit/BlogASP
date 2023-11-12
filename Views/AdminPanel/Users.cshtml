@@ -56,12 +56,6 @@
         transition: box-shadow 0.3s ease;
     }
 
-    .btn-success {
-        background-color: #8cb742;
-        color: #fff;
-        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
-    }
-
     .btn-danger {
         background-color: #d54a4a;
         color: #fff;
@@ -90,7 +84,7 @@
         text-align: center;
         text-decoration: none;
         border-radius: 4px;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
         color: #fff;
     }
 
@@ -105,7 +99,7 @@
         text-align: center;
         text-decoration: none;
         border-radius: 4px;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
         color: #fff;
     }
 
@@ -121,84 +115,86 @@
 </style>
 
 <body>
-<div id="all-users" class="table-container">
+    <div id="all-users" class="table-container">
         <h1>Users <img src="https://images.freeimages.com/fic/images/icons/1994/vista_style_business_and_data/256/users.png" alt="Users Icon" /></h1>
-    <table>
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Role</th>
-                <th>CreatedAt</th>
-                <th>UpdatedAt</th>
-                <th>DeletedAt</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (UserModel user in Model.Users.Where(u => u.Role == "Privileged" || u.Role == "Administrator" || u.Role == "Disabled"))
-            {
-                <tr>
-                    <td>@user.UserId</td>
-                    <td>@user.Username</td>
-                    <td>@user.Email</td>
-                    <td>@user.Role</td>
-                    <td>@user.CreatedAt</td>
-                    <td>@user.UpdatedAt</td>
-                    <td>
-                        @{
-                            if (user.DeletedAt == null)
-                            {
-                                @: 01/01/0001 00:00:00
-                            }
-                            else
-                            {
-                                @user.DeletedAt
-                            }
-                        }
-                    </td>
-                    <td>
-                        @if (user.Role == "Disabled")
-                        {
-                            <form asp-controller="AdminPanel" asp-action="EnableUser" method="post">
-                                <input type="hidden" name="id" value="@user.UserId" />
-                                <button type="submit" class="btn btn-success">Enable</button>
-                            </form>
-                        }
-                        else
-                        {
-                            <div class="btn-group" role="group" style="display: flex;">
-                                <form asp-controller="AdminPanel" asp-action="DisableUser" method="post">
-                                    <input type="hidden" name="id" value="@user.UserId" />
-                                    <button type="submit" class="btn btn-danger">Disable</button>
-                                </form>
-                                <a role="button" class="btn btn-warning" asp-route-id="@user.UserId" asp-controller="AdminPanel" asp-action="Edit">Edit</a>
-                                <form asp-controller="AdminPanel" asp-action="SetAsPublicUser" method="post" style="display: inline-block;">
-                                    <input type="hidden" name="id" value="@user.UserId" />
-                                        <button type="submit" class="btn btn-primary">Public</button>
-                                </form>
-                                <form asp-controller="AdminPanel" asp-action="SetAsPrivileged" method="post" style="display: inline-block;">
-                                    <input type="hidden" name="id" value="@user.UserId" />
-                                        <button type="submit" class="btn btn-primary" @if (user.Role == "Privileged")
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>CreatedAt</th>
+                        <th>UpdatedAt</th>
+                        <th>DeletedAt</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (UserModel user in Model.Users.Where(u => u.Role == "Privileged" || u.Role == "Administrator" || u.Role == "Disabled"))
+                    {
+                        <tr>
+                            <td>@user.UserId</td>
+                            <td>@user.Username</td>
+                            <td>@user.Email</td>
+                            <td>@user.Role</td>
+                            <td>@user.CreatedAt</td>
+                            <td>@user.UpdatedAt</td>
+                            <td>
+                                @{
+                                    if (user.DeletedAt == null)
                                     {
-                                        <text>disabled</text>
-                                    }>Privileged</button>
-                                </form>
-                                <form asp-controller="AdminPanel" asp-action="SetAsAdministrator" method="post" style="display: inline-block;">
-                                    <input type="hidden" name="id" value="@user.UserId" />
-                                        <button type="submit" class="btn btn-primary" @if (user.Role == "Administrator")
+                                        @: 01/01/0001 00:00:00
+                                    }
+                                    else
                                     {
-                                        <text>disabled</text>
-                                    }>Administrator</button>
-                                </form>
-                            </div>
-                        }
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>
+                                        @user.DeletedAt
+                                    }
+                                }
+                            </td>
+                            <td>
+                                @if (user.Role == "Disabled")
+                                {
+                                    <form asp-controller="AdminPanel" asp-action="EnableUser" method="post">
+                                        <input type="hidden" name="id" value="@user.UserId" />
+                                        <button type="submit" class="btn btn-success">Enable</button>
+                                    </form>
+                                }
+                                else
+                                {
+                                    <div class="btn-group" role="group">
+                                        <form asp-controller="AdminPanel" asp-action="DisableUser" method="post">
+                                            <input type="hidden" name="id" value="@user.UserId" />
+                                            <button type="submit" class="btn btn-danger">Disable</button>
+                                        </form>
+                                        <a role="button" class="btn btn-warning" asp-route-id="@user.UserId" asp-controller="AdminPanel" asp-action="Edit">Edit</a>
+                                        <form asp-controller="AdminPanel" asp-action="SetAsPublicUser" method="post">
+                                            <input type="hidden" name="id" value="@user.UserId" />
+                                            <button type="submit" class="btn btn-primary">Public</button>
+                                        </form>
+                                        <form asp-controller="AdminPanel" asp-action="SetAsPrivileged" method="post">
+                                            <input type="hidden" name="id" value="@user.UserId" />
+                                            <button type="submit" class="btn btn-primary" @if (user.Role == "Privileged")
+                                            {
+                                                <text>disabled</text>
+                                            }>Privileged</button>
+                                        </form>
+                                        <form asp-controller="AdminPanel" asp-action="SetAsAdministrator" method="post">
+                                            <input type="hidden" name="id" value="@user.UserId" />
+                                            <button type="submit" class="btn btn-primary" @if (user.Role == "Administrator")
+                                            {
+                                                <text>disabled</text>
+                                            }>Administrator</button>
+                                        </form>
+                                    </div>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
     <a href="@Url.Action("ExportUsersToCSV", "AdminPanel")" class="btn btn-export">Export Data</a>
 </body>
