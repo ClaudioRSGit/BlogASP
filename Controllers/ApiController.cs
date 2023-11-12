@@ -43,7 +43,7 @@ public class ApiController : ControllerBase
         }
         catch (Exception ex)
         {
-            return StatusCode(500, "Internal Server Error");
+            return StatusCode(500, "Server Error");
         }
     }
 
