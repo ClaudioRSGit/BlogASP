@@ -55,7 +55,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-app.MapControllers();
 
 //////////////////////////////// Admin Default
 using (var scope = builder.Services.BuildServiceProvider().CreateScope())
@@ -174,5 +173,6 @@ using (var scope = app.Services.CreateScope())
     }
 
 }
+app.MapControllers();
 
 app.Run();
