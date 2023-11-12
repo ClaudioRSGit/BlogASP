@@ -105,7 +105,8 @@ using (var scope = app.Services.CreateScope())
             Category = "Data Science",
             CreatedAt = DateTime.Now,
             UpdatedAt = DateTime.Now,
-            UserName = "Anonymous",
+            UserName = "bySeeder",
+            isDisabled = false,
             Stars = 0,
             Picture = "https://previews.123rf.com/images/olegdudko/olegdudko1908/olegdudko190803202/128612103-big-data-analytics-and-business-intelligence-concept-with-chart-and-graph-icons-on-a-digital-screen.jpg?fj=1",
         };
@@ -118,8 +119,9 @@ using (var scope = app.Services.CreateScope())
             Category = "DevOps",
             CreatedAt = DateTime.Now,
             UpdatedAt = DateTime.Now,
-            UserName = "Anonymous",
+            UserName = "bySeeder",
             Stars = 2,
+            isDisabled = false,
             isPrivate = true,
             Picture = "https://wallpaperbat.com/img/873635-devops-testing-services-agile-testing.jpg",
         };
@@ -132,8 +134,9 @@ using (var scope = app.Services.CreateScope())
             Category = "Web Development",
             CreatedAt = DateTime.Now,
             UpdatedAt = DateTime.Now,
-            UserName = "Anonymous",
+            UserName = "bySeeder",
             Stars = 5,
+            isDisabled = false,
             isPrivate = true,
             Picture = "https://e0.pxfuel.com/wallpapers/185/259/desktop-wallpaper-front-end-web-developer-vacancy-egeniq.jpg",
         };
@@ -146,8 +149,9 @@ using (var scope = app.Services.CreateScope())
             Category = "Security",
             CreatedAt = DateTime.Now,
             UpdatedAt = DateTime.Now,
-            UserName = "Anonymous",
+            UserName = "bySeeder",
             Stars = 1,
+            isDisabled = false,
             Picture = "https://wallpapercave.com/wp/wp3797546.jpg",
         };
         dbContext.Articles.Add(article4);
@@ -159,8 +163,9 @@ using (var scope = app.Services.CreateScope())
             Category = "Cloud",
             CreatedAt = DateTime.Now,
             UpdatedAt = DateTime.Now,
-            UserName = "Anonymous",
+            UserName = "bySeeder",
             Stars = 2,
+            isDisabled = true,
             Picture = "https://ascenty.com/wp-content/uploads/2016/08/1473150_Ascenty_OtimizacaodeArtigo_05_VantagensservicosCloud_Mai23capablog-1920x1000-c-default.jpg",
         };
         dbContext.Articles.Add(article5);
