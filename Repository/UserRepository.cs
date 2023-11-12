@@ -56,5 +56,21 @@ namespace BlogASP.Repository
         {
             return _databaseContext.Users.FirstOrDefault(u => u.Email == email);
         }
+        public bool APIDeleteUser(int userId)
+        {
+            var user = _databaseContext.Users.Find(userId);
+
+            if (user == null)
+            {
+                // User not found
+                return false;
+            }
+
+            // Add any additional logic before removing the user
+            _databaseContext.Users.Remove(user);
+            _databaseContext.SaveChanges();
+
+            return true;
+        }
     }
 }

@@ -60,6 +60,26 @@ public class ApiController : ControllerBase
             return StatusCode(500, "Internal Server Error");
         }
     }
+    [HttpDelete("articles/{id}")]
+    public IActionResult DeleteArticle(int id)
+    {
+        try
+        {
+            var deletedArticle = _articleRepository.DeleteArticle(id);
+            if (deletedArticle)
+            {
+                return Ok("Article deleted successfully");
+            }
+            else
+            {
+                return NotFound("Article not found");
+            }
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, "Internal Server Error");
+        }
+    }
 }
 
 [Route("api/Users")]
@@ -119,4 +139,26 @@ public class UsersController : ControllerBase
             return StatusCode(500, "Server Error");
         }
     }
+    [HttpDelete("{id}")]
+    public IActionResult Delete(int id)
+    {
+        try
+        {
+            var isDeleted = _userRepository.APIDeleteUser(id);
+
+            if (isDeleted)
+            {
+                return Ok("User deleted successfully.");
+            }
+            else
+            {
+                return NotFound("User not found.");
+            }
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, "Internal Server Error");
+        }
+    }
+
 }
