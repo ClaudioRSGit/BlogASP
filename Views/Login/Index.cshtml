@@ -13,9 +13,9 @@
         body {
             background: url('https://wallpaperaccess.com/full/796854.jpg') no-repeat center center fixed;
             background-size: cover;
-            min-height: 100vh; /* Set minimum height to full viewport height */
-            margin: 0; /* Remove default margin to ensure full coverage */
-            padding-bottom: 20px; /* Add some bottom padding */
+            min-height: 100vh; 
+            margin: 0; 
+            padding-bottom: 20px; 
         }
 
         .login-container {
@@ -38,12 +38,12 @@
                         <div class="card-body text-center">
                             <h2 class="mb-4">Login</h2>
                             <form asp-controller="Login" asp-action="Login" method="post">
-                                <div class="form-group">
-                                    <label for="inputUsername" class="form-label">Username</label>
+                                <div class="form-group text-left">
+                                    <label for="inputUsername" class="form-label">Username :</label>
                                     <input type="text" class="form-control" id="inputUsername" name="Username" placeholder="Username123">
                                 </div>
-                                <div class="form-group">
-                                    <label for="inputPassword" class="form-label">Password</label>
+                                <div class="form-group text-left">
+                                    <label for="inputPassword" class="form-label">Password :</label>
                                     <input type="password" class="form-control" id="inputPassword" name="Password" placeholder="********">
                                 </div>
                                 <div class="col-12 mt-3">
