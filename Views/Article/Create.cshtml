@@ -5,28 +5,28 @@
 <form asp-action="Create" method="post" class="mt-5">
     <div class="form-group">
         <label asp-for="Title" class="control-label">Title:</label>
-        <input asp-for="Title" class="form-control" />
+        <input asp-for="Title" class="form-control" required/>
     </div>
 
     <div class="form-group">
         <label asp-for="Category" class="control-label">Category:</label>
-        <input asp-for="Category" class="form-control" />
+        <input asp-for="Category" class="form-control" required />
     </div>
 
     <div class="form-group">
         <label asp-for="Description" class="control-label">Description:</label>
-        <textarea asp-for="Description" class="form-control" rows="5"></textarea>
+        <textarea asp-for="Description" class="form-control" rows="5" required></textarea>
     </div>
 
     <div class="form-group">
         <label asp-for="isPrivate" class="control-label">Visibility:</label>
         <div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" asp-for="isPrivate" value="true" />
+                <input class="form-check-input" type="radio" asp-for="isPrivate" value="true" required />
                 <label class="form-check-label">Private</label>
             </div>
             <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" asp-for="isPrivate" value="false" />
+                <input class="form-check-input" type="radio" asp-for="isPrivate" value="false" required />
                 <label class="form-check-label">Public</label>
             </div>
         </div>
