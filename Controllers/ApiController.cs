@@ -60,7 +60,7 @@ public class ApiController : ControllerBase
             return StatusCode(500, "Internal Server Error");
         }
     }
-    [HttpDelete("articles/{id}")]
+    [HttpDelete("{id}")]
     public IActionResult DeleteArticle(int id)
     {
         try
@@ -126,17 +126,26 @@ public class UsersController : ControllerBase
             return StatusCode(500, "Internal Server Error");
         }
     }
+
     [HttpPut("{id}")]
     public IActionResult PutUser(int id, [FromBody] UserModel data)
     {
         try
         {
+            data.UserId = id;
+
             var updatedUser = _userRepository.Edit(data);
+
+            if (updatedUser == null)
+            {
+                return NotFound("User not found.");
+            }
+
             return Ok(updatedUser);
         }
         catch (Exception ex)
         {
-            return StatusCode(500, "Server Error");
+            return StatusCode(500, "Internal Server Error");
         }
     }
     [HttpDelete("{id}")]

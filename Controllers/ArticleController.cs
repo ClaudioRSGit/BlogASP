@@ -13,7 +13,6 @@ namespace BlogASP.Controllers
     {
         private readonly DatabaseContext _context;
         private readonly IArticleRepository _articleRepository;
-
         private readonly IRatingService _ratingService;
 
 
@@ -121,9 +120,6 @@ namespace BlogASP.Controllers
             }
         }
 
-
-
-
         private string GetRandomImageLink()
         {
             //obter um link de imagem aleatório
@@ -219,5 +215,6 @@ namespace BlogASP.Controllers
             }
             return View("EditArticle", article);
         }
+
     }
 }

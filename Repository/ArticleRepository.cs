@@ -49,7 +49,7 @@ namespace BlogASP.Repository
         public ArticleModel GetArticleById(int id)
         {
             return _databaseContext.Articles
-                .Include(a => a.Comments) // Include comments
+                .Include(a => a.Comments)
                 .FirstOrDefault(x => x.ArticleId == id);
         }
 
@@ -83,23 +83,46 @@ namespace BlogASP.Repository
 
         public ArticleModel Edit(ArticleModel article)
         {
-            ArticleModel articleDB = GetArticleById(article.ArticleId);
+            // Fetch the existing article including the Stars property
+            ArticleModel articleDB = _databaseContext.Articles
+                .FirstOrDefault(x => x.ArticleId == article.ArticleId);
 
             if (articleDB == null) throw new Exception("Update error!");
 
-            articleDB.Title = article.Title;
-            articleDB.Category = article.Category;
-            articleDB.Description = article.Description;
+            // Store the existing stars in a temporary variable
+            int? tempStars = articleDB.Stars;
+
+            if (!string.IsNullOrEmpty(article.Title))
+            {
+                articleDB.Title = article.Title;
+            }
+            if (!string.IsNullOrEmpty(article.Category))
+            {
+                articleDB.Category = article.Category;
+            }
+            if (!string.IsNullOrEmpty(article.Description))
+            {
+                articleDB.Description = article.Description;
+            }
+            if (!string.IsNullOrEmpty(article.Picture))
+            {
+                articleDB.Picture = article.Picture;
+            }
+
+            // Reassign the existing stars back to the articleDB
+            articleDB.Stars = tempStars;
+
             articleDB.isDisabled = false;
             articleDB.UpdatedAt = DateTime.Now;
             articleDB.UserName = article.UserName;
-            articleDB.Stars = article.Stars;
 
-            _databaseContext.Articles.Update(articleDB);
+            // Update the entire article
+            _databaseContext.Update(articleDB);
             _databaseContext.SaveChanges();
 
             return articleDB;
         }
+
 
         public bool DeleteArticle(int id)
         {
