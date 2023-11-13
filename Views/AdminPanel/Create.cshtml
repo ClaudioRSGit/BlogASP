@@ -36,34 +36,34 @@
                         <h2 class="mb-4">Create User</h2>
                         <form asp-controller="AdminPanel" asp-action="CreateAdmin" method="post">
 
-                            <div class="form-group">
-                                <label for="Name">Name:</label>
+                            <div class="form-group text-left">
+                                <label for="Name" class="font-weight-bold">Name:</label>
                                 <input type="text" asp-for="Name" class="form-control" placeholder="Enter your Name" required>
                             </div>
 
-                            <div class="form-group">
-                                <label for="Username">Username:</label>
+                            <div class="form-group text-left">
+                                <label for="Username" class="font-weight-bold">Username:</label>
                                 <input type="text" asp-for="Username" class="form-control" placeholder="Enter your Username" required
                                        pattern="^[a-zA-Z0-9_]{5,}$"
                                        title="Username must contain only letters, numbers, and underscores and must be at least 5 characters long.">
                             </div>
 
-                            <div class="form-group">
-                                <label for="Email">Email:</label>
+                            <div class="form-group text-left">
+                                <label for="Email" class="font-weight-bold">Email:</label>
                                 <input type="text" asp-for="Email" class="form-control" placeholder="Enter your Email" required
                                        pattern="^[A-Za-z0-9._%+-]+[.][A-Za-z0-9.-]+[.][A-Za-z]{2,6}$"
                                        title="Invalid email format. Please enter a valid email address.">
                             </div>
 
-                            <div class="form-group">
-                                <label for="Password">Password:</label>
+                            <div class="form-group text-left">
+                                <label for="Password" class="font-weight-bold">Password:</label>
                                 <input type="password" asp-for="Password" class="form-control" placeholder="Enter your Password" required
                                        pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{5,}$"
                                        title="Password must contain at least one uppercase letter, one lowercase letter, one digit, and one special character, and must be at least 5 characters long.">
                             </div>
 
-                            <div class="form-group">
-                                <label for="ConfirmPassword">Confirm Password:</label>
+                            <div class="form-group text-left">
+                                <label for="ConfirmPassword" class="font-weight-bold">Confirm Password:</label>
                                 <input type="password" id="ConfirmPassword" class="form-control" placeholder="Confirm your Password" required
                                        data-val="true"
                                        data-val-equalto="The password and confirmation password do not match."
