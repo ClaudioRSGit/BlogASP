@@ -16,10 +16,10 @@
             
         <div id="filteredArticles" class="mt-4">
             <h4>Select a Category</h4>
-            <a href="#" class="btn btn-primary category-link" data-category="all">All</a>
+                <a href="#" class="btn btn-primary category-link mt-2 me-1" data-category="all">All</a>
             @foreach (var category in Model.Select(a => a.Category).Distinct())
             {
-                <a href="#" class="btn btn-outline-primary category-link" data-category="@category">@category</a>
+                <a href="#" class="btn btn-outline-primary category-link mt-2 me-1" data-category="@category">@category</a>
             }
 
             <hr />
@@ -291,8 +291,15 @@
                 if (articleYear === selectedYear) {
                     articlesForYear = true;
                     $(this).show();
+
+                    // Show Hot Article if not already shown and available
+                    var hotArticleShown = false;
+                    if (!hotArticleShown) {
+                        $('.category-article h3:contains("Hot Article")').closest('.category-article').show();
+                    }
                 }
             });
+
 
             // Show noResultsMessage if there are no articles for the selected year
             if (!articlesForYear) {
@@ -317,9 +324,12 @@
                 if (articleMonth.toString() === selectedMonth) {
                     articlesForMonth = true
                     $(this).show();
-                }
-                else{
 
+                    // Show Hot Article if not already shown and available
+                    var hotArticleShown = false;
+                    if (!hotArticleShown) {
+                        $('.category-article h3:contains("Hot Article")').closest('.category-article').show();
+                    }
                 }
             });
 
