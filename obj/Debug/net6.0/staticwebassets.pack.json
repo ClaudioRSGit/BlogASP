@@ -17,23 +17,19 @@
       "PackagePath": "staticwebassets\\addArticle.png"
     },
     {
-<<<<<<< HEAD
-      "Id": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\adminArticlesMobile.png",
+      "Id": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\adminArticlesMobile.png",
       "PackagePath": "staticwebassets\\adminArticlesMobile.png"
     },
     {
-      "Id": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\articlesDesktop.png",
+      "Id": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\articlesDesktop.png",
       "PackagePath": "staticwebassets\\articlesDesktop.png"
     },
     {
-      "Id": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\articlesMobile.png",
+      "Id": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\articlesMobile.png",
       "PackagePath": "staticwebassets\\articlesMobile.png"
     },
     {
-      "Id": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\css\\site.css",
-=======
       "Id": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\css\\site.css",
->>>>>>> 14ad2e31a09e3ea7c27f77b89259ee0f93dc77fc
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
@@ -273,55 +269,43 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
-<<<<<<< HEAD
-      "Id": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\login.png",
+      "Id": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\login.png",
       "PackagePath": "staticwebassets\\login.png"
     },
     {
-      "Id": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\notStarred.png",
+      "Id": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\notStarred.png",
       "PackagePath": "staticwebassets\\notStarred.png"
     },
     {
-      "Id": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\pendingUsersDesktop.png",
+      "Id": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\pendingUsersDesktop.png",
       "PackagePath": "staticwebassets\\pendingUsersDesktop.png"
     },
     {
-      "Id": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\pendingUsersMobile.png",
+      "Id": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\pendingUsersMobile.png",
       "PackagePath": "staticwebassets\\pendingUsersMobile.png"
-    },
-    {
-      "Id": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\readmore.png",
-      "PackagePath": "staticwebassets\\readmore.png"
-    },
-    {
-      "Id": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\readmoreDesktop.png",
-      "PackagePath": "staticwebassets\\readmoreDesktop.png"
-    },
-    {
-      "Id": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\readmoreMobile.png",
-      "PackagePath": "staticwebassets\\readmoreMobile.png"
-    },
-    {
-      "Id": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\signupDesktop.png",
-      "PackagePath": "staticwebassets\\signupDesktop.png"
-    },
-    {
-      "Id": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\signupMobile.png",
-      "PackagePath": "staticwebassets\\signupMobile.png"
-    },
-    {
-      "Id": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\techInSight.png",
-=======
-      "Id": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\notStarred.png",
-      "PackagePath": "staticwebassets\\notStarred.png"
     },
     {
       "Id": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\readmore.png",
       "PackagePath": "staticwebassets\\readmore.png"
     },
     {
+      "Id": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\readmoreDesktop.png",
+      "PackagePath": "staticwebassets\\readmoreDesktop.png"
+    },
+    {
+      "Id": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\readmoreMobile.png",
+      "PackagePath": "staticwebassets\\readmoreMobile.png"
+    },
+    {
+      "Id": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\signupDesktop.png",
+      "PackagePath": "staticwebassets\\signupDesktop.png"
+    },
+    {
+      "Id": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\signupMobile.png",
+      "PackagePath": "staticwebassets\\signupMobile.png"
+    },
+    {
       "Id": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\techInSight.png",
->>>>>>> 14ad2e31a09e3ea7c27f77b89259ee0f93dc77fc
       "PackagePath": "staticwebassets\\techInSight.png"
     },
     {
