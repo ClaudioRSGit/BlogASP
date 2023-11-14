@@ -140,7 +140,7 @@
                     {
                         <tr>
                             <td>@article.ArticleId</td>
-                            <td>@article.Title</td>
+                            <td class="title-column">@article.Title</td>
                             <td>@article.Category</td>
                             <td>
                                 @{
@@ -190,4 +190,19 @@
         </div>
     </div>
     <a href="@Url.Action("ExportArticlesToCSV", "AdminPanel")" class="btn btn-export">Export Data</a>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var titleColumns = document.querySelectorAll('.title-column');
+
+            titleColumns.forEach(function (titleColumn) {
+                var words = titleColumn.textContent.trim().split(' ');
+
+                if (words.length > 3) {
+                    titleColumn.textContent = words.slice(0, 3).join(' ') + '...';
+                }
+            });
+        });
+    </script>
+
 </body>
