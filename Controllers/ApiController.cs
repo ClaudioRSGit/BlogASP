@@ -1,6 +1,7 @@
 ﻿using BlogASP.Models;
 using BlogASP.Repository;
 using Microsoft.AspNetCore.Mvc;
+using BlogASP;
 
 [Route("api/Articles")]
 [ApiController]
@@ -87,6 +88,7 @@ public class ApiController : ControllerBase
 public class UsersController : ControllerBase
 {
     private readonly IUserRepository _userRepository;
+    private readonly PasswordHasher _passwordHasher;
 
     public UsersController(IUserRepository userRepository)
     {
@@ -118,6 +120,7 @@ public class UsersController : ControllerBase
     {
         try
         {
+            data.Password = PasswordHasher.HashPassword(data.Password);
             var createdUser = _userRepository.Create(data);
             return Ok(createdUser);
         }
@@ -132,8 +135,8 @@ public class UsersController : ControllerBase
     {
         try
         {
+            data.Password = PasswordHasher.HashPassword(data.Password);
             data.UserId = id;
-
             var updatedUser = _userRepository.Edit(data);
 
             if (updatedUser == null)
