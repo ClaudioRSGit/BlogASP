@@ -280,14 +280,12 @@
 
             var articlesForYear = false;
 
-            // Get the current region
-            var culture = '@CultureInfo.CurrentCulture.Name';
-
             // Show articles based on the selected year
             $('.category-article').each(function () {
                 var articleCreatedAt = $(this).data('created-at');
-                var articleYear = new Date(articleCreatedAt).toLocaleDateString(culture, { year: 'numeric' });
-
+                var articleYear = new Date(articleCreatedAt).getFullYear().toString();
+                console.log("articleCreatedAt" + articleCreatedAt);
+                console.log("articleYear" + articleYear);
                 if (articleYear === selectedYear) {
                     articlesForYear = true;
                     $(this).show();
