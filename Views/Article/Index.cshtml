@@ -17,7 +17,7 @@
         <div id="filteredArticles" class="mt-4">
             <h4>Select a Category</h4>
                 <a href="#" class="btn btn-primary category-link mt-2 me-1" data-category="all">All</a>
-            @foreach (var category in Model.Where(a => a.isDisabled != false).Select(a => a.Category).Distinct())
+            @foreach (var category in Model.Where(a => a.isDisabled == false).Select(a => a.Category).Distinct())
             {
                 <a href="#" class="btn btn-outline-primary category-link mt-2 me-1" data-category="@category">@category</a>
             }
@@ -280,10 +280,13 @@
 
             var articlesForYear = false;
 
+            // Get the current region
+            var culture = '@CultureInfo.CurrentCulture.Name';
+
             // Show articles based on the selected year
             $('.category-article').each(function () {
                 var articleCreatedAt = $(this).data('created-at');
-                var articleYear = new Date(articleCreatedAt).getFullYear().toString();
+                var articleYear = new Date(articleCreatedAt).toLocaleDateString(culture, { year: 'numeric' });
 
                 if (articleYear === selectedYear) {
                     articlesForYear = true;
