@@ -11,7 +11,7 @@ namespace BlogASP.Repository
         ArticleModel GetArticleById(int id);
         List<ArticleModel> GetAllArticles();
         ArticleModel CreateArticle(ArticleModel article, string userName);
-        ArticleModel Edit(ArticleModel article);
+        public ArticleModel Edit(ArticleModel article);
         bool DeleteArticle(int id);
         void UpdateArticle(ArticleModel article);
         bool IsUserAuthor(string? username, int articleId);

@@ -203,21 +203,36 @@ namespace BlogASP.Controllers
             {
                 return View("Error");
             }
-            article.Picture = article.Picture;
+
             return View("EditArticle", article);
         }
 
         [HttpPost]
-        public IActionResult UpdateArticle(ArticleModel article)
+        public IActionResult UpdateArticle(int id, ArticleModel updatedArticle)
         {
             if (ModelState.IsValid)
             {
-                _articleRepository.UpdateArticle(article);
+                ArticleModel existingArticle = _articleRepository.GetArticleById(id);
 
+                if (existingArticle == null)
+                {
+                    return NotFound();
+                }
 
-                return Redirect("/AdminPanel/Articles");
+                existingArticle.Title = updatedArticle.Title;
+                existingArticle.Category = updatedArticle.Category;
+                existingArticle.Description = updatedArticle.Description;
+                existingArticle.isPrivate = updatedArticle.isPrivate;
+                existingArticle.UpdatedAt = DateTime.Now;
+
+                updatedArticle.Stars = existingArticle.Stars;
+
+                _articleRepository.UpdateArticle(existingArticle);
+
+                return RedirectToAction("Articles"); // Redirect to the admin panel articles page
             }
-            return View("EditArticle", article);
+
+            return View("EditArticle", updatedArticle);
         }
 
         [HttpPost]

@@ -42,6 +42,7 @@ namespace BlogASP.Repository
         public void UpdateArticle(ArticleModel article)
         {
             article.UpdatedAt = DateTime.Now;
+
             _databaseContext.Articles.Update(article);
             _databaseContext.SaveChanges();
         }
@@ -109,12 +110,6 @@ namespace BlogASP.Repository
                 articleDB.Picture = article.Picture;
             }
 
-            // Reassign the existing stars back to the articleDB
-            articleDB.Stars = tempStars;
-
-            articleDB.isDisabled = false;
-            articleDB.UpdatedAt = DateTime.Now;
-            articleDB.UserName = article.UserName;
 
             // Update the entire article
             _databaseContext.Update(articleDB);

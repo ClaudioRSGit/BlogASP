@@ -184,13 +184,14 @@ namespace BlogASP.Controllers
             }
         }
 
-        [HttpPost]
-        public IActionResult Edit(ArticleModel article)
-        {
-            _articleRepository.Edit(article);
-            return RedirectToAction("Index");
-        }
+        //[HttpPost]
+        //public IActionResult Edit(ArticleModel article)
+        //{
+        //    _articleRepository.Edit(article);
+        //    return RedirectToAction("Index");
+        //}
 
+        [HttpGet]
         public IActionResult Edit(int id)
         {
             ArticleModel article = _articleRepository.GetArticleById(id);
@@ -199,22 +200,38 @@ namespace BlogASP.Controllers
             {
                 return View("Error");
             }
-            article.Picture = article.Picture;
+
             return View("Edit", article);
         }
 
         [HttpPost]
-        public IActionResult Update(ArticleModel article)
+        public IActionResult Update(int id, ArticleModel updatedArticle)
         {
             if (ModelState.IsValid)
             {
-                _articleRepository.UpdateArticle(article);
+                ArticleModel existingArticle = _articleRepository.GetArticleById(id);
 
+                if (existingArticle == null)
+                {
+                    return NotFound();
+                }
 
-                return RedirectToAction("Index");
+                existingArticle.Title = updatedArticle.Title;
+                existingArticle.Category = updatedArticle.Category;
+                existingArticle.Description = updatedArticle.Description;
+                existingArticle.isPrivate = updatedArticle.isPrivate;
+                existingArticle.UpdatedAt = DateTime.Now;
+
+                updatedArticle.Stars = existingArticle.Stars;
+
+                _articleRepository.UpdateArticle(existingArticle);
+
+                return RedirectToAction("Details", new { id = existingArticle.ArticleId });
             }
-            return View("EditArticle", article);
+
+            return View("Edit", updatedArticle);
         }
+
 
     }
 }

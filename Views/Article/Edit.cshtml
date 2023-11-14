@@ -7,7 +7,7 @@
 
 <br />
 
-<form asp-controller="Article" asp-action="Update" method="post">
+<form asp-controller="Article" asp-action="Update" asp-route-id="@Model.ArticleId" method="post">
     <input type="hidden" asp-for="ArticleId" />
     <div class="form-group">
         <label for="title">Title:</label>
@@ -38,7 +38,7 @@
         </div>
     </div>
 
-    <input type="hidden" asp-for="Picture"/>
+    <input type="hidden" asp-for="Picture" />
     <button type="submit" class="btn btn-primary btn-block w-100 mt-4">Submit</button>
     <a role="button" class="btn btn-secondary btn-block w-100 mt-2" asp-controller="Article" asp-action="Index">Back</a>
 </form>

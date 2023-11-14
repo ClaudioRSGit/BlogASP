@@ -167,14 +167,20 @@
                                 }
                                 else
                                 {
+                                    <div class="d-flex">
+
                                     <form asp-controller="AdminPanel" asp-action="DisableArticle" method="post">
                                         <input type="hidden" name="id" value="@article.ArticleId" />
                                         <div class="btn-group" role="group">
                                             <button type="submit" class="btn btn-danger">Disable</button>
                                             <a role="button" href="@Url.Action("Details", "Article", new { id = article.ArticleId })" class="btn btn-primary" >Show</a>
-                                            <a role="button" href="@Url.Action("EditArticle", "AdminPanel", new { id = article.ArticleId })" class="btn btn-warning">Edit</a>
                                         </div>
                                     </form>
+                                    <form asp-controller="Article" asp-action="Update" method="post">
+                                        <a role="button" href="@Url.Action("Edit", "Article", new { id = article.ArticleId })" class="btn btn-warning">Edit</a>
+                                    </form>
+
+                                    </div>
                                 }
                             </td>
                         </tr>

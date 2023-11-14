@@ -1,10 +1,6 @@
 {
   "Version": 1,
-<<<<<<< HEAD
-  "Hash": "gTF2/Yt0JHRRQWrBc0Pzwe8sET28bSZixQxBS5rGzwg=",
-=======
   "Hash": "MSi7tdh22H7SVRP5Jv3AhfoKGXD6Nh93fcCNEtG74tw=",
->>>>>>> 3c7ad3f4fdc3b75beebae9ece46a0b0d464c789a
   "Source": "BlogASP",
   "BasePath": "_content/BlogASP",
   "Mode": "Default",
@@ -89,14 +85,10 @@
       "OriginalItemSpec": "wwwroot\\addArticle.png"
     },
     {
-<<<<<<< HEAD
-      "Identity": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\adminArticlesMobile.png",
-=======
       "Identity": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\adminArticlesMobile.png",
->>>>>>> 3c7ad3f4fdc3b75beebae9ece46a0b0d464c789a
       "SourceId": "BlogASP",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\",
       "BasePath": "_content/BlogASP",
       "RelativePath": "adminArticlesMobile.png",
       "AssetKind": "All",
@@ -110,10 +102,10 @@
       "OriginalItemSpec": "wwwroot\\adminArticlesMobile.png"
     },
     {
-      "Identity": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\articlesDesktop.png",
+      "Identity": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\articlesDesktop.png",
       "SourceId": "BlogASP",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\",
       "BasePath": "_content/BlogASP",
       "RelativePath": "articlesDesktop.png",
       "AssetKind": "All",
@@ -127,10 +119,10 @@
       "OriginalItemSpec": "wwwroot\\articlesDesktop.png"
     },
     {
-      "Identity": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\articlesMobile.png",
+      "Identity": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\articlesMobile.png",
       "SourceId": "BlogASP",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\",
       "BasePath": "_content/BlogASP",
       "RelativePath": "articlesMobile.png",
       "AssetKind": "All",
@@ -144,11 +136,7 @@
       "OriginalItemSpec": "wwwroot\\articlesMobile.png"
     },
     {
-<<<<<<< HEAD
-      "Identity": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\css\\site.css",
-=======
       "Identity": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\css\\site.css",
->>>>>>> 3c7ad3f4fdc3b75beebae9ece46a0b0d464c789a
       "SourceId": "BlogASP",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\",
@@ -1168,14 +1156,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
     },
     {
-<<<<<<< HEAD
-      "Identity": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\login.png",
-=======
       "Identity": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\login.png",
->>>>>>> 3c7ad3f4fdc3b75beebae9ece46a0b0d464c789a
       "SourceId": "BlogASP",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\",
       "BasePath": "_content/BlogASP",
       "RelativePath": "login.png",
       "AssetKind": "All",
@@ -1189,11 +1173,7 @@
       "OriginalItemSpec": "wwwroot\\login.png"
     },
     {
-<<<<<<< HEAD
-      "Identity": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\notStarred.png",
-=======
       "Identity": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\notStarred.png",
->>>>>>> 3c7ad3f4fdc3b75beebae9ece46a0b0d464c789a
       "SourceId": "BlogASP",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\",
@@ -1210,14 +1190,10 @@
       "OriginalItemSpec": "wwwroot\\notStarred.png"
     },
     {
-<<<<<<< HEAD
-      "Identity": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\pendingUsersDesktop.png",
-=======
       "Identity": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\pendingUsersDesktop.png",
->>>>>>> 3c7ad3f4fdc3b75beebae9ece46a0b0d464c789a
       "SourceId": "BlogASP",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\",
       "BasePath": "_content/BlogASP",
       "RelativePath": "pendingUsersDesktop.png",
       "AssetKind": "All",
@@ -1231,10 +1207,10 @@
       "OriginalItemSpec": "wwwroot\\pendingUsersDesktop.png"
     },
     {
-      "Identity": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\pendingUsersMobile.png",
+      "Identity": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\pendingUsersMobile.png",
       "SourceId": "BlogASP",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\",
       "BasePath": "_content/BlogASP",
       "RelativePath": "pendingUsersMobile.png",
       "AssetKind": "All",
@@ -1248,11 +1224,7 @@
       "OriginalItemSpec": "wwwroot\\pendingUsersMobile.png"
     },
     {
-<<<<<<< HEAD
-      "Identity": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\readmore.png",
-=======
       "Identity": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\readmore.png",
->>>>>>> 3c7ad3f4fdc3b75beebae9ece46a0b0d464c789a
       "SourceId": "BlogASP",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\",
@@ -1269,14 +1241,10 @@
       "OriginalItemSpec": "wwwroot\\readmore.png"
     },
     {
-<<<<<<< HEAD
-      "Identity": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\readmoreDesktop.png",
-=======
       "Identity": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\readmoreDesktop.png",
->>>>>>> 3c7ad3f4fdc3b75beebae9ece46a0b0d464c789a
       "SourceId": "BlogASP",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\",
       "BasePath": "_content/BlogASP",
       "RelativePath": "readmoreDesktop.png",
       "AssetKind": "All",
@@ -1290,10 +1258,10 @@
       "OriginalItemSpec": "wwwroot\\readmoreDesktop.png"
     },
     {
-      "Identity": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\readmoreMobile.png",
+      "Identity": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\readmoreMobile.png",
       "SourceId": "BlogASP",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\",
       "BasePath": "_content/BlogASP",
       "RelativePath": "readmoreMobile.png",
       "AssetKind": "All",
@@ -1307,10 +1275,10 @@
       "OriginalItemSpec": "wwwroot\\readmoreMobile.png"
     },
     {
-      "Identity": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\signupDesktop.png",
+      "Identity": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\signupDesktop.png",
       "SourceId": "BlogASP",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\",
       "BasePath": "_content/BlogASP",
       "RelativePath": "signupDesktop.png",
       "AssetKind": "All",
@@ -1324,10 +1292,10 @@
       "OriginalItemSpec": "wwwroot\\signupDesktop.png"
     },
     {
-      "Identity": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\signupMobile.png",
+      "Identity": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\signupMobile.png",
       "SourceId": "BlogASP",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\",
       "BasePath": "_content/BlogASP",
       "RelativePath": "signupMobile.png",
       "AssetKind": "All",
@@ -1341,11 +1309,7 @@
       "OriginalItemSpec": "wwwroot\\signupMobile.png"
     },
     {
-<<<<<<< HEAD
-      "Identity": "C:\\Users\\fabio\\Desktop\\ASPNET\\BlogASP\\wwwroot\\Starred.png",
-=======
       "Identity": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\Starred.png",
->>>>>>> 3c7ad3f4fdc3b75beebae9ece46a0b0d464c789a
       "SourceId": "BlogASP",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Claudio\\Desktop\\BlogASP\\wwwroot\\",
