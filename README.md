@@ -129,14 +129,41 @@ In our application, the Database Context serves as the bridge between the applic
 
 ## Usage
 
-### Lets say that you're the Administrator
-
 `login system`
 <br><br>
-    <img src="images/login.png" style="min-width: 80%; height: 80%; width: 80%;" alt="Logo">
+    <img src="wwwroot/login.png" style="min-width: 80%; height: 80%; width: 80%;" alt="Logo">
  
+`signup system`
+<br><br>
+    <img src="wwwroot/signupDesktop.png" style="min-width: 80%; height: 80%; width: 80%;" alt="Logo">
 
-> placeholder
+> Desktop Version
+
+`signup system`
+<br><br>
+    <img src="wwwroot/signupMobile.png" style="min-width: 50%; height: 50%; width: 50%;" alt="Logo">
+
+> Mobile Version
+
+`Articles Tab -> Desktop`
+<br><br>
+    <img src="wwwroot/articlesDesktop.png" style="min-width: 50%; height: 50%; width: 50%;" alt="Logo">
+
+`Articles Tab -> Mobile`
+<br><br>
+    <img src="wwwroot/articlesMobile.png" style="min-width: 50%; height: 50%; width: 50%;" alt="Logo">
+
+> This is the Articles Tab, here you can see all the articles, filter it by title, category, year or month
+
+`Articles Read More -> Desktop Version`
+<br><br>
+    <img src="wwwroot/readmoreDesktop.png" style="min-width: 70%; height: 70%; width: 70%;" alt="Logo">
+
+`Articles Read More -> Mobile Version`
+<br><br>
+    <img src="wwwroot/readmoreMobile.png" style="min-width: 70%; height: 70%; width: 70%;" alt="Logo">
+
+> You can read more about certain articles
 
 # BlogASP API Documentation
 
