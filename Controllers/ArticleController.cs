@@ -184,13 +184,6 @@ namespace BlogASP.Controllers
             }
         }
 
-        //[HttpPost]
-        //public IActionResult Edit(ArticleModel article)
-        //{
-        //    _articleRepository.Edit(article);
-        //    return RedirectToAction("Index");
-        //}
-
         [HttpGet]
         public IActionResult Edit(int id)
         {

@@ -26,7 +26,7 @@ namespace BlogASP.Repositories
             comment.CreatedAt = DateTime.Now;
             comment.UpdatedAt = DateTime.Now;
             comment.ArticleId = articleId;
-            comment.UserId = userId; // Set the user ID
+            comment.UserId = userId; 
             _databaseContext.Comments.Add(comment);
             _databaseContext.SaveChanges();
 

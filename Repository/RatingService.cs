@@ -40,9 +40,7 @@ namespace BlogASP.Repository
                 }
                 else
                 {
-                    // If the user has already rated, you might want to handle this case
-                    // You can choose to ignore, update, or throw an exception
-                    // For now, let's ignore and not update
+                    
                 }
             }
         }
