@@ -191,6 +191,29 @@ app.Use(async (context, next) =>
         ");
         return;
     }
+    if (context.Request.Path.StartsWithSegments("/Article/Edit"))
+    {
+        var articleIdString = context.Request.Path.Value.Split("/").Last(); 
+        if (int.TryParse(articleIdString, out int articleId))
+        {
+            var articleRepository = context.RequestServices.GetRequiredService<IArticleRepository>();
+            var article = articleRepository.GetArticleById(articleId);
+
+            if (article == null || (!user.Identity.Name.Equals(article.UserName) && !user.IsInRole("Administrator")))
+            {
+                context.Response.StatusCode = 403;
+                context.Response.ContentType = "text/html";
+
+                await context.Response.WriteAsync(@"
+                    <script>
+                        alert('Access Denied! You do not have permission to edit this article.');
+                        window.location.href = '/';
+                    </script>
+                ");
+                return;
+            }
+        }
+    }
     await next();
 });
 
